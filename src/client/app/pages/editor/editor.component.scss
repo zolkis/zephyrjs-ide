@@ -4,6 +4,19 @@
     display: block;
     height: calc(100% - 50px - 60px); // navbar and footer
 
+    > #editor-page-container {
+        height: 100%;
+        margin: 0;
+    }
+
+    .tab-content {
+        height: calc(100% - 40px);
+
+        .tab-pane {
+            height: 100%;
+        }
+    }
+
     .pane {
         height: 100%;
         padding: 0;
@@ -109,16 +122,6 @@
         position: relative;
         background-color: $panel-bg-color;
 
-        .tab-content {
-            height: calc(100% - 40px); // for the tab bar
-
-            .tab-pane {
-                height: 100%;
-            }
-        }
-    }
-
-    .split-pane-content-primary {
         #new-tab-button {
             position: absolute;
             top: 12px;

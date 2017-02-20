@@ -1,4 +1,12 @@
 @import '../../../../../scss/main';
 
 :host {
+    display: block;
+    height: 100%;
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
 }
