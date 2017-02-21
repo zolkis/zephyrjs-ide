@@ -1,6 +1,7 @@
 <iframe
-    (load)="onIFrameLoaded()"
-    src='app/pages/editor/components/board-explorer/board-viewer/board-embedded.html'>
+    #boardViewer
+    src="about:blank"
+    data-src='app/pages/editor/components/board-explorer/board-viewer/board-embedded.html'>
 </iframe>
 
 <div class="iframe-loading-container" [hidden]="viewerLoaded">
