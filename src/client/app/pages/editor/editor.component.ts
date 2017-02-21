@@ -160,7 +160,7 @@ export class EditorComponent implements AfterViewInit {
     // tslint:disable-next-line:no-unused-variable
     private onBeginResizing() {
         let overlays = document.getElementsByClassName(
-            'console-resizing-overlay');
+            'protect-resizing-overlay');
         [].forEach.call(overlays, (overlay: HTMLElement) => {
             overlay.style.display = 'block';
         });
@@ -169,7 +169,7 @@ export class EditorComponent implements AfterViewInit {
     // tslint:disable-next-line:no-unused-variable
     private onEndedResizing() {
         let overlays = document.getElementsByClassName(
-            'console-resizing-overlay');
+            'protect-resizing-overlay');
         [].forEach.call(overlays, (overlay: HTMLElement) => {
             overlay.style.display = 'none';
         });

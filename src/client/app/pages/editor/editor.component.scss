@@ -174,4 +174,14 @@
             background-color: lighten($navbar-bg-color, 10%);
         }
     }
+
+    /deep/ .protect-resizing-overlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        z-index: 2;
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+    }
 }
