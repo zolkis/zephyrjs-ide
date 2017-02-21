@@ -11,6 +11,10 @@ export = () => {
   let files = [
       { path: 'app/pages/home/', name: 'home.component.html'},
       { path: 'app/pages/about/', name: 'about.component.html'},
+      {
+          path: 'app/pages/editor/components/board-explorer/',
+          name: 'board-explorer.component.html'
+      },
       { path: 'app/shared/navbar/', name: 'navbar.component.html'},
       { path: 'app/shared/footer/', name: 'footer.component.html'}
   ];
