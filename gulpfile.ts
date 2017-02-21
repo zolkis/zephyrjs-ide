@@ -15,6 +15,7 @@ loadTasks(Config.PROJECT_TASKS_DIR);
 gulp.task('build.dev', (done: any) =>
   runSequence(//'clean.dev',
               'tslint',
+              'copy.boardviewer',
               'build.assets.dev',
               'build.fonts',
               'build.monaco',
@@ -36,6 +37,7 @@ gulp.task('build.dev.watch', (done: any) =>
 gulp.task('build.e2e', (done: any) =>
   runSequence('clean.dev',
               'tslint',
+              'copy.boardviewer',
               'build.assets.dev',
               'build.fonts',
               'build.monaco',
@@ -55,6 +57,7 @@ gulp.task('build.prod', (done: any) =>
               'build.monaco',
               'build.html_css',
               'copy.prod',
+              'copy.boardviewer',
               'build.js.prod',
               'build.bundles',
               'build.bundles.app',
@@ -74,6 +77,7 @@ gulp.task('build.prod.exp', (done: any) =>
               'build.monaco',
               'build.html_css',
               'copy.prod',
+              'copy.boardviewer',
               'compile.ahead.prod',
               'build.js.prod.exp',
               'build.bundles',
@@ -88,6 +92,7 @@ gulp.task('build.prod.exp', (done: any) =>
 gulp.task('build.test', (done: any) =>
   runSequence('clean.once',
               'tslint',
+              'copy.boardviewer',
               'build.assets.dev',
               'build.fonts',
               'build.monaco',
