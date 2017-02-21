@@ -52,3 +52,5 @@ gulpfile.js.map
 .DS_Store
 src/client/app/shared/config/env.config.js
 src/client/app/shared/config/env.config.js.map
+
+src/client/app/pages/editor/components/board-explorer/board-viewer/bower_components
