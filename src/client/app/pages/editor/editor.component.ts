@@ -138,7 +138,7 @@ export class EditorComponent implements AfterViewInit {
     // tslint:disable-next-line:no-unused-locals
     public onBeginResizing() {
         let overlays = document.getElementsByClassName(
-            'console-resizing-overlay');
+            'protect-resizing-overlay');
         [].forEach.call(overlays, (overlay: HTMLElement) => {
             overlay.style.display = 'block';
         });
@@ -147,7 +147,7 @@ export class EditorComponent implements AfterViewInit {
     // tslint:disable-next-line:no-unused-locals
     public onEndedResizing() {
         let overlays = document.getElementsByClassName(
-            'console-resizing-overlay');
+            'protect-resizing-overlay');
         [].forEach.call(overlays, (overlay: HTMLElement) => {
             overlay.style.display = 'none';
         });
