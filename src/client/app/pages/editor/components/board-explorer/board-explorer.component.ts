@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
     templateUrl: 'board-explorer.component.html',
     styleUrls: ['board-explorer.component.css']
 })
-export class BoardExplorerComponent { }
+export class BoardExplorerComponent {
+    private viewerLoaded: boolean = false;
+
+    public onIFrameLoaded() {
+        this.viewerLoaded = true;
+    }
+}

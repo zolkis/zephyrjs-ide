@@ -9,4 +9,26 @@
         height: 100%;
         border: none;
     }
+
+    .iframe-loading-container {
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        top: 0;
+
+        > .iframe-loading-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            transform: translate(-50%, -50%);
+            text-transform: uppercase;
+
+            > .fa {
+                display: block;
+                margin-bottom: 20px;
+            }
+        }
+    }
 }
