@@ -68,7 +68,7 @@
 
             <li role="presentation" class="nav-item">
                 <a class="nav-link" href="#board-explorer" role="tab"
-                   data-toggle="tab">
+                   data-toggle="tab" (click)="initBoardExplorer()">
                     Board Explorer
                 </a>
             </li>
@@ -91,7 +91,7 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" id="board-explorer">
-                <sd-board-explorer></sd-board-explorer>
+                <sd-board-explorer #boardExplorer></sd-board-explorer>
             </div>
 
             <div role="tabpanel" class="tab-pane" id="ocf-explorer">

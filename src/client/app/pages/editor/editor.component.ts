@@ -12,6 +12,8 @@ import { NotificationsService } from 'angular2-notifications';
 // Own
 import { AppDataService } from '../../app.data.service';
 import { EditorTab, OPERATION_STATUS, EDITOR_STATUS } from './editor.tab';
+import { BoardExplorerComponent }
+    from './components/board-explorer/board-explorer.component';
 import { WebUsbService } from '../../shared/webusb/webusb.service';
 
 
@@ -35,6 +37,9 @@ export class EditorComponent implements AfterViewInit {
 
     @ViewChild('tabMenu')
     private tabMenu: ElementRef;
+
+    @ViewChild('boardExplorer')
+    private boardExplorer: BoardExplorerComponent;
 
     // Variables
 
@@ -148,6 +153,12 @@ export class EditorComponent implements AfterViewInit {
         });
     }
 
+    // tslint:disable-next-line:no-unused-variable
+    public initBoardExplorer(): boolean {
+        this.boardExplorer.init();
+        return false;
+    }
+
 
     ///////////////////////////////////////////////////////////////////////////
 
@@ -178,6 +189,4 @@ export class EditorComponent implements AfterViewInit {
         }
         return max + 1;
     }
-
-
 }

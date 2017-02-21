@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -8,9 +8,18 @@ import { Component } from '@angular/core';
     styleUrls: ['board-explorer.component.css']
 })
 export class BoardExplorerComponent {
-    private viewerLoaded: boolean = false;
+    public viewerLoaded: boolean = false;
 
-    public onIFrameLoaded() {
-        this.viewerLoaded = true;
+    @ViewChild('boardViewer')
+    private boardViewer: ElementRef;
+
+    public init() {
+        if (!this.viewerLoaded) {
+            let iframe = this.boardViewer.nativeElement;
+            iframe.setAttribute('src', iframe.getAttribute('data-src'));
+            iframe.onload = () => {
+                this.viewerLoaded = true;
+            };
+        }
     }
 }
