@@ -1,0 +1,18 @@
+<iframe
+    #boardViewer
+    src="about:blank"
+    data-src='app/pages/editor/components/board-explorer/board-viewer/board-embedded.html'>
+</iframe>
+
+<div class="iframe-loading-container" [hidden]="viewerLoaded">
+    <div class="iframe-loading-content">
+        <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
+        Loading
+    </div>
+</div>
+
+<!--
+Used to mask the board-viewer during resizing operations, and prevent it from
+trying to intercept mouse events.
+-->
+<div class="protect-resizing-overlay"></div>
