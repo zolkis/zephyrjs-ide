@@ -1,6 +1,9 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
 
+import { AppDataService } from './app.data.service';
+import { GitHubService } from './pages/editor/components/github/github.service';
+
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the
@@ -10,7 +13,8 @@ import { Event, NavigationEnd, Router } from '@angular/router';
     moduleId: module.id,
     selector: 'sd-app',
     templateUrl: 'app.component.html',
-    styleUrls: ['app.component.css']
+    styleUrls: ['app.component.css'],
+    providers: [AppDataService, GitHubService]
 })
 export class AppComponent implements OnInit {
     @HostBinding('attr.id') public route: string;

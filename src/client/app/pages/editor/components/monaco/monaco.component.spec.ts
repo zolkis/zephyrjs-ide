@@ -76,6 +76,29 @@ export function main() {
                 });
             });
         });
+
+        it('reinstantiating preserves contents', done => {
+            TestBed.compileComponents().then(() => {
+                const fixture = TestBed.createComponent(MonacoComponent);
+                let component = fixture.componentInstance;
+                component.tab = tab;
+
+                loadMonaco(component).then(() => {
+                    component.tab.editor.setValue('test content');
+                    expect(component.tab.editor.getValue()).toBe('test content');
+
+                    const fixture2 = TestBed.createComponent(MonacoComponent);
+                    let component2 = fixture2.componentInstance;
+
+                    component2.tab = tab;
+
+                    loadMonaco(component2).then(() => {
+                        expect(component2.tab.editor.getValue()).toBe('test content');
+                        done();
+                    });
+                });
+            });
+        });
     });
 }
 

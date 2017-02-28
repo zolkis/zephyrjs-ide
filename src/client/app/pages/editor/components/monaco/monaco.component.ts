@@ -71,27 +71,35 @@ export class MonacoComponent implements AfterViewInit {
 
     // Will be called once monaco library is available
     public initMonaco() {
-        if (this.tab !== null && this.tab.editor === null) {
-            if (this.editorView !== null) {
-                let theme = 'vs-dark';
+        if (this.tab === null) {
+            throw('You need to construct the monaco component with a tab');
+        }
 
-                if (monaco.editor.defineTheme !== undefined) {
-                    monaco.editor.defineTheme('web-ide', {
-                        base: theme,
-                        inherit: true,
-                        rules: []
-                    });
+        let theme = 'vs-dark';
+        let model = null;
 
-                    theme = 'web-ide';
-                }
+        if (monaco.editor.defineTheme !== undefined) {
+            monaco.editor.defineTheme('web-ide', {
+                base: theme,
+                inherit: true,
+                rules: []
+            });
+            theme = 'web-ide';
+        }
 
-                this.tab.editor = monaco.editor.create(this.editorView.nativeElement, {
-                    value: this.initialCode,
-                    language: 'javascript',
-                    automaticLayout: true,
-                    theme: theme
-                });
-            }
+        if (this.tab.editor !== null) {
+            model = this.tab.editor.getModel();
+        }
+
+        this.tab.editor = monaco.editor.create(this.editorView.nativeElement, {
+            value: this.initialCode,
+            language: 'javascript',
+            automaticLayout: true,
+            theme: theme
+        });
+
+        if (model !== null) {
+            this.tab.editor.setModel(model);
         }
     }
 

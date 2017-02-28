@@ -10,8 +10,8 @@ import {
 import { NotificationsService } from 'angular2-notifications';
 
 // Own
+import { AppDataService } from '../../app.data.service';
 import { EditorTab, OPERATION_STATUS, EDITOR_STATUS } from './editor.tab';
-import { GitHubService } from './components/github/github.service';
 import { WebUsbService } from '../../shared/webusb/webusb.service';
 
 
@@ -21,8 +21,7 @@ declare var $: any;
   moduleId: module.id,
   selector: 'sd-editor',
   templateUrl: 'editor.component.html',
-  styleUrls: ['editor.component.css'],
-  providers: [GitHubService]
+  styleUrls: ['editor.component.css']
 })
 export class EditorComponent implements AfterViewInit {
     public notificationOptions = {
@@ -39,20 +38,15 @@ export class EditorComponent implements AfterViewInit {
 
     // Variables
 
-    private tabs: Array<EditorTab> = [{
-        id: 1,
-        active: true,
-        title: 'Tab # 1',
-        editor: null,
-        port: null,
-        term: null
-    }];
+    private tabs: Array<EditorTab>;
 
     // Methods
 
     constructor(
+        private appDataService: AppDataService,
         private notificationsService: NotificationsService,
         private webusbService: WebUsbService) {
+        this.tabs = appDataService.editorTabs;
     }
 
     public ngAfterViewInit() {

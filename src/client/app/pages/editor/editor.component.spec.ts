@@ -6,6 +6,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { ResourceModule } from 'ng2-resource-rest';
 
 // Own
+import { AppDataService } from '../../app.data.service';
 import { EditorModule } from './editor.module';
 
 
@@ -17,6 +18,7 @@ export function main() {
     beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [TestComponent],
+        providers: [AppDataService],
         imports: [EditorModule, ResourceModule]
       });
     });

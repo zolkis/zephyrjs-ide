@@ -44,7 +44,11 @@ export class ConsoleComponent implements AfterViewInit {
     }
 
     private initTerminal() {
-        if (this.tab !== null && this.tab.term === null) {
+        if (this.tab === null) {
+           throw('You need to construct the console component with a tab');
+        }
+
+        if (this.tab.term === null) {
             this.tab.term = new this.hterm.Terminal();
 
             this.tab.term.onTerminalReady = () => {
@@ -78,9 +82,9 @@ export class ConsoleComponent implements AfterViewInit {
             this.tab.term.prefs_.set('font-size', 13);
             this.tab.term.prefs_.set('cursor-blink', true);
             this.tab.term.prefs_.set('scrollbar-visible', false);
-
-            this.tab.term.decorate(this.consoleView.nativeElement);
-            this.tab.term.installKeyboard();
         }
+
+        this.tab.term.decorate(this.consoleView.nativeElement);
+        this.tab.term.installKeyboard();
     }
 }
