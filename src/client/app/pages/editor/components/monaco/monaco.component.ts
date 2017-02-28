@@ -50,6 +50,7 @@ export class MonacoComponent implements AfterViewInit {
         };
 
         // Load AMD loader if necessary
+        // WARNING: this will 404 doing unit tests. It's fine.
         if (!(<any>window).require) {
             var loaderScript = document.createElement('script');
             loaderScript.type = 'text/javascript';
@@ -65,6 +66,32 @@ export class MonacoComponent implements AfterViewInit {
                 body: 'Your browser does not support WebUSB',
                 sticky: true
             });
+        }
+    }
+
+    // Will be called once monaco library is available
+    public initMonaco() {
+        if (this.tab !== null && this.tab.editor === null) {
+            if (this.editorView !== null) {
+                let theme = 'vs-dark';
+
+                if (monaco.editor.defineTheme !== undefined) {
+                    monaco.editor.defineTheme('web-ide', {
+                        base: theme,
+                        inherit: true,
+                        rules: []
+                    });
+
+                    theme = 'web-ide';
+                }
+
+                this.tab.editor = monaco.editor.create(this.editorView.nativeElement, {
+                    value: this.initialCode,
+                    language: 'javascript',
+                    automaticLayout: true,
+                    theme: theme
+                });
+            }
         }
     }
 
@@ -168,37 +195,4 @@ export class MonacoComponent implements AfterViewInit {
     public onGitHubFileFetched(content: string) {
         this.tab.editor.setValue(content);
     }
-
-
-    ///////////////////////////////////////////////////////////////////////////
-
-
-    // Will be called once monaco library is available
-    private initMonaco() {
-        if (this.tab !== null && this.tab.editor === null) {
-            if (this.editorView !== null) {
-                let theme = 'vs-dark';
-
-                if (monaco.editor.defineTheme !== undefined) {
-                    monaco.editor.defineTheme('web-ide', {
-                        base: theme,
-                        inherit: true,
-                        rules: []
-                    });
-
-                    theme = 'web-ide';
-                }
-
-                this.tab.editor = monaco.editor.create(this.editorView.nativeElement, {
-                    value: this.initialCode,
-                    language: 'javascript',
-                    automaticLayout: true,
-                    theme: theme
-                });
-            }
-        }
-    }
-
-
-
 }
