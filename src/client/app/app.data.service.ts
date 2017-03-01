@@ -14,8 +14,4 @@ export class AppDataService {
         port: null,
         term: null
     }];
-
-    constructor() {
-        console.log('AppDataService constructed');
-    }
 }
