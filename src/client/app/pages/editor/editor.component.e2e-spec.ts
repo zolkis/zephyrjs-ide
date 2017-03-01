@@ -1,6 +1,8 @@
 describe('Editor', () => {
     beforeEach( () => {
+        // Needed because the Monaco workers confuse webdriver
         browser.ignoreSynchronization = true;
+
         browser.get('/#/editor');
     });
 
