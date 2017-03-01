@@ -1,3 +1,11 @@
+2017-03-01 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.10.0-alpha
+	* Remove Download button from GitHub modal and download on click
+	* Use notifications to report when WebUSB is not supported
+	* Remove console scrollbar
+	* Rename 'Board schematics' to 'Board explorer'
+	* Preserve editor and console status when routing
+
 2017-02-21 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.9.0-alpha
 	* ocf-explorer: add support for arbitrary resources via JSON editing
