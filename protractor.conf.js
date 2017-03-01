@@ -40,10 +40,4 @@ const config = {
   useAllAngular2AppRoots: true
 };
 
-if (process.env.TRAVIS) {
-  config.capabilities = {
-    browserName: 'firefox'
-  };
-}
-
 exports.config = config;

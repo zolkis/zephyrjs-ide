@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/01org/zephyrjs-ide.svg?branch=master)](https://travis-ci.org/01org/zephyrjs-ide)
+
 # Introduction
 
 `JS IDE for Zephyr OS` is an online JavaScript editor that lets you upload code to a

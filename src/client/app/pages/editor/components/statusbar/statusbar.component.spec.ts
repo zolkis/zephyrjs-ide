@@ -12,6 +12,8 @@ export function main() {
    describe('Statusbar component', () => {
 
     beforeEach(() => {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
       TestBed.configureTestingModule({
         declarations: [TestComponent],
         imports: [StatusBarModule]
