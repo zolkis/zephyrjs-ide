@@ -23,7 +23,10 @@ const config = {
   directConnect: true,
 
   capabilities: {
-    browserName: 'chrome'
+    browserName: 'chrome',
+    'chromeOptions' : {
+      args: ['--window-size=1024,800']
+    }
   },
 
   onPrepare: function() {
