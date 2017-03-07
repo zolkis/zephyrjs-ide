@@ -26,6 +26,7 @@ import { MonacoComponent } from './pages/editor/components/monaco/monaco.compone
 import { StatusBarComponent } from './pages/editor/components/statusbar/statusbar.component';
 import { OcfExplorerComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.component';
 import { OcfResourceComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.resource.component';
+import { TabBarComponent } from './pages/editor/components/tab-bar/tab-bar.component';
 
 import { OcfResourceValueFanComponent }
     from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.fan.component';
@@ -84,6 +85,7 @@ export function main() {
                             OcfResourceValueRgbLedComponent,
                             OcfResourceValueTemperatureComponent,
                             OcfResourceValueJsonComponent,
+                        TabBarComponent,
                     NavbarComponent,
                     FooterComponent
                 ],

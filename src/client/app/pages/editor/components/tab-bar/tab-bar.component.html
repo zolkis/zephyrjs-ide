@@ -1,0 +1,37 @@
+<ul #tabMenu class="nav nav-tabs" role="tablist">
+    <li
+        *ngFor="let tab of tabs" role="presentation"
+        [ngClass]="{'nav-item': true, 'active': tab.active}">
+        <a
+            class="nav-link"
+            href="#tab-{{tab.id}}"
+            role="tab"
+            data-toggle="tab"
+            (click)="onActivateTab(tab)">
+
+            {{tab.title}}
+
+            <a
+               href=""
+               class="edit-tab"
+               (click)="onEditTab(tab)">
+                <fa [name]="'pencil'"></fa>
+            </a>
+
+            <a
+               href=""
+               class="close-tab"
+               (click)="onCloseTab(tab)">
+                <fa [name]="'close'"></fa>
+            </a>
+        </a>
+    </li>
+</ul>
+
+<button
+    id="new-tab-button"
+    class="btn btn-primary"
+    [disabled]="!mayAddTab()"
+    (click)="onNewTab()">
+    <fa [name]="'plus'"></fa> New tab
+</button>

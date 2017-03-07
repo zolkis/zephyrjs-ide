@@ -1,0 +1,128 @@
+@import "../../../../../scss/main";
+
+:host {
+    .nav-tabs  {
+        $tab-color: #abacaf;
+        $active-tab-color: #ffffff;
+
+        margin-top: 0;
+        padding: 8px 0;
+        padding-left: 36px;
+        border: 0;
+        background-color: $panel-bg-color;
+        height: 40px;
+        width: calc(100% - 90px); // for the new tab button
+
+        > li {
+            padding: 0;
+            padding-left: 16px;
+            overflow: hidden;
+            max-width: 140px;
+            font-size: 12px;
+
+            &.active > a, &.active .close-tab {
+                color: $active-tab-color;
+            }
+
+            &:last-child  {
+                > a {
+                    // No border for last tab.
+                    border-right: 1px solid transparent;
+                }
+            }
+
+            > a {
+                padding: 0;
+                margin: 0;
+
+                border: none;
+                border-right: 1px solid lighten($panel-bg-color, 10%);
+                border-radius: 0;
+
+                background-color: inherit;
+                color: $tab-color;
+
+                text-transform: uppercase;
+                line-height: 24px;
+
+                overflow: hidden;
+                white-space: nowrap;
+
+                &:hover:not(.active) {
+                    color: $active-tab-color;
+                }
+
+                > .tab-title {
+                    width: calc(100% - 24px);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                > .edit-tab, .close-tab {
+                    position: absolute;
+                    top: 0px;
+                    width: 16px;
+                    padding: 0;
+
+                    fa {
+                        font-family: $thin-font;
+                        font-size: 10px;
+                        color: $tab-color;
+                        text-align: center;
+
+                        &:hover {
+                            text-decoration: none;
+                            color: $text-color;
+                        }
+                    }
+                }
+
+                .edit-tab {
+                    right: 32px;
+                    display: none;
+                }
+
+                &:hover .edit-tab {
+                    display: block;
+                }
+
+                .close-tab {
+                    right: 16px;
+
+                    fa:hover {
+                        color: #e67171;
+                    }
+                }
+            }
+        }
+
+        @for $i from 1 through 20 {
+            li:first-child:nth-last-child(#{$i}),
+            li:first-child:nth-last-child(#{$i}) ~ li {
+                width: 100% / $i;
+            }
+        }
+    }
+}
+
+#new-tab-button {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    max-height: 20px;
+
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: normal;
+    color: $panel-bg-color;
+    border: none;
+    border-radius: 15px;
+    text-align: center;
+    text-shadow: none;
+
+    fa {
+        margin-right: 4px;
+        font-weight: normal;
+    }
+}

@@ -1,44 +1,28 @@
 // Core
-import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    ViewChild
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 // Third party
 import { NotificationsService } from 'angular2-notifications';
 
 // Own
 import { AppDataService } from '../../app.data.service';
-import { EditorTab, OPERATION_STATUS, EDITOR_STATUS } from './editor.tab';
+import { EditorTab } from './editor.tab';
 import { WebUsbService } from '../../shared/webusb/webusb.service';
 
 
-declare var $: any;
-
 @Component({
-  moduleId: module.id,
-  selector: 'sd-editor',
-  templateUrl: 'editor.component.html',
-  styleUrls: ['editor.component.css']
+    moduleId: module.id,
+    selector: 'sd-editor',
+    templateUrl: 'editor.component.html',
+    styleUrls: ['editor.component.css']
 })
-export class EditorComponent implements AfterViewInit {
+export class EditorComponent {
     public notificationOptions = {
         timeOut: 3000,
         showProgressBar: false
     };
 
-    private readonly MAX_TABS: number = 10;
-
-    // Childen
-
-    @ViewChild('tabMenu')
-    private tabMenu: ElementRef;
-
-    // Variables
-
-    private tabs: Array<EditorTab>;
+    public tabs: Array<EditorTab>;
 
     // Methods
 
@@ -47,63 +31,6 @@ export class EditorComponent implements AfterViewInit {
         private notificationsService: NotificationsService,
         private webusbService: WebUsbService) {
         this.tabs = appDataService.editorTabs;
-    }
-
-    public ngAfterViewInit() {
-        this.setDefaultTabStatuses(1);
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onCloseTab(id: number) {
-        let tab = this.getTabById(id);
-        let index = this.tabs.indexOf(tab);
-        this.tabs.splice(index, 1);
-
-        if (this.tabs.length > 0) {
-            this.tabs[this.tabs.length - 1].active = true;
-        } else {
-            this.newTab();
-        }
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onActivateTab(tab: EditorTab) {
-        for (let t of this.tabs) {
-            t.active = false;
-        }
-        tab.active = true;
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public mayAddTab(): boolean {
-        return this.tabs.length < this.MAX_TABS;
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public newTab(): EditorTab {
-        let id = this.getFirstAvailableTabId();
-        let tab: EditorTab = {
-            id: id,
-            active: true,
-            title: 'Tab # ' + id,
-            editor: null,
-            port: null,
-            term: null
-        };
-
-        for (let other of this.tabs) {
-            other.active = false;
-        }
-
-        // Before creating the new tab (i.e. adding it to `this.tabs`, make
-        // the previously last tab active, to workaround bugs in Bootstrap:
-        // https://github.com/twbs/bootstrap/issues/21223
-        $(this.tabMenu.nativeElement).find('a:last').tab('show');
-
-        this.tabs.push(tab);
-        this.setDefaultTabStatuses(tab.id);
-
-        return tab;
     }
 
     // tslint:disable-next-line:no-unused-locals
@@ -147,37 +74,4 @@ export class EditorComponent implements AfterViewInit {
             overlay.style.display = 'none';
         });
     }
-
-
-    ///////////////////////////////////////////////////////////////////////////
-
-
-    private setDefaultTabStatuses(id: number) {
-        let tab = this.getTabById(id);
-
-        tab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
-        tab.uploadStatus = OPERATION_STATUS.NOT_STARTED;
-        tab.editorStatus = EDITOR_STATUS.READY;
-    }
-
-    private getTabById(id: number): EditorTab {
-        for (let tab of this.tabs) {
-            if (tab.id === id) {
-                return tab;
-            }
-        }
-        return null;
-    }
-
-    private getFirstAvailableTabId(): number {
-        let max = 0;
-        for (let tab of this.tabs) {
-            if (tab.id > max) {
-                max = tab.id;
-            }
-        }
-        return max + 1;
-    }
-
-
 }

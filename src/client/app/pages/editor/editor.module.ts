@@ -18,6 +18,7 @@ import { OcfExplorerModule } from './components/ocf-explorer/ocf-explorer.module
 
 // This module
 import { EditorComponent } from './editor.component';
+import { TabBarComponent } from './components/tab-bar/tab-bar.component';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { EditorComponent } from './editor.component';
 
         SharedModule.forRoot()
     ],
-    declarations: [EditorComponent],
+    declarations: [EditorComponent, TabBarComponent],
     exports: [EditorComponent]
 })
 export class EditorModule {}

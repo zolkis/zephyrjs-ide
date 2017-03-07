@@ -6,31 +6,7 @@
     (on-ended-resizing)="onEndedResizing($event)">
 
     <div class="split-pane-content-primary">
-        <ul #tabMenu class="nav nav-tabs" role="tablist">
-            <li
-                *ngFor="let tab of tabs" role="presentation"
-                [ngClass]="{'nav-item': true, 'active': tab.active}">
-                <a
-                    class="nav-link"
-                    href="#tab-{{tab.id}}"
-                    role="tab"
-                    data-toggle="tab"
-                    (click)="onActivateTab(tab)">
-
-                    <div class="tab-title">
-                        {{tab.title}}
-                    </div>
-
-                    <a
-                       href=""
-                       class="close-tab"
-                       (click)="onCloseTab(tab.id)">
-                        &times;
-                    </a>
-                </a>
-            </li>
-        </ul>
-
+        <sd-tab-bar [tabs]="tabs"></sd-tab-bar>
         <div class="tab-content">
             <div
                 *ngFor="let tab of tabs"
@@ -47,14 +23,6 @@
                 <sd-statusbar [tab]="tab"></sd-statusbar>
             </div> <!-- ./tab-pane -->
         </div> <!-- ./tab-content -->
-
-        <button
-            id="new-tab-button"
-            class="btn btn-primary"
-            [disabled]="!mayAddTab()"
-            (click)="newTab()">
-            <fa [name]="'plus'"></fa> New tab
-        </button>
     </div> <!-- ./split-pane-contenty-primary -->
 
     <div class="split-pane-content-secondary">
