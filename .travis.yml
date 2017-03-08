@@ -1,10 +1,9 @@
 language: node_js
-node_js: stable
+node_js:
+  - "6"
 
-sudo: false
-
-addons:
-  firefox: "39.0"
+sudo: required
+dist: trusty
 
 os:
   - linux
@@ -13,9 +12,21 @@ os:
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew outdated xctool || brew upgrade xctool; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=chromium-browser; fi  # Karma CI
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew cask install google-chrome; fi  # Karma CI
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew cask install google-chrome; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install yarn; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export DISPLAY=:99.0; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=/usr/bin/google-chrome; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y libappindicator1 fonts-liberation; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo dpkg -i google-chrome*.deb; fi
+
+# We need a custom install step while ng2-split-pane is not released with
+# support for ES5.
+install:
+  - yarn
+  - (cd ../; git clone https://github.com/wannabegeek/ng2-split-pane.git)
+  - (cd ../ng2-split-pane; npm install; ./node_modules/.bin/tsc -p src)
+  - npm install ../ng2-split-pane
 
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
@@ -25,18 +36,14 @@ after_failure:
   - cat /home/travis/build/01org/zephyrjs-ide/npm-debug.log
 
 branches:
-  only: master
-
-notifications:
-  email: true
-  webhooks:
-    urls: https://webhooks.gitter.im/e/565e4b2fed3b96c1b964
-    on_success: change  # options: [always|never|change] default: always
-    on_failure: always  # options: [always|never|change] default: always
-    on_start: never     # options: [always|never|change] default: always
+  only:
+    - master
+    - travis
 
 cache:
   directories: node_modules
 
 script:
-  - npm run tests.all && npm run build.prod.exp
+  - npm run serve.prod & echo $! >>/tmp/serve.prod.pid
+  - npm run tests.all
+  - kill `cat /tmp/serve.prod.pid`

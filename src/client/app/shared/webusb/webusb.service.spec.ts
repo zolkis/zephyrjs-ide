@@ -8,6 +8,8 @@ export function main() {
     let webusbService: WebUsbService;
 
     beforeEach(() => {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
       let injector = ReflectiveInjector.resolveAndCreate([
         WebUsbService,
       ]);

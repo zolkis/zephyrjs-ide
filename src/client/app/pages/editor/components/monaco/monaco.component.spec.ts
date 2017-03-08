@@ -49,6 +49,8 @@ export function main() {
         };
 
         beforeEach(() => {
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
             TestBed.configureTestingModule({
                 declarations: [TestComponent],
                 providers: [GitHubService, RepoService, UserService],

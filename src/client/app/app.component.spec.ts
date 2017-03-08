@@ -55,6 +55,8 @@ export function main() {
         ];
 
         beforeEach(() => {
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
             TestBed.configureTestingModule({
                 imports: [
                     FormsModule,

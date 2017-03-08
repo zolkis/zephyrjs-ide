@@ -117,61 +117,77 @@
         }
     }
 
-    .split-pane-content-primary, .split-pane-content-secondary {
-        height: 100%;
-        position: relative;
-        background-color: $panel-bg-color;
-
-        #new-tab-button {
-            position: absolute;
-            top: 12px;
-            right: 10px;
-            max-height: 20px;
-
-            padding: 2px 10px;
-            font-size: 11px;
-            font-weight: normal;
-            color: $panel-bg-color;
-            border: none;
-            border-radius: 15px;
-            text-align: center;
-            text-shadow: none;
-
-            fa {
-                margin-right: 4px;
-                font-weight: normal;
-            }
+    vertical-split-pane /deep/ {
+        .left-component, .right-component {
+            height: 100%;
         }
-    }
 
-    .split-pane-content-secondary {
-        .nav-tabs {
-            padding-left: 10px;
-            width: auto;
+        .split-pane-content-primary, .split-pane-content-secondary {
+            height: 100%;
+            position: relative;
+            background-color: $panel-bg-color;
 
-            li {
-                width: initial !important;
-                max-width: initial;
-                padding-left: initial !important;
+            .tab-content {
+                height: calc(100% - 40px); // for the tab bar
 
-                a {
-                    padding: 0 16px;
+                .tab-pane {
+                    height: 100%;
                 }
             }
         }
-    }
 
-    /deep/ vertical-split-separator {
-        width: 6px;
-        border: none;
-        background-color: $navbar-bg-color;
+        .split-pane-content-primary {
+            #new-tab-button {
+                position: absolute;
+                top: 12px;
+                right: 10px;
+                max-height: 20px;
 
-        .handle {
-            background-color: darken($accent-color, 10%);
+                padding: 2px 10px;
+                font-size: 11px;
+                font-weight: normal;
+                color: $panel-bg-color;
+                border: none;
+                border-radius: 15px;
+                text-align: center;
+                text-shadow: none;
+
+                fa {
+                    margin-right: 4px;
+                    font-weight: normal;
+                }
+            }
         }
 
-        &:hover {
-            background-color: lighten($navbar-bg-color, 10%);
+        .split-pane-content-secondary {
+            .nav-tabs {
+                padding-left: 10px;
+                width: auto;
+
+                li {
+                    width: initial !important;
+                    max-width: initial;
+                    padding-left: initial !important;
+
+                    a {
+                        padding: 0 16px;
+                    }
+                }
+            }
+        }
+
+        vertical-split-separator {
+            width: 6px;
+            border: none;
+            background-color: $navbar-bg-color;
+
+            .handle {
+                background-color: darken($accent-color, 10%);
+            }
+
+            &:hover {
+                background-color: lighten($navbar-bg-color, 10%);
+            }
         }
     }
 

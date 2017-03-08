@@ -12,6 +12,8 @@ export function main() {
     // Disable old forms
 
     beforeEach(() => {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+
       TestBed.configureTestingModule({
         declarations: [TestComponent],
         imports: [AboutModule]

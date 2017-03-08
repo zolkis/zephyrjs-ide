@@ -23,7 +23,10 @@ const config = {
   directConnect: true,
 
   capabilities: {
-    browserName: 'chrome'
+    browserName: 'chrome',
+    'chromeOptions' : {
+      args: ['--window-size=1024,800']
+    }
   },
 
   onPrepare: function() {
@@ -39,11 +42,5 @@ const config = {
    */
   useAllAngular2AppRoots: true
 };
-
-if (process.env.TRAVIS) {
-  config.capabilities = {
-    browserName: 'firefox'
-  };
-}
 
 exports.config = config;
