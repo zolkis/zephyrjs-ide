@@ -41,6 +41,19 @@ export class TabBarComponent {
 
     // tslint:disable-next-line:no-unused-locals
     public onEditTab(tab: EditorTab) {
+        let input = $(this.tabMenu.nativeElement).find('.tab-title-editor');
+        tab.editing = true;
+
+        setTimeout(() => {
+            input.focus();
+        }, 0);
+
+        return false;
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onFinishedEditingTab(tab: EditorTab) {
+        tab.editing = false;
         return false;
     }
 

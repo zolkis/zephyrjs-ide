@@ -53,10 +53,38 @@
                 }
 
                 > .tab-title {
-                    width: calc(100% - 24px);
+                    display: block;
+                    width: calc(100% - 50px); // 50px for the edit/close icons
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+                }
+
+                > .tab-title-editor {
+                    display: none;
+
+                    background-color: lighten($panel-bg-color, 5%);
+                    color: $text-color;
+                    border: 0;
+                    padding: 0;
+
+
+                    height: 24px;
+                    width: 100%;
+
+                    text-transform: uppercase;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                &.editing > .tab-title {
+                    display: none;
+                }
+
+                &.editing > .tab-title-editor {
+                    display: block;
                 }
 
                 > .edit-tab, .close-tab {
@@ -64,6 +92,7 @@
                     top: 0px;
                     width: 16px;
                     padding: 0;
+                    text-align: center;
 
                     fa {
                         font-family: $thin-font;
@@ -83,7 +112,7 @@
                     display: none;
                 }
 
-                &:hover .edit-tab {
+                &:hover:not(.editing) .edit-tab {
                     display: block;
                 }
 

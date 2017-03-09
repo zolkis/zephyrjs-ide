@@ -32,4 +32,35 @@ describe('Editor', () => {
             });
         });
     });
+
+    it('editing tab name should work', (done) => {
+        let editBtn = element(by.css('.edit-tab')),
+            closeBtn = element(by.css('.close-tab')),
+            title = element(by.css('.tab-title')),
+            input = element(by.css('.tab-title-editor'));
+
+        expect(editBtn.isDisplayed()).toBe(false);
+        expect(title.isDisplayed()).toBe(true);
+        expect(input.isDisplayed()).toBe(false);
+
+        // Let's click the edit button
+        browser.executeScript('arguments[0].click()', editBtn).then(() => {
+            setTimeout(() => {
+                expect(title.isDisplayed()).toBe(false);
+                expect(input.isDisplayed()).toBe(true);
+                expect(closeBtn.isDisplayed()).toBe(false);
+
+                input.sendKeys('NEW TITLE');
+                input.sendKeys(protractor.Key.ENTER);
+
+                expect(editBtn.isDisplayed()).toBe(false);
+                expect(title.isDisplayed()).toBe(true);
+                expect(input.isDisplayed()).toBe(false);
+
+                expect(title.getText()).toBe('NEW TITLE');
+
+                done();
+            }, 100);
+        });
+    });
 });

@@ -4,24 +4,38 @@
         [ngClass]="{'nav-item': true, 'active': tab.active}">
         <a
             class="nav-link"
+            [class.editing]="tab.editing"
+            title="{{tab.title}}"
             href="#tab-{{tab.id}}"
             role="tab"
             data-toggle="tab"
             (click)="onActivateTab(tab)">
 
-            {{tab.title}}
+            <span class="tab-title">
+                {{tab.title}}
+            </span>
+
+            <input class="tab-title-editor"
+                   type="text"
+                   onfocus="this.select()"
+                   [(ngModel)]="tab.title"
+                   (keyup.enter)="onFinishedEditingTab(tab)"
+                   (keyup.escape)="onFinishedEditingTab(tab)"
+                   (blur)="onFinishedEditingTab(tab)" />
 
             <a
                href=""
                class="edit-tab"
-               (click)="onEditTab(tab)">
+               (click)="onEditTab(tab)"
+               [hidden]="tab.editing">
                 <fa [name]="'pencil'"></fa>
             </a>
 
             <a
                href=""
                class="close-tab"
-               (click)="onCloseTab(tab)">
+               (click)="onCloseTab(tab)"
+               [hidden]="tab.editing">
                 <fa [name]="'close'"></fa>
             </a>
         </a>

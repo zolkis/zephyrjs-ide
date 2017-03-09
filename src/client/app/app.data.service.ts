@@ -23,6 +23,11 @@ export class AppDataService {
         this._setDefaultEditorTabStatuses(this.editorTabs[0]);
     }
 
+    // Returns an editor tab by index.
+    public getEditorTab(index: number): EditorTab {
+        return this.editorTabs[index];
+    }
+
     // Create and return a new default editor tab.
     public newEditorTab(commit: boolean = true): EditorTab {
         let id = this._getFirstAvailableEditorTabId();
@@ -59,6 +64,11 @@ export class AppDataService {
             // Never allow 0 tabs.
             this.newEditorTab();
         }
+    }
+
+    // Rename an editor tab.
+    public renameEditorTab(tab: EditorTab, newTitle: string) {
+        tab.title = newTitle;
     }
 
 

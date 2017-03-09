@@ -25,4 +25,5 @@ export interface EditorTab {
     connectionStatus?: OPERATION_STATUS;
     uploadStatus?: OPERATION_STATUS;
     editorStatus?: EDITOR_STATUS;
+    editing?: boolean;
 };
