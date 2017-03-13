@@ -41,13 +41,6 @@
                     Board Explorer
                 </a>
             </li>
-
-            <li role="presentation" class="nav-item">
-                <a class="nav-link" href="#ocf-explorer" role="tab"
-                   data-toggle="tab">
-                    OCF Explorer
-                </a>
-            </li>
         </ul>
 
         <div class="tab-content">
@@ -61,13 +54,6 @@
 
             <div role="tabpanel" class="tab-pane" id="board-explorer">
                 <sd-board-explorer></sd-board-explorer>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="ocf-explorer">
-                <sd-ocf-explorer
-                    (onWarning)="onWarning($event)"
-                    (onError)="onError($event)">
-                </sd-ocf-explorer>
             </div>
         </div> <!-- ./tab-content -->
     </div> <!-- ./split-pane-content-secondary -->
