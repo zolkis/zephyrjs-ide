@@ -23,6 +23,13 @@
         position: relative;
         background-color: $panel-bg-color;
 
+        .pane-title {
+            font-size: 14px;
+            line-height: 42px;
+            padding-left: 12px;
+            text-transform: uppercase;
+        }
+
         .tab-content {
             height: calc(100% - 40px); // for the tab bar
 
@@ -30,6 +37,10 @@
                 height: 100%;
             }
         }
+    }
+
+    #console-pane .pane-title {
+        background-color: $code-bg-color;
     }
 
     .split-pane-content-secondary {
@@ -148,8 +159,7 @@
         }
     }
 
-    /deep/ vertical-split-separator {
-        width: 6px;
+    /deep/ vertical-split-separator, /deep/ horizontal-split-separator {
         border: none;
         background-color: $navbar-bg-color;
 

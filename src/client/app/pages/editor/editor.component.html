@@ -1,12 +1,9 @@
 <vertical-split-pane
     primary-component-minsize="400"
     secondary-component-minsize="400"
-    local-storage-key="editor-split-pane"
-    [secondary-component-toggled-off]="consoleToggledOff"
-    (on-begin-resizing)="onBeginResizing($event)"
-    (on-ended-resizing)="onEndedResizing($event)">
+    local-storage-key="editor-split-pane-code">
 
-    <div class="split-pane-content-primary">
+    <div id="code-pane" class="split-pane-content-primary">
         <sd-tab-bar></sd-tab-bar>
         <div class="tab-content">
             <div
@@ -27,35 +24,29 @@
     </div> <!-- ./split-pane-contenty-primary -->
 
     <div class="split-pane-content-secondary">
-        <ul #explorerMenu class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="nav-item active">
-                <a class="nav-link" href="#console" role="tab"
-                   data-toggle="tab">
-                    Console
-                </a>
-            </li>
 
-            <li role="presentation" class="nav-item">
-                <a class="nav-link" href="#board-explorer" role="tab"
-                   data-toggle="tab">
-                    Board Explorer
-                </a>
-            </li>
-        </ul>
+        <horizontal-split-pane
+            primary-component-minsize="42"
+            secondary-component-minsize="42"
+            local-storage-key="editor-split-pane-viewer"
+            [secondary-component-toggled-off]="consoleToggledOff"
+            (on-begin-resizing)="onBeginResizing($event)"
+            (on-ended-resizing)="onEndedResizing($event)">>
 
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="console">
+            <div id="board-viewer-pane" class="split-pane-content-primary">
+                <div class="pane-title">Board viewer</div>
+                <sd-board-explorer></sd-board-explorer>
+            </div>
+
+            <div id="console-pane" class="split-pane-content-secondary">
+                <div class="pane-title">Console</div>
                 <sd-console
                     *ngFor="let tab of tabs"
                     [tab]="tab"
                     [hidden]="!tab.active">
                 </sd-console>
             </div>
-
-            <div role="tabpanel" class="tab-pane" id="board-explorer">
-                <sd-board-explorer></sd-board-explorer>
-            </div>
-        </div> <!-- ./tab-content -->
+        </horizontal-split-pane>
     </div> <!-- ./split-pane-content-secondary -->
 </vertical-split-pane>
 
