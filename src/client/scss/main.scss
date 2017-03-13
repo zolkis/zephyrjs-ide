@@ -93,7 +93,7 @@ strong, .strong {
 /* BUTTONS */
 
 .btn-primary {
-    @include button-variant(white, $accent-color, darken($accent-color, 5%));
+    @include button-variant($panel-bg-color, $accent-color, darken($accent-color, 5%));
 }
 
 /* TABLES */

@@ -2,6 +2,7 @@
     primary-component-minsize="400"
     secondary-component-minsize="400"
     local-storage-key="editor-split-pane"
+    [secondary-component-toggled-off]="consoleToggledOff"
     (on-begin-resizing)="onBeginResizing($event)"
     (on-ended-resizing)="onEndedResizing($event)">
 

@@ -63,4 +63,17 @@ describe('Editor', () => {
             }, 100);
         });
     });
+
+    it('toggling the console should work', (done) => {
+        let toggleBtn = element(by.css('footer .buttons button')),
+            console = element(by.css('sd-console'));
+
+        expect(console.isDisplayed()).toBe(true);
+        browser.executeScript('arguments[0].click()', toggleBtn).then(() => {
+            setTimeout(() => {
+                expect(console.isDisplayed()).toBe(false);
+                done();
+            }, 100);
+        });
+    });
 });

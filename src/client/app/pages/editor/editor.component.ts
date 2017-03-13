@@ -24,6 +24,8 @@ export class EditorComponent {
 
     public tabs: Array<EditorTab>;
 
+    public consoleToggledOff: boolean = false;
+
     // Methods
 
     constructor(
@@ -31,6 +33,18 @@ export class EditorComponent {
         private notificationsService: NotificationsService,
         private webusbService: WebUsbService) {
         this.tabs = appDataService.editorTabs;
+        this.appDataService.registerFooterButton(
+            'Console',
+            'btn btn-primary active',
+            () => {
+                let button = this.appDataService.getFooterButtonByTitle('Console');
+                this.consoleToggledOff = !this.consoleToggledOff;
+                if (this.consoleToggledOff) {
+                    button.cls = 'btn btn-primary';
+                } else {
+                    button.cls = 'btn btn-primary active';
+                }
+            });
     }
 
     // tslint:disable-next-line:no-unused-locals

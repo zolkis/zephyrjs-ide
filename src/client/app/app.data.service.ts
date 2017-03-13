@@ -19,6 +19,8 @@ export class AppDataService {
         term: null
     }];
 
+    public footerButtons: Array<any> = [];
+
     public constructor() {
         this._setDefaultEditorTabStatuses(this.editorTabs[0]);
     }
@@ -71,6 +73,37 @@ export class AppDataService {
         tab.title = newTitle;
     }
 
+    // Add a button to the footer.
+    public registerFooterButton(title: string, cls: string, funct: any) {
+        for(let button of this.footerButtons) {
+            if (button.title === title) {
+                // A button with this title is already registered, we do not
+                // add another
+                return button;
+            }
+        }
+
+        let button = {
+            title: title,
+            cls: cls,
+            funct: funct
+        };
+
+        this.footerButtons.push(button);
+
+        return button;
+    }
+
+    // Find a footer button by its title.
+    public getFooterButtonByTitle(title: string) {
+        for(let button of this.footerButtons) {
+            if (button.title === title) {
+                return button;
+            }
+        }
+
+        return null;
+    }
 
     ///////////////////////////////////////////////////////////////////////////
 

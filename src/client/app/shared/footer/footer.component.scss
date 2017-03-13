@@ -9,22 +9,30 @@
 
     background-color: $footer-bg-color;
 
-    text-align: right;
+    .about {
+        display: inline-block;
 
-    .app-name {
-        font-family: $thin-font;
-        text-transform: uppercase;
-    }
+        .app-name {
+            font-family: $thin-font;
+            text-transform: uppercase;
+        }
 
-    a {
-        color: $accent-color;
-        text-decoration: none;
-        font-style: italic;
+        a {
+            color: $accent-color;
+            text-decoration: none;
+            font-style: italic;
 
-        &:hover {
-            &:hover, &:focus {
-                color: lighten($accent-color, 5%);
+            &:hover {
+                &:hover, &:focus {
+                    color: lighten($accent-color, 5%);
+                }
             }
         }
+    }
+
+    .buttons {
+        float: right;
+        margin-top: -6px;
+        text-align: right;
     }
 }
