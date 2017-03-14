@@ -75,21 +75,27 @@ export class AppDataService {
 
     // Add a button to the footer.
     public registerFooterButton(title: string, cls: string, funct: any) {
-        for(let button of this.footerButtons) {
-            if (button.title === title) {
-                // A button with this title is already registered, we do not
-                // add another
-                return button;
+        let button = null;
+
+        for(let b of this.footerButtons) {
+            if (b.title === title) {
+                // A button with this title is already registered, we replace
+                // it.
+                button = b;
             }
         }
 
-        let button = {
-            title: title,
-            cls: cls,
-            funct: funct
-        };
-
-        this.footerButtons.push(button);
+        if (button === null) {
+            button = {
+                title: title,
+                cls: cls,
+                funct: funct
+            };
+            this.footerButtons.push(button);
+        } else {
+            button.cls = cls;
+            button.funct = funct;
+        }
 
         return button;
     }

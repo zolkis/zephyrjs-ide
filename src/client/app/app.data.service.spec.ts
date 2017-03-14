@@ -61,12 +61,11 @@ export function main() {
             expect(button.cls).toBe('bar');
             expect(service.footerButtons.length).toBe(1);
 
-            // Adding another with the same name does nothing and returns the
-            // previous instance.
+            // Adding another with the same name replaces the previous instance.
             // tslint:disable-next-line:no-empty
             button = service.registerFooterButton('foo', 'bar 2', () => {});
             expect(button.title).toBe('foo');
-            expect(button.cls).toBe('bar');
+            expect(button.cls).toBe('bar 2');
             expect(service.footerButtons.length).toBe(1);
 
             expect(service.getFooterButtonByTitle('not found')).toBe(null);
