@@ -5,16 +5,16 @@
 
     .console-container {
         position: relative;
-        height: 100%;
+        height: calc(100% - 42px);
         overflow: hidden;
         background-color: $code-bg-color;
 
         .console {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            width: calc(100% - 10px);
-            height: calc(100% - 10px);
+            top: 0px;
+            left: 12px;
+            width: calc(100% - 12px);
+            height: 100%;
         }
 
     }
