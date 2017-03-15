@@ -48,6 +48,12 @@ export class EditorComponent {
     }
 
     // tslint:disable-next-line:no-unused-locals
+    public onCloseConsole() {
+        this.consoleToggledOff = true;
+        return false;
+    }
+
+    // tslint:disable-next-line:no-unused-locals
     public onWarning(message: any) {
         let overrides: any = {};
 

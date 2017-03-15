@@ -41,7 +41,14 @@
             </div>
 
             <div id="console-pane" class="split-pane-content-secondary">
-                <div class="pane-title">Console</div>
+                <div class="pane-title">
+                    Console
+                    <a  href="#"
+                        class="close"
+                        (click)="onCloseConsole()">
+                        <fa [name]="'close'"></fa>
+                    </a>
+                </div>
                 <sd-console
                     *ngFor="let tab of tabs"
                     [tab]="tab"

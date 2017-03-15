@@ -28,6 +28,17 @@
             line-height: 42px;
             padding-left: 12px;
             text-transform: uppercase;
+
+            .close {
+                float: right;
+                padding: 9px;
+
+                fa {
+                    color: darken($text-color, 10%);
+                    text-shadow: none;
+                    font-weight: normal;
+                }
+            }
         }
 
         .tab-content {
