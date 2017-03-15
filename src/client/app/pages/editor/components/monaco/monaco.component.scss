@@ -6,7 +6,8 @@
 
     .monaco-toolbar {
         background-color: $code-bg-color;
-        padding: 5px 15px 30px 42px;
+        padding: 5px 0 30px 42px;
+        text-align: right;
 
         fa {
             color: $accent-color;
@@ -19,11 +20,12 @@
             box-shadow: none;
             text-shadow: none;
             font-family: $default-font;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: normal;
 
             fa {
                 margin-right: 4px;
+                color: darken($text-color, 50%);
             }
         }
     }
