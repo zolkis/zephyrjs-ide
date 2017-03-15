@@ -1,7 +1,9 @@
 <vertical-split-pane
     primary-component-minsize="400"
     secondary-component-minsize="400"
-    local-storage-key="editor-split-pane-code">
+    local-storage-key="editor-split-pane-code"
+    (on-begin-resizing)="onBeginResizing($event)"
+    (on-ended-resizing)="onEndedResizing($event)">
 
     <div id="code-pane" class="split-pane-content-primary">
         <sd-tab-bar></sd-tab-bar>
