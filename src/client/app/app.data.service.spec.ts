@@ -26,9 +26,30 @@ export function main() {
             expect(tab.title).toBe('Tab # 2');
             expect(service.editorTabs.length).toBe(2);
 
-            // No commit
-            tab = service.newEditorTab(false);
-            expect(service.editorTabs.length).toBe(2);
+            // Adding one while the last one is not the active tab should
+            // still result in the new tab being the only active one.
+            service.resetEditorTabs();
+            tab = service.getEditorTab(0);
+            let tab2 = service.newEditorTab();
+            service.activateEditorTab(tab);
+            let tab3 = service.newEditorTab();
+
+            expect(tab.active).toBe(false);
+            expect(tab2.active).toBe(false);
+            expect(tab3.active).toBe(true);
+        });
+
+        it('activating an editor tab should work', () => {
+            let tab1 = service.getEditorTab(0);
+            let tab2 = service.newEditorTab();
+
+            expect(tab1.active).toBe(false);
+            expect(tab2.active).toBe(true);
+
+            service.activateEditorTab(tab1);
+
+            expect(tab1.active).toBe(true);
+            expect(tab2.active).toBe(false);
         });
 
         it('getting an editor tab should work', () => {
@@ -43,6 +64,43 @@ export function main() {
 
             let tab = service.newEditorTab();
             service.removeEditorTab(tab);
+            expect(service.editorTabs.length).toBe(1);
+
+            // When we remove an active tab that was last, the new last becomes
+            // active.
+            let tab2 = service.newEditorTab();
+            let tab3 = service.newEditorTab();
+
+            expect(service.editorTabs.length).toBe(3);
+            expect(service.editorTabs[0].active).toBe(false);
+            expect(service.editorTabs[1].active).toBe(false);
+            expect(service.editorTabs[2].active).toBe(true);
+
+            service.removeEditorTab(tab3);
+            expect(service.editorTabs[1].active).toBe(true);
+
+            // When we remove an active tab that was not last, the one that was
+            // following it becomes active.
+            tab3 = service.newEditorTab();
+            service.activateEditorTab(tab2);
+            service.removeEditorTab(tab2);
+            expect(tab3.active).toBe(true);
+
+            // When we remove an inactive tab, the currently active tab does
+            // not change.
+            service.resetEditorTabs();
+            tab2 = service.newEditorTab();
+            tab3 = service.newEditorTab();
+            service.removeEditorTab(tab2);
+            expect(tab3.active).toBe(true);
+        });
+
+        it('resetting all editor tabs should work', () => {
+            let tab1 = service.getEditorTab(0);
+            let tab2 = service.newEditorTab();
+            let tab3 = service.newEditorTab();
+
+            service.resetEditorTabs();
             expect(service.editorTabs.length).toBe(1);
         });
 

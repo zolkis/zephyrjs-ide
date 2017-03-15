@@ -33,10 +33,7 @@ export class TabBarComponent {
 
     // tslint:disable-next-line:no-unused-locals
     public onActivateTab(tab: EditorTab) {
-        for (let t of this.tabs) {
-            t.active = false;
-        }
-        tab.active = true;
+        this._appDataService.activateEditorTab(tab);
     }
 
     // tslint:disable-next-line:no-unused-locals
@@ -64,13 +61,6 @@ export class TabBarComponent {
 
     // tslint:disable-next-line:no-unused-locals
     public onNewTab() {
-        let tab = this._appDataService.newEditorTab(false);
-
-        // Before committing the new tab, make the previously last tab active,
-        // to workaround bugs in Bootstrap:
-        // https://github.com/twbs/bootstrap/issues/21223
-        $(this.tabMenu.nativeElement).find('a:last').tab('show');
-
-        this._appDataService.editorTabs.push(tab);
+        let tab = this._appDataService.newEditorTab();
     }
 }

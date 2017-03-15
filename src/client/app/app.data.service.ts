@@ -31,7 +31,7 @@ export class AppDataService {
     }
 
     // Create and return a new default editor tab.
-    public newEditorTab(commit: boolean = true): EditorTab {
+    public newEditorTab(): EditorTab {
         let id = this._getFirstAvailableEditorTabId();
         let tab: EditorTab = {
             id: id,
@@ -41,31 +41,51 @@ export class AppDataService {
             port: null,
             term: null
         };
+
         this._setDefaultEditorTabStatuses(tab);
-
-        for (let other of this.editorTabs) {
-            other.active = false;
-        }
-
-        if (commit) {
-            this.editorTabs.push(tab);
-        }
+        this.editorTabs.push(tab);
+        this.activateEditorTab(tab);
 
         return tab;
     }
 
+    // Make a tab active, while deactivating all others.
+    public activateEditorTab(tab: EditorTab) {
+        for (let t of this.editorTabs) {
+            t.active = false;
+        }
+        tab.active = true;
+    }
+
     // Remove an editor tab.
     public removeEditorTab(tab: EditorTab) {
-        let index = this.editorTabs.indexOf(tab);
+        let index = this.editorTabs.indexOf(tab),
+            wasActive = tab.active;
+
         this.editorTabs.splice(index, 1);
 
-        if (this.editorTabs.length > 0) {
-            // Activate the last tab.
-            this.editorTabs[this.editorTabs.length - 1].active = true;
-        } else {
+        if (wasActive && index !== 0) {
+            if (index === this.editorTabs.length) {
+                // We removed the last tab, so we activate the tab that is now
+                // last.
+                this.editorTabs[this.editorTabs.length - 1].active = true;
+            } else {
+                // Let's activate the tab that was right after the one we
+                // removed, and that now has its index.
+                this.editorTabs[index].active = true;
+            }
+        }
+
+        if (this.editorTabs.length === 0) {
             // Never allow 0 tabs.
             this.newEditorTab();
         }
+    }
+
+    // Will remove all editor tabs and create a new empty one.
+    public resetEditorTabs() {
+        this.editorTabs = [];
+        this.newEditorTab();
     }
 
     // Rename an editor tab.
