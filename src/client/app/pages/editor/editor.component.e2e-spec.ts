@@ -67,7 +67,7 @@ describe('Editor', () => {
     });
 
     it('toggling the console should work', (done) => {
-        let toggleBtn = element(by.css('footer .buttons button')),
+        let toggleBtn = element(by.css('#editor-footer button.toggle-console')),
             console = element(by.css('sd-console'));
 
         expect(console.isDisplayed()).toBe(true);
