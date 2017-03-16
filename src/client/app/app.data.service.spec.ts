@@ -109,32 +109,5 @@ export function main() {
             service.renameEditorTab(tab, 'New title');
             expect(tab.title).toBe('New title');
         });
-
-        it('registering footer buttons should work', () => {
-            expect(service.footerButtons).toBeDefined();
-
-            // tslint:disable-next-line:no-empty
-            let button = service.registerFooterButton('foo', 'bar', () => {});
-            expect(button.title).toBe('foo');
-            expect(button.cls).toBe('bar');
-            expect(service.footerButtons.length).toBe(1);
-
-            // Adding another with the same name replaces the previous instance.
-            // tslint:disable-next-line:no-empty
-            button = service.registerFooterButton('foo', 'bar 2', () => {});
-            expect(button.title).toBe('foo');
-            expect(button.cls).toBe('bar 2');
-            expect(service.footerButtons.length).toBe(1);
-
-            expect(service.getFooterButtonByTitle('not found')).toBe(null);
-            expect(service.getFooterButtonByTitle('foo')).not.toBe(null);
-        });
-
-        it('unregistering footer buttons should work', () => {
-            // tslint:disable-next-line:no-empty
-            let button = service.registerFooterButton('foo', 'bar', () => {});
-            service.unregisterFooterButton('foo');
-            expect(service.footerButtons.length).toBe(0);
-        });
     });
 }

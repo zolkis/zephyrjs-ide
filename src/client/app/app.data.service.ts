@@ -93,53 +93,6 @@ export class AppDataService {
         tab.title = newTitle;
     }
 
-    // Add a button to the footer.
-    public registerFooterButton(title: string, cls: string, funct: any) {
-        let button = null;
-
-        for(let b of this.footerButtons) {
-            if (b.title === title) {
-                // A button with this title is already registered, we replace
-                // it.
-                button = b;
-            }
-        }
-
-        if (button === null) {
-            button = {
-                title: title,
-                cls: cls,
-                funct: funct
-            };
-            this.footerButtons.push(button);
-        } else {
-            button.cls = cls;
-            button.funct = funct;
-        }
-
-        return button;
-    }
-
-    // Find a footer button by its title.
-    public getFooterButtonByTitle(title: string) {
-        for(let button of this.footerButtons) {
-            if (button.title === title) {
-                return button;
-            }
-        }
-
-        return null;
-    }
-
-    // Remove a footer button.
-    public unregisterFooterButton(title: string) {
-        for(let i = 0; i < this.footerButtons.length; i++) {
-            if (this.footerButtons[i].title === title) {
-                this.footerButtons.splice(i, 1);
-                return;
-            }
-        }
-    }
 
     ///////////////////////////////////////////////////////////////////////////
 

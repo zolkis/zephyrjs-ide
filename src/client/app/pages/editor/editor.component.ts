@@ -1,5 +1,5 @@
 // Core
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 // Third party
 import { NotificationsService } from 'angular2-notifications';
@@ -16,13 +16,16 @@ import { WebUsbService } from '../../shared/webusb/webusb.service';
     templateUrl: 'editor.component.html',
     styleUrls: ['editor.component.css']
 })
-export class EditorComponent implements OnInit, OnDestroy {
+export class EditorComponent {
     public notificationOptions = {
         timeOut: 3000,
         showProgressBar: false
     };
 
     public tabs: Array<EditorTab>;
+
+    @ViewChild('toggleConsoleButton')
+    public toggleConsoleButton: ElementRef;
 
     public consoleToggledOff: boolean = false;
 
@@ -35,23 +38,9 @@ export class EditorComponent implements OnInit, OnDestroy {
         this.tabs = appDataService.editorTabs;
     }
 
-    public ngOnInit() {
-        this.appDataService.registerFooterButton(
-            'Console',
-            'btn btn-primary active',
-            () => {
-                let button = this.appDataService.getFooterButtonByTitle('Console');
-                this.consoleToggledOff = !this.consoleToggledOff;
-                if (this.consoleToggledOff) {
-                    button.cls = 'btn btn-primary';
-                } else {
-                    button.cls = 'btn btn-primary active';
-                }
-            });
-    }
-
-    public ngOnDestroy() {
-        this.appDataService.unregisterFooterButton('Console');
+    // tslint:disable-next-line:no-unused-locals
+    public onToggleConsole() {
+        this.consoleToggledOff = !this.consoleToggledOff;
     }
 
     // tslint:disable-next-line:no-unused-locals
