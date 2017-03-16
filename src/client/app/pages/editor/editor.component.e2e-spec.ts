@@ -46,6 +46,8 @@ describe('Editor', () => {
         // Let's click the edit button
         browser.executeScript('arguments[0].click()', editBtn).then(() => {
             setTimeout(() => {
+                browser.wait(
+                    protractor.ExpectedConditions.visibilityOf(input), 5000);
                 expect(title.isDisplayed()).toBe(false);
                 expect(input.isDisplayed()).toBe(true);
                 expect(closeBtn.isDisplayed()).toBe(false);
