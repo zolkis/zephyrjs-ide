@@ -131,6 +131,16 @@ export class AppDataService {
         return null;
     }
 
+    // Remove a footer button.
+    public unregisterFooterButton(title: string) {
+        for(let i = 0; i < this.footerButtons.length; i++) {
+            if (this.footerButtons[i].title === title) {
+                this.footerButtons.splice(i, 1);
+                return;
+            }
+        }
+    }
+
     ///////////////////////////////////////////////////////////////////////////
 
 

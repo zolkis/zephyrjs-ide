@@ -129,5 +129,12 @@ export function main() {
             expect(service.getFooterButtonByTitle('not found')).toBe(null);
             expect(service.getFooterButtonByTitle('foo')).not.toBe(null);
         });
+
+        it('unregistering footer buttons should work', () => {
+            // tslint:disable-next-line:no-empty
+            let button = service.registerFooterButton('foo', 'bar', () => {});
+            service.unregisterFooterButton('foo');
+            expect(service.footerButtons.length).toBe(0);
+        });
     });
 }

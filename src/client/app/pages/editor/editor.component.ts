@@ -1,5 +1,5 @@
 // Core
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // Third party
 import { NotificationsService } from 'angular2-notifications';
@@ -16,7 +16,7 @@ import { WebUsbService } from '../../shared/webusb/webusb.service';
     templateUrl: 'editor.component.html',
     styleUrls: ['editor.component.css']
 })
-export class EditorComponent {
+export class EditorComponent implements OnInit, OnDestroy {
     public notificationOptions = {
         timeOut: 3000,
         showProgressBar: false
@@ -33,6 +33,9 @@ export class EditorComponent {
         private notificationsService: NotificationsService,
         private webusbService: WebUsbService) {
         this.tabs = appDataService.editorTabs;
+    }
+
+    public ngOnInit() {
         this.appDataService.registerFooterButton(
             'Console',
             'btn btn-primary active',
@@ -45,6 +48,10 @@ export class EditorComponent {
                     button.cls = 'btn btn-primary active';
                 }
             });
+    }
+
+    public ngOnDestroy() {
+        this.appDataService.unregisterFooterButton('Console');
     }
 
     // tslint:disable-next-line:no-unused-locals
