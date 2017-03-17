@@ -1,3 +1,14 @@
+2017-03-17 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.11.0-alpha
+	* Move console to the bottom right, under board viewer
+	* Add button to toggle console on/off
+	* Remove OCF explorer
+	* Fix issues with multiple editor tabs displayed as active
+	* Move Monaco toolbar buttons to the right and change the icon colors
+	* Make landing and About pages responsive
+	* Add a more detaied footer to the About page (and any future pages other
+	than the Editor
+
 2017-03-08 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.10.1-alpha
 	* Enable integration with Travis CI
