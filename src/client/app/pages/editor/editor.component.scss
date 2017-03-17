@@ -18,34 +18,40 @@
         }
     }
 
-    .split-pane-content-primary, .split-pane-content-secondary {
-        height: 100%;
-        position: relative;
-        background-color: $panel-bg-color;
-
-        .pane-title {
-            font-size: 14px;
-            line-height: 42px;
-            padding-left: 12px;
-            text-transform: uppercase;
-
-            .close {
-                float: right;
-                padding: 9px;
-
-                fa {
-                    color: darken($text-color, 10%);
-                    text-shadow: none;
-                    font-weight: normal;
-                }
-            }
+    vertical-split-pane /deep/ {
+        .left-component, .right-component {
+            height: 100%;
         }
 
-        .tab-content {
-            height: calc(100% - 40px); // for the tab bar
+        .split-pane-content-primary, .split-pane-content-secondary {
+            height: 100%;
+            position: relative;
+            background-color: $panel-bg-color;
 
-            .tab-pane {
-                height: 100%;
+            .pane-title {
+                font-size: 14px;
+                line-height: 42px;
+                padding-left: 12px;
+                text-transform: uppercase;
+
+                .close {
+                    float: right;
+                    padding: 9px;
+
+                    fa {
+                        color: darken($text-color, 10%);
+                        text-shadow: none;
+                        font-weight: normal;
+                    }
+                }
+            }
+
+            .tab-content {
+                height: calc(100% - 40px); // for the tab bar
+
+                .tab-pane {
+                    height: 100%;
+                }
             }
         }
     }
