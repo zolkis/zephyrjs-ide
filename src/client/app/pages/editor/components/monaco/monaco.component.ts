@@ -8,19 +8,22 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { GitHubModalComponent } from '../github/github.modal.component';
-import { WebUsbPort } from '../../../../shared/webusb/webusb.port';
+import { FileService } from '../../file.service';
 import { WebUsbService } from '../../../../shared/webusb/webusb.service';
+
+import { GitHubModalComponent } from '../github/github.modal.component';
+import { WebUsbPort } from '../../../../shared/webusb/webusb.port';
 import { EditorTab, OPERATION_STATUS, EDITOR_STATUS } from '../../editor.tab';
 
 
+declare var $: any;
 declare const monaco: any;
 
 
 @Component({
     moduleId: module.id,
     selector: 'sd-monaco',
-    providers: [WebUsbService],
+    providers: [FileService, WebUsbService],
     templateUrl: 'monaco.component.html',
     styleUrls: ['monaco.component.css']
 })
@@ -29,15 +32,25 @@ export class MonacoComponent implements AfterViewInit {
     @Output() onWarning = new EventEmitter();
     @Output() onError = new EventEmitter();
 
+    public filename: string = '';
+
     @ViewChild('editor')
     private editorView: ElementRef;
 
     @ViewChild('gitHubModal')
     private gitHubModal: GitHubModalComponent;
 
+    @ViewChild('saveModal')
+    private saveModal: ElementRef;
+
+    @ViewChild('overwriteModal')
+    private overwriteModal: ElementRef;
+
     private initialCode: string = '';
 
-    constructor(private webusbService: WebUsbService) {
+    constructor(
+        private fileService: FileService,
+        private webusbService: WebUsbService) {
     }
 
     public ngAfterViewInit() {
@@ -67,6 +80,11 @@ export class MonacoComponent implements AfterViewInit {
                 sticky: true
             });
         }
+
+        $(this.saveModal.nativeElement).on('shown.bs.modal', () => {
+            document.getElementById(
+                'saveModal_filename_' + this.tab.id).focus();
+        });
     }
 
     // Will be called once monaco library is available
@@ -164,41 +182,73 @@ export class MonacoComponent implements AfterViewInit {
     }
 
     // tslint:disable-next-line:no-unused-locals
-    public mayUpload(): boolean {
+    public mayRun(): boolean {
         return this.webusbService.usb !== undefined &&
                this.tab.connectionStatus === OPERATION_STATUS.DONE &&
                this.tab.editor.getValue().length > 0 &&
-               this.tab.uploadStatus !== OPERATION_STATUS.IN_PROGRESS &&
+               this.tab.runStatus !== OPERATION_STATUS.IN_PROGRESS &&
                this.tab.port !== null;
     }
 
     // tslint:disable-next-line:no-unused-locals
-    public onUpload() {
-        this.tab.uploadStatus = OPERATION_STATUS.IN_PROGRESS;
+    public onRun() {
+        this.tab.runStatus = OPERATION_STATUS.IN_PROGRESS;
         this.tab.editorStatus = EDITOR_STATUS.UPLOADING;
 
         this.tab.port.run(this.tab.editor.getValue())
         .then((warning: string) => {
-            this.tab.uploadStatus = OPERATION_STATUS.DONE;
+            this.tab.runStatus = OPERATION_STATUS.DONE;
             this.tab.editorStatus = EDITOR_STATUS.READY;
 
             if (warning !== undefined) {
                 this.onWarning.emit({
-                    header: 'Upload failed',
+                    header: 'Running failed',
                     body: warning
                 });
             }
         })
         .catch((error: DOMException) => {
             this.tab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
-            this.tab.uploadStatus = OPERATION_STATUS.NOT_STARTED;
+            this.tab.runStatus = OPERATION_STATUS.NOT_STARTED;
             this.tab.editorStatus = EDITOR_STATUS.READY;
             this.onError.emit({
-                header: 'Upload failed',
+                header: 'Running failed',
                 body: error.message
             });
         });
     }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onSave() {
+        // Initialize filename to tab.title if filename was not previously
+        // set and tab title is not pristine.
+        if (this.filename.length === 0 &&
+            !this.tab.title.match(/Tab # \d+/i)) {
+            this.filename = this.tab.title;
+        }
+
+        $(this.saveModal.nativeElement).modal('show');
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onSaveConfirm() {
+        if (this.filename.length === 0) {
+            return;
+        }
+
+        if (this.filename !== this.tab.title &&
+            this.fileService.exists(this.filename)) {
+            $(this.overwriteModal.nativeElement).modal('show');
+        } else {
+            this._doSave();
+        }
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onOverwrite() {
+        this._doSave();
+    }
+
 
     // tslint:disable-next-line:no-unused-locals
     public onFetchFromGitHub() {
@@ -208,5 +258,16 @@ export class MonacoComponent implements AfterViewInit {
     // tslint:disable-next-line:no-unused-locals
     public onGitHubFileFetched(content: string) {
         this.tab.editor.setValue(content);
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+
+
+    private _doSave() {
+        this.fileService.save(this.filename, this.tab.editor.getValue(), true);
+        this.tab.title = this.filename;
+        $(this.overwriteModal.nativeElement).modal('hide');
+        $(this.saveModal.nativeElement).modal('hide');
     }
 }

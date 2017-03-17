@@ -1,63 +1,154 @@
-<vertical-split-pane
-    primary-component-minsize="400"
-    secondary-component-minsize="400"
-    local-storage-key="editor-split-pane-code"
-    (on-begin-resizing)="onBeginResizing($event)"
-    (on-ended-resizing)="onEndedResizing($event)">
+<ng-sidebar-container class="primary">
+    <ng-sidebar
+        [opened]="sidebarOptions.opened"
+        [position]="sidebarOptions.position"
+        [mode]="sidebarOptions.mode"
+        [dockedSize]="sidebarOptions.dockedSize"
+        [animate]="sidebarOptions.animate">
 
-    <div id="code-pane" class="split-pane-content-primary">
-        <sd-tab-bar></sd-tab-bar>
-        <div class="tab-content">
-            <div
-                *ngFor="let tab of tabs"
-                role="tabpanel"
-                [ngClass]="{'tab-pane': true, 'active': tab.active}"
-                id="tab-{{tab.id}}">
+        <ul>
+            <li>
+                <a href="#" class="files"
+                   [class.active]="secondarySidebarOptions.content === 'files'"
+                   (click)="onFilesClicked()">
+                    <fa [name]="'folder'"></fa>
+                    <span *ngIf="sidebarOptions.opened">
+                        Files
+                        <span class="count">({{fileService.count()}})</span>
+                    </span>
+                </a>
+            </li>
 
-                <sd-monaco
-                    [tab]="tab"
-                    (onWarning)="onWarning($event)"
-                    (onError)="onError($event)">
-                </sd-monaco>
+            <li>
+                <a href="#" class="examples"
+                   [class.active]="secondarySidebarOptions.content === 'examples'"
+                   (click)="onExamplesClicked()">
+                    <fa [name]="'code'"></fa>
+                    <span *ngIf="sidebarOptions.opened">
+                        Examples
+                        <span class="count">({{exampleService.count()}})</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
 
-                <sd-statusbar [tab]="tab"></sd-statusbar>
-            </div> <!-- ./tab-pane -->
-        </div> <!-- ./tab-content -->
-    </div> <!-- ./split-pane-contenty-primary -->
+        <button class="toggleCollapse" (click)="onToggleSidebar()">
+            <span *ngIf="sidebarOptions.opened">
+                <fa [name]="'angle-double-left'"></fa>
+            </span>
 
-    <div class="split-pane-content-secondary">
+            <span *ngIf="!sidebarOptions.opened">
+                <fa [name]="'angle-double-right'"></fa>
+            </span>
+        </button>
+    </ng-sidebar>
 
-        <horizontal-split-pane
-            primary-component-minsize="42"
-            secondary-component-minsize="42"
-            local-storage-key="editor-split-pane-viewer"
-            [secondary-component-toggled-off]="consoleToggledOff"
-            (on-begin-resizing)="onBeginResizing($event)"
-            (on-ended-resizing)="onEndedResizing($event)">
+    <!-- secondary sidebar -->
+    <ng-sidebar-container class="secondary">
+        <ng-sidebar
+            [opened]="secondarySidebarOptions.opened"
+            [position]="secondarySidebarOptions.position"
+            [mode]="secondarySidebarOptions.mode"
+            [animate]="secondarySidebarOptions.animate">
 
-            <div id="board-viewer-pane" class="split-pane-content-primary">
-                <div class="pane-title">Board explorer</div>
-                <sd-board-explorer></sd-board-explorer>
+            <button class="close" (click)="onCloseSecondarySidebar()">
+                <fa [name]="'close'"></fa>
+            </button>
+
+            <div *ngIf="secondarySidebarOptions.content === 'files'" class="files">
+                <ul *ngIf="fileService.count() > 0">
+                    <li *ngFor="let filename of fileService.ls()">
+                        <a href="#" class="filename" (click)="onFilenameClicked(filename)">
+                            {{filename}}
+                            <div class="size">
+                                {{computeFileSize(filename)}} bytes
+                            </div>
+                        </a>
+
+                        <a href="#" class="delete" (click)="onDeleteFileClicked(filename)">
+                            <fa [name]="'trash'"></fa>
+                        </a>
+                    </li>
+                </ul>
+
+                <p *ngIf="fileService.count() === 0" class="empty">
+                    You have no saved files, on this browser.
+                </p>
             </div>
 
-            <div id="console-pane" class="split-pane-content-secondary">
-                <div class="pane-title">
-                    Console
-                    <a  href="#"
-                        class="close"
-                        (click)="onCloseConsole()">
-                        <fa [name]="'close'"></fa>
-                    </a>
-                </div>
-                <sd-console
+            <div *ngIf="secondarySidebarOptions.content === 'examples'" class="examples">
+                <ul>
+                    <li *ngFor="let example of exampleService.ls()">
+                        <a href="#" class="example" (click)="onExampleFilenameClicked(example)">
+                            {{example}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </ng-sidebar>
+    </ng-sidebar-container>
+
+    <vertical-split-pane
+        primary-component-minsize="400"
+        secondary-component-minsize="400"
+        local-storage-key="editor-split-pane-code"
+        (on-begin-resizing)="onBeginResizing($event)"
+        (on-ended-resizing)="onEndedResizing($event)">
+
+        <div id="code-pane" class="split-pane-content-primary">
+            <sd-tab-bar></sd-tab-bar>
+            <div class="tab-content">
+                <div
                     *ngFor="let tab of tabs"
-                    [tab]="tab"
-                    [hidden]="!tab.active">
-                </sd-console>
-            </div>
-        </horizontal-split-pane>
-    </div> <!-- ./split-pane-content-secondary -->
-</vertical-split-pane>
+                    role="tabpanel"
+                    [ngClass]="{'tab-pane': true, 'active': tab.active}"
+                    id="tab-{{tab.id}}">
+
+                    <sd-monaco
+                        [tab]="tab"
+                        (onWarning)="onWarning($event)"
+                        (onError)="onError($event)">
+                    </sd-monaco>
+
+                    <sd-statusbar [tab]="tab"></sd-statusbar>
+                </div> <!-- ./tab-pane -->
+            </div> <!-- ./tab-content -->
+        </div> <!-- ./split-pane-contenty-primary -->
+
+        <div class="split-pane-content-secondary">
+
+            <horizontal-split-pane
+                primary-component-minsize="42"
+                secondary-component-minsize="42"
+                local-storage-key="editor-split-pane-viewer"
+                [secondary-component-toggled-off]="consoleToggledOff"
+                (on-begin-resizing)="onBeginResizing($event)"
+                (on-ended-resizing)="onEndedResizing($event)">
+
+                <div id="board-viewer-pane" class="split-pane-content-primary">
+                    <div class="pane-title">Board viewer</div>
+                    <sd-board-explorer></sd-board-explorer>
+                </div>
+
+                <div id="console-pane" class="split-pane-content-secondary">
+                    <div class="pane-title">
+                        Console
+                        <a  href="#"
+                            class="close"
+                            (click)="onCloseConsole()">
+                            <fa [name]="'close'"></fa>
+                        </a>
+                    </div>
+                    <sd-console
+                        *ngFor="let tab of tabs"
+                        [tab]="tab"
+                        [hidden]="!tab.active">
+                    </sd-console>
+                </div>
+            </horizontal-split-pane>
+        </div> <!-- ./split-pane-content-secondary -->
+    </vertical-split-pane>
+</ng-sidebar-container>
 
 <div id="editor-footer">
     <div class="fluid-container">

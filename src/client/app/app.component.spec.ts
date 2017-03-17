@@ -7,7 +7,9 @@ import { Route, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { LocalStorageModule } from 'angular-2-local-storage';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { SidebarModule } from 'ng-sidebar/lib/sidebar.module';
 import { SplitPaneModule } from 'ng2-split-pane/lib/ng2-split-pane';
 
 // Main app component
@@ -63,7 +65,9 @@ export function main() {
                     FormsModule,
                     RouterTestingModule.withRoutes(config),
                     Angular2FontawesomeModule,
+                    LocalStorageModule,
                     SimpleNotificationsModule,
+                    SidebarModule,
                     SplitPaneModule
                 ],
                 declarations: [

@@ -97,6 +97,22 @@ export class ProjectConfig extends SeedConfig {
                 main: 'components.js',
                 defaultExtension: 'js'
             }
+        },
+        {
+            name: 'ng-sidebar',
+            path: 'node_modules/ng-sidebar/lib/index.js',
+            packageMeta: {
+                main: 'index.js',
+                defaultExtension: 'js'
+            }
+        },
+        {
+            name: 'angular-2-local-storage',
+            path: 'node_modules/angular-2-local-storage/dist/index.js',
+            packageMEta: {
+                main: 'index.js',
+                defaultExtension: 'js'
+            }
         }
     ];
 

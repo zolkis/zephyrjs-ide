@@ -23,7 +23,7 @@ export interface EditorTab {
     port: WebUsbPort;
     term: any;
     connectionStatus?: OPERATION_STATUS;
-    uploadStatus?: OPERATION_STATUS;
+    runStatus?: OPERATION_STATUS;
     editorStatus?: EDITOR_STATUS;
     editing?: boolean;
     hasError?: boolean;

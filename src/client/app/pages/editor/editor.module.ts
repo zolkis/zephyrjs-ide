@@ -5,7 +5,9 @@ import { CommonModule } from '@angular/common';
 
 // Third-party modules
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { LocalStorageModule } from 'angular-2-local-storage';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { SidebarModule } from 'ng-sidebar/lib/sidebar.module';
 import { SplitPaneModule } from 'ng2-split-pane/lib/ng2-split-pane';
 
 // Own modules
@@ -27,7 +29,12 @@ import { TabBarComponent } from './components/tab-bar/tab-bar.component';
         FormsModule,
 
         Angular2FontawesomeModule,
+        LocalStorageModule.withConfig({
+            prefix: 'zephyrjs-ide',
+            storageType: 'localStorage'
+        }),
         SimpleNotificationsModule.forRoot(),
+        SidebarModule,
         SplitPaneModule,
 
         MonacoModule,

@@ -117,7 +117,7 @@ export class AppDataService {
 
     private _setDefaultEditorTabStatuses(tab: EditorTab) {
         tab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
-        tab.uploadStatus = OPERATION_STATUS.NOT_STARTED;
+        tab.runStatus = OPERATION_STATUS.NOT_STARTED;
         tab.editorStatus = EDITOR_STATUS.READY;
     }
 }

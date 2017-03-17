@@ -2,6 +2,11 @@
 import { Component } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 
+// Third party
+import {
+    LocalStorageModule, LocalStorageService
+} from 'angular-2-local-storage';
+
 // Own
 import { EditorTab } from '../../editor.tab';
 import { GitHubModule } from '../github/github.module';
@@ -53,8 +58,22 @@ export function main() {
 
             TestBed.configureTestingModule({
                 declarations: [TestComponent],
-                providers: [GitHubService, RepoService, UserService],
-                imports: [GitHubModule, MonacoModule]
+                providers: [
+                    LocalStorageService,
+
+                    GitHubService,
+                    RepoService,
+                    UserService
+                ],
+                imports: [
+                    LocalStorageModule.withConfig({
+                        prefix: 'zephyrjs-ide-test',
+                        storageType: 'localStorage'
+                    }),
+
+                    GitHubModule,
+                    MonacoModule
+                ]
             });
         });
 
