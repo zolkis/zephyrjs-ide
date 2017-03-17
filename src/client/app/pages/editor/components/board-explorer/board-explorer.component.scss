@@ -2,7 +2,7 @@
 
 :host {
     display: block;
-    height: 100%;
+    height: calc(100% - 42px);
 
     iframe {
         width: 100%;

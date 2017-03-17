@@ -20,14 +20,6 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo dpkg -i google-chrome*.deb; fi
 
-# We need a custom install step while ng2-split-pane is not released with
-# support for ES5.
-install:
-  - yarn
-  - (cd ../; git clone https://github.com/wannabegeek/ng2-split-pane.git)
-  - (cd ../ng2-split-pane; npm install; ./node_modules/.bin/tsc -p src)
-  - npm install ../ng2-split-pane
-
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start 2>&1 &"; fi  # Protractor CI

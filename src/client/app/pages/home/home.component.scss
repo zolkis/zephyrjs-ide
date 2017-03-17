@@ -75,3 +75,23 @@
         }
     }
 }
+
+@media(max-width: 480px) {
+    :host {
+        .container {
+            width: initial !important;
+            position: initial !important;
+            transform: none;
+            padding: 20px;
+        }
+
+        #app-name {
+            margin-bottom: initial;
+            font-size: 18px;
+        }
+
+        #hello {
+            font-size: 80px;
+        }
+    }
+}

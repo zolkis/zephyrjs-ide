@@ -15,6 +15,7 @@ export = () => {
           path: 'app/pages/editor/components/board-explorer/',
           name: 'board-explorer.component.html'
       },
+      { path: 'app/pages/editor/', name: 'editor.component.html'},
       { path: 'app/shared/navbar/', name: 'navbar.component.html'},
       { path: 'app/shared/footer/', name: 'footer.component.html'}
   ];

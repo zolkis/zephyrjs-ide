@@ -1,36 +1,12 @@
 <vertical-split-pane
     primary-component-minsize="400"
     secondary-component-minsize="400"
-    local-storage-key="editor-split-pane"
+    local-storage-key="editor-split-pane-code"
     (on-begin-resizing)="onBeginResizing($event)"
     (on-ended-resizing)="onEndedResizing($event)">
 
-    <div class="split-pane-content-primary">
-        <ul #tabMenu class="nav nav-tabs" role="tablist">
-            <li
-                *ngFor="let tab of tabs" role="presentation"
-                [ngClass]="{'nav-item': true, 'active': tab.active}">
-                <a
-                    class="nav-link"
-                    href="#tab-{{tab.id}}"
-                    role="tab"
-                    data-toggle="tab"
-                    (click)="onActivateTab(tab)">
-
-                    <div class="tab-title">
-                        {{tab.title}}
-                    </div>
-
-                    <a
-                       href=""
-                       class="close-tab"
-                       (click)="onCloseTab(tab.id)">
-                        &times;
-                    </a>
-                </a>
-            </li>
-        </ul>
-
+    <div id="code-pane" class="split-pane-content-primary">
+        <sd-tab-bar></sd-tab-bar>
         <div class="tab-content">
             <div
                 *ngFor="let tab of tabs"
@@ -47,61 +23,71 @@
                 <sd-statusbar [tab]="tab"></sd-statusbar>
             </div> <!-- ./tab-pane -->
         </div> <!-- ./tab-content -->
-
-        <button
-            id="new-tab-button"
-            class="btn btn-primary"
-            [disabled]="!mayAddTab()"
-            (click)="newTab()">
-            <fa [name]="'plus'"></fa> New tab
-        </button>
     </div> <!-- ./split-pane-contenty-primary -->
 
     <div class="split-pane-content-secondary">
-        <ul #explorerMenu class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="nav-item active">
-                <a class="nav-link" href="#console" role="tab"
-                   data-toggle="tab">
+
+        <horizontal-split-pane
+            primary-component-minsize="42"
+            secondary-component-minsize="42"
+            primary-component-initialratio="0.75"
+            local-storage-key="editor-split-pane-viewer"
+            [secondary-component-toggled-off]="consoleToggledOff"
+            (on-begin-resizing)="onBeginResizing($event)"
+            (on-ended-resizing)="onEndedResizing($event)">
+
+            <div id="board-viewer-pane" class="split-pane-content-primary">
+                <div class="pane-title">Board viewer</div>
+                <sd-board-explorer></sd-board-explorer>
+            </div>
+
+            <div id="console-pane" class="split-pane-content-secondary">
+                <div class="pane-title">
                     Console
-                </a>
-            </li>
-
-            <li role="presentation" class="nav-item">
-                <a class="nav-link" href="#board-explorer" role="tab"
-                   data-toggle="tab" (click)="initBoardExplorer()">
-                    Board Explorer
-                </a>
-            </li>
-
-            <li role="presentation" class="nav-item">
-                <a class="nav-link" href="#ocf-explorer" role="tab"
-                   data-toggle="tab">
-                    OCF Explorer
-                </a>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="console">
+                    <a  href="#"
+                        class="close"
+                        (click)="onCloseConsole()">
+                        <fa [name]="'close'"></fa>
+                    </a>
+                </div>
                 <sd-console
                     *ngFor="let tab of tabs"
                     [tab]="tab"
                     [hidden]="!tab.active">
                 </sd-console>
             </div>
-
-            <div role="tabpanel" class="tab-pane" id="board-explorer">
-                <sd-board-explorer #boardExplorer></sd-board-explorer>
-            </div>
-
-            <div role="tabpanel" class="tab-pane" id="ocf-explorer">
-                <sd-ocf-explorer
-                    (onWarning)="onWarning($event)"
-                    (onError)="onError($event)">
-                </sd-ocf-explorer>
-            </div>
-        </div> <!-- ./tab-content -->
+        </horizontal-split-pane>
     </div> <!-- ./split-pane-content-secondary -->
 </vertical-split-pane>
+
+<div id="editor-footer">
+    <div class="fluid-container">
+        <div class="about">
+            <span class="app-name"><%= APP_TITLE_HTML %></span>
+            /
+            <span class="app-version">
+                <a href="https://github.com/01org/zephyrjs-ide/releases" target="_blank">
+                    v<%= VERSION %>
+                </a>
+            </span>
+            /
+            <span class="app-rev">
+                <a href="https://github.com/01org/zephyrjs-ide/commits" target="_blank">
+                    <%= GIT_REV %>
+                </a>
+            </span>
+        </div> <!-- ./about -->
+
+        <div class="buttons">
+            <button
+                #toggleConsoleButton
+                class="btn btn-primary toggle-console"
+                [class.active]="!consoleToggledOff"
+                (click)="onToggleConsole()">
+                Console
+            </button>
+        </div>
+    </div>
+</div>
 
 <simple-notifications [options]="notificationOptions"></simple-notifications>
