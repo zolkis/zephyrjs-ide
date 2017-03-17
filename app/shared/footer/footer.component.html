@@ -1,17 +1,56 @@
 <footer>
-    <div class="fluid-container">
-        <span class="app-name">JS <strong>IDE</strong> for Zephyr OS</span>
-        /
-        <span class="app-version">
-            <a href="https://github.com/01org/zephyrjs-ide/releases" target="_blank">
-                v0.10.1-alpha
-            </a>
-        </span>
-        /
-        <span class="app-rev">
-            <a href="https://github.com/01org/zephyrjs-ide/commits" target="_blank">
-                5f1ccc5
-            </a>
-        </span>
+    <div class="row">
+        <div class="col-md-3">
+            <h3>About</h3>
+            JS IDE for Zephyr OS is an online JavaScript editor that lets you upload code to a board powered by Zephyr OS, directly from the browser, taking advantage of WebUSB.
+        </div>
+
+        <div class="col-md-3">
+            <h3>Site links</h3>
+            <ul class="site-links">
+                <li>
+                    <a  [routerLink]="['/']"
+                        [routerLinkActive]="['router-link-active']"
+                        [routerLinkActiveOptions]="{exact:true}">
+
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a  [routerLink]="['/about']"
+                        [routerLinkActive]="['router-link-active']"
+                        [routerLinkActiveOptions]="{exact:true}">
+
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a  [routerLink]="['/editor']"
+                        [routerLinkActive]="['router-link-active']"
+                        [routerLinkActiveOptions]="{exact:true}">
+
+                        Editor
+                    </a>
+                </li>
+            </ul> <!-- /.nav -->
+        </div>
+
+        <div class="col-md-3">
+            <h3>Acknowledgements</h3>
+            <ul class="acknowledgements">
+                <li>
+                    <a href="http://www.zephyrproject.org/" target="_blank">
+                        Zephyr Project
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-3">
+            <h3>Legal</h3>
+            JS <strong>IDE</strong> for Zephyr OS is a copyright of Intel Corporation.
+        </div>
     </div>
 </footer>
