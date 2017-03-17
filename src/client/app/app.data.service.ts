@@ -60,11 +60,12 @@ export class AppDataService {
     // Remove an editor tab.
     public removeEditorTab(tab: EditorTab) {
         let index = this.editorTabs.indexOf(tab),
-            wasActive = tab.active;
+            wasActive = tab.active,
+            wasOnly = this.editorTabs.length === 1;
 
         this.editorTabs.splice(index, 1);
 
-        if (wasActive && index !== 0) {
+        if (wasActive && !wasOnly) {
             if (index === this.editorTabs.length) {
                 // We removed the last tab, so we activate the tab that is now
                 // last.
