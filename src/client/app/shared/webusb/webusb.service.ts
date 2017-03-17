@@ -16,7 +16,7 @@ export class WebUsbService {
         // tslint:disable-next-line:no-empty
     }
 
-    public onReceiveError(error: string) {
+    public onReceiveError(error: DOMException) {
         // tslint:disable-next-line:no-empty
     }
 
