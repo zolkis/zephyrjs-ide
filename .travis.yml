@@ -36,6 +36,4 @@ cache:
   directories: node_modules
 
 script:
-  - npm run serve.prod & echo $! >>/tmp/serve.prod.pid
-  - npm run tests.all
-  - kill `cat /tmp/serve.prod.pid`
+  - ./test.sh
