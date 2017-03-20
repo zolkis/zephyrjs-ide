@@ -120,8 +120,14 @@ export class MonacoComponent implements AfterViewInit {
                 this.tab.term.io.print(data);
             };
 
-            this.webusbService.onReceiveError = (error: string) => {
-                console.error(error);
+            this.webusbService.onReceiveError = (error: DOMException) => {
+                this.tab.editorStatus = EDITOR_STATUS.READY;
+                this.tab.connectionStatus = OPERATION_STATUS.ERROR;
+                this.tab.port = null;
+                this.onError.emit({
+                    header: 'Connection error',
+                    body: error.message
+                });
             };
 
             this.webusbService.connect(this.tab.port)

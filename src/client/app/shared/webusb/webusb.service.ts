@@ -16,7 +16,7 @@ export class WebUsbService {
         // tslint:disable-next-line:no-empty
     }
 
-    public onReceiveError(error: string) {
+    public onReceiveError(error: DOMException) {
         // tslint:disable-next-line:no-empty
     }
 
@@ -47,7 +47,7 @@ export class WebUsbService {
                 this.onReceive(data);
             };
 
-            port.onReceiveError = (error: string) => {
+            port.onReceiveError = (error: DOMException) => {
                 this.onReceiveError(error);
             };
         });

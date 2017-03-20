@@ -86,6 +86,15 @@ export function main() {
             service.removeEditorTab(tab2);
             expect(tab3.active).toBe(true);
 
+            // When we remove the first tab, which is also active, the newly
+            // first tab becomes active.
+            service.resetEditorTabs();
+            tab = service.getEditorTab(0);
+            tab2 = service.newEditorTab();
+            service.activateEditorTab(tab);
+            service.removeEditorTab(tab);
+            expect(tab2.active).toBe(true);
+
             // When we remove an inactive tab, the currently active tab does
             // not change.
             service.resetEditorTabs();
