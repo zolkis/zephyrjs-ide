@@ -1,3 +1,9 @@
+2017-03-20 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.11.1-alpha
+	* Fix issue when closing the first tab and a disappearig editor
+	* Handle all webusb errors (including sudden disconnect)
+	* Fix issue with split pane separator being under other elements
+
 2017-03-17 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.11.0-alpha
 	* Move console to the bottom right, under board viewer
