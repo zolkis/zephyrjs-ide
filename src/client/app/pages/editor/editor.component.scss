@@ -179,6 +179,7 @@
     /deep/ vertical-split-separator, /deep/ horizontal-split-separator {
         border: none;
         background-color: $navbar-bg-color;
+        z-index: 9999;
 
         .handle {
             background-color: darken($accent-color, 10%);
