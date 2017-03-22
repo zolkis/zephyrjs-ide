@@ -77,6 +77,10 @@
                     &:focus {
                         outline: none;
                     }
+
+                    &.has-error {
+                        background-color: $error-color;
+                    }
                 }
 
                 &.editing > .tab-title {

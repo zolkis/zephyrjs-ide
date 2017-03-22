@@ -16,9 +16,11 @@
             </span>
 
             <input class="tab-title-editor"
+                   [class.has-error]="tab.hasError"
                    type="text"
                    onfocus="this.select()"
                    [(ngModel)]="tab.title"
+                   (keydown)="onChangeEditingTab(tab)"
                    (keyup.enter)="onFinishedEditingTab(tab)"
                    (keyup.escape)="onFinishedEditingTab(tab)"
                    (blur)="onFinishedEditingTab(tab)" />

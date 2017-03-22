@@ -33,7 +33,7 @@ describe('Editor', () => {
         });
     });
 
-    it('editing tab name should work', (done) => {
+    it('editing tab title should work', (done) => {
         let editBtn = element(by.css('.edit-tab')),
             closeBtn = element(by.css('.close-tab')),
             title = element(by.css('.tab-title')),
@@ -65,6 +65,46 @@ describe('Editor', () => {
             }, 100);
         });
     });
+
+    it('trying to have two tabs with the same title should fail', (done) => {
+        let newTabBtn = element(by.id('new-tab-button'));
+
+        let promises = [
+            // Set up two tabs
+            newTabBtn.click().then(() => {
+                let tabs = element.all(by.css('#tab-bar .nav-item'));
+                expect(tabs.count()).toBe(2);
+                expect(tabs.get(0).getText()).toBe('TAB # 1');
+                expect(tabs.get(1).getText()).toBe('TAB # 2');
+            }),
+
+            // Rename second oab
+            browser.executeScript(
+                'arguments[0].click()',
+                element(by.css(
+                    '#tab-bar .nav-item:last-child .edit-tab'))).then(() => {
+                let input = element(by.css('#tab-bar .nav-item:last-child .tab-title-editor'));
+                browser.wait(() => { return input.isDisplayed(); }, 1000);
+
+                // Error status
+                input.sendKeys('Tab # 1');
+                input.sendKeys(protractor.Key.ENTER);
+                expect(input.getAttribute('class')).toMatch('has-error');
+                expect(input.isDisplayed()).toBe(true);
+
+                // Esc doesn't let you leave editing
+                input.sendKeys(protractor.Key.ESCAPE);
+                expect(input.isDisplayed()).toBe(true);
+
+                // Sending a new key remove the error status
+                input.sendKeys('0');
+                expect(input.getAttribute('class')).not.toMatch('has-error');
+            })
+        ];
+
+        protractor.promise.all(promises).then(done);
+    });
+
 
     it('toggling the console should work', (done) => {
         let toggleBtn = element(by.css('#editor-footer button.toggle-console')),

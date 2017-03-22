@@ -114,9 +114,19 @@ export function main() {
         });
 
         it('renaming an editor tab should work', () => {
-            let tab = service.getEditorTab(0);
-            service.renameEditorTab(tab, 'New title');
-            expect(tab.title).toBe('New title');
+            let tab1 = service.getEditorTab(0);
+            service.renameEditorTab(tab1, 'New title');
+            expect(tab1.title).toBe('New title');
+
+            let tab2 = service.newEditorTab();
+            expect(() => {
+                service.renameEditorTab(tab2, 'New title');
+            }).toThrow();
+
+            expect(() => {
+                // Case insensitive
+                service.renameEditorTab(tab2, 'new title');
+            }).toThrow();
         });
     });
 }

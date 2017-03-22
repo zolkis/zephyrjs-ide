@@ -49,8 +49,20 @@ export class TabBarComponent {
     }
 
     // tslint:disable-next-line:no-unused-locals
+    public onChangeEditingTab(tab: EditorTab) {
+        tab.hasError = false;
+    }
+
+    // tslint:disable-next-line:no-unused-locals
     public onFinishedEditingTab(tab: EditorTab) {
-        tab.editing = false;
+        try {
+            this._appDataService.renameEditorTab(tab, tab.title);
+            tab.editing = false;
+            tab.hasError = false;
+        } catch (e) {
+            tab.hasError = true;
+        }
+
         return false;
     }
 
