@@ -91,6 +91,13 @@ export class AppDataService {
 
     // Rename an editor tab.
     public renameEditorTab(tab: EditorTab, newTitle: string) {
+        for(let other of this.editorTabs) {
+            if (other.id !== tab.id &&
+                other.title.toLowerCase() === newTitle.toLowerCase()) {
+                throw new Error('This title is already taken by another tab');
+            }
+        }
+
         tab.title = newTitle;
     }
 
@@ -110,7 +117,7 @@ export class AppDataService {
 
     private _setDefaultEditorTabStatuses(tab: EditorTab) {
         tab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
-        tab.uploadStatus = OPERATION_STATUS.NOT_STARTED;
+        tab.runStatus = OPERATION_STATUS.NOT_STARTED;
         tab.editorStatus = EDITOR_STATUS.READY;
     }
 }

@@ -4,16 +4,166 @@
     display: block;
     height: calc(100% - 50px - 60px); // navbar and footer
 
-    > #editor-page-container {
-        height: 100%;
-        margin: 0;
+    .not-supported {
+        padding: 40px;
+        font-size: 20px;
+        color: lighten($panel-bg-color, 66%);
+        text-align: center;
     }
 
-    .tab-content {
-        height: calc(100% - 40px);
+    /deep/ ng-sidebar-container.primary {
+        height: 100%;
 
-        .tab-pane {
+        aside {
+            position: absolute;
             height: 100%;
+            width: 160px;
+            background-color: $panel-bg-color;
+            border-right: 8px solid $navbar-bg-color;
+            padding: 0;
+            color: darken($text-color, 30%);
+            z-index: 999; // Remember that modals are 1050
+
+            ul {
+                position: absolute;
+                width: 100%;
+                padding: 0;
+
+                > li {
+                    list-style: none;
+
+                    > a {
+                        display: block;
+                        width: 100%;
+                        padding: 10px 20px;
+                        color: darken($text-color, 30%);
+
+                        &:hover, &:active, &.active, &:focus {
+                            color: darken($text-color, 30%);
+                            background-color: lighten($panel-bg-color, 2.5%);
+                        }
+
+                        .count {
+                            float: right;
+                        }
+
+                        &.active fa {
+                            color: $accent-color;
+                        }
+
+                        fa {
+                            width: 20px;
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+
+
+            &.ng-sidebar--closed {
+                margin-left: 52px;
+
+                ul {
+                    right: 0;
+                    width: initial;
+
+                    > li > a {
+                        padding: 10px 12px;
+                        text-align: centeR;
+                    }
+                }
+            }
+
+            .toggleCollapse {
+                position: absolute;
+                bottom: 0px;
+                right: 10px;
+                font-size: 22px;
+                font-weight: bold;
+                border: none;
+                background: none;
+            }
+        }
+
+        .ng-sidebar__content {
+            overflow: hidden;
+        }
+    }
+
+    /deep/ ng-sidebar-container.secondary {
+        height: 100%;
+        float: left;
+
+        aside {
+            background-color: #f0f0f0;
+            color: $code-bg-color;
+            padding: 40px 0 20px 0;
+            position: absolute;
+            width: 320px;
+            border-right: none;
+
+            &.ng-sidebar--closed {
+                margin-left: initial;
+            }
+
+            a {
+                color: $code-bg-color !important;
+            }
+
+            ul > li {
+                border-bottom: 1px solid #ccc;
+
+                &:last-child {
+                    border-bottom: 0;
+                }
+
+                > a:hover {
+                    background-color: #e0e0e0;
+                }
+            }
+
+
+            .files {
+                a.filename {
+                    width: calc(100% - 50px);
+                    display: inline-block;
+
+                    .size {
+                        color: #999;
+                        font-size: 13px;
+                    }
+                }
+
+                a.delete {
+                    width: auto;
+                    padding: 19px 15px;
+                    display: inline-block;
+                    float: right;
+                    text-align: center;
+
+                    fa {
+                        color: #ccc;
+                    }
+
+                    &:hover fa {
+                        color: $error-color;
+                    }
+                }
+
+                .empty {
+                    padding: 20px;
+                    font-size: 18px;
+                    color: #aaa;
+                    text-align: centeR;
+                }
+            }
+
+            .close {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                font-size: 16px;
+            }
         }
     }
 
