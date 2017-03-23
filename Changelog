@@ -1,3 +1,9 @@
+2017-03-23 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.12.0-alpha
+	* Do not not allow multiple tabs to have the same title
+	* Add sidebar with localstorage files and examples
+	* Show a 'unsupported' message to small devices accessing the editor
+
 2017-03-21 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.11.2-alpha
 	* Rename Board Viewer to Board Explorer
