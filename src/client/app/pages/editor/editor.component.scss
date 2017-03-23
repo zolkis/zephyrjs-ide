@@ -4,6 +4,13 @@
     display: block;
     height: calc(100% - 50px - 60px); // navbar and footer
 
+    .not-supported {
+        padding: 40px;
+        font-size: 20px;
+        color: lighten($panel-bg-color, 66%);
+        text-align: center;
+    }
+
     /deep/ ng-sidebar-container.primary {
         height: 100%;
 

@@ -1,4 +1,10 @@
-<ng-sidebar-container class="primary">
+<div class="not-supported visible-xs-block visible-sm-block">
+    We apologize, but the <%= APP_TITLE_HTML %> project only supports laptops
+    and desktop computers, and a screen resolution with width greater than 992
+    pixels.
+</div>
+
+<ng-sidebar-container class="primary hidden-xs hidden-sm">
     <ng-sidebar
         [opened]="sidebarOptions.opened"
         [position]="sidebarOptions.position"
@@ -166,7 +172,7 @@
             </span>
         </div> <!-- ./about -->
 
-        <div class="buttons">
+        <div class="buttons hidden-xs hidden-sm">
             <button
                 #toggleConsoleButton
                 class="btn btn-primary toggle-console"
