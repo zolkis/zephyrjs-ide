@@ -55,7 +55,9 @@
             [opened]="secondarySidebarOptions.opened"
             [position]="secondarySidebarOptions.position"
             [mode]="secondarySidebarOptions.mode"
-            [animate]="secondarySidebarOptions.animate">
+            [animate]="secondarySidebarOptions.animate"
+            [closeOnClickOutside]="secondarySidebarOptions.closeOnClickOutside"
+            (onClosed)="secondarySidebarOptions.opened = false">
 
             <button class="close" (click)="onCloseSecondarySidebar()">
                 <fa [name]="'close'"></fa>

@@ -38,6 +38,7 @@ export class EditorComponent {
         position: 'left',
         mode: 'over',
         animate: false,
+        closeOnClickOutside: true,
         content: ''
     };
 
