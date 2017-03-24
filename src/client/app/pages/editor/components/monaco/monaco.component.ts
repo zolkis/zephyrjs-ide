@@ -118,7 +118,9 @@ export class MonacoComponent implements AfterViewInit {
                 useShadows: false,
                 verticalScrollbarSize: 7,
                 horizontalScrollbarSize: 7
-            }
+            },
+            hideCursorInOverviewRuler: true,
+            scrollBeyondLastLine: false
         });
 
         if (model !== null) {
