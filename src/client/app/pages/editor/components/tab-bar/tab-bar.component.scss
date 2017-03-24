@@ -141,21 +141,16 @@
 
 #new-tab-button {
     position: absolute;
-    top: 12px;
+    top: 10px;
     right: 10px;
-    max-height: 20px;
 
     padding: 2px 10px;
     font-size: 11px;
+    line-height: 14px;
     font-weight: normal;
-    color: $panel-bg-color;
-    border: none;
-    border-radius: 15px;
-    text-align: center;
-    text-shadow: none;
 
     fa {
         margin-right: 4px;
-        font-weight: normal;
+        font-size: 10px;
     }
 }
