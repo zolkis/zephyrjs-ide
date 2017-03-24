@@ -205,12 +205,13 @@
 
                 .close {
                     float: right;
-                    padding: 9px;
+                    padding: 14px 15.5px;
 
                     fa {
                         color: darken($text-color, 10%);
                         text-shadow: none;
-                        font-weight: normal;
+                        font-size: 13px;
+                        display: table-cell;
                     }
                 }
             }
