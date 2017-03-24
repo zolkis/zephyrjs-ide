@@ -100,7 +100,7 @@
 
                     fa {
                         font-family: $thin-font;
-                        font-size: 10px;
+                        font-size: 12px;
                         color: $tab-color;
                         text-align: center;
 
@@ -114,6 +114,10 @@
                 .edit-tab {
                     right: 32px;
                     display: none;
+
+                    fa {
+                        font-size: 11px;
+                    }
                 }
 
                 &:hover:not(.editing) .edit-tab {
