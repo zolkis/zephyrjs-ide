@@ -113,7 +113,12 @@ export class MonacoComponent implements AfterViewInit {
             value: this.initialCode,
             language: 'javascript',
             automaticLayout: true,
-            theme: theme
+            theme: theme,
+            scrollbar: {
+                useShadows: false,
+                verticalScrollbarSize: 7,
+                horizontalScrollbarSize: 7
+            }
         });
 
         if (model !== null) {
