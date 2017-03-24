@@ -372,15 +372,20 @@
             display: inline-block;
 
             a {
-                color: $accent-color;
+                color: #555;
                 text-decoration: none;
                 font-style: italic;
 
                 &:hover {
                     &:hover, &:focus {
-                        color: lighten($accent-color, 5%);
+                        color: #888;
                     }
                 }
+            }
+
+            .separator {
+                color: #444;
+                padding: 0 2px;
             }
         }
 
