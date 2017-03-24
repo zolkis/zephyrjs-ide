@@ -7,11 +7,11 @@
 
         margin-top: 0;
         padding: 8px 0;
-        padding-left: 36px;
+        padding-left: 14px;
         border: 0;
         background-color: $panel-bg-color;
         height: 40px;
-        width: calc(100% - 90px); // for the new tab button
+        width: calc(100% - 96px); // for the new tab button
 
         > li {
             padding: 0;
@@ -100,7 +100,7 @@
 
                     fa {
                         font-family: $thin-font;
-                        font-size: 10px;
+                        font-size: 12px;
                         color: $tab-color;
                         text-align: center;
 
@@ -114,6 +114,10 @@
                 .edit-tab {
                     right: 32px;
                     display: none;
+
+                    fa {
+                        font-size: 11px;
+                    }
                 }
 
                 &:hover:not(.editing) .edit-tab {
@@ -141,21 +145,16 @@
 
 #new-tab-button {
     position: absolute;
-    top: 12px;
+    top: 10px;
     right: 10px;
-    max-height: 20px;
 
     padding: 2px 10px;
     font-size: 11px;
+    line-height: 14px;
     font-weight: normal;
-    color: $panel-bg-color;
-    border: none;
-    border-radius: 15px;
-    text-align: center;
-    text-shadow: none;
 
     fa {
         margin-right: 4px;
-        font-weight: normal;
+        font-size: 10px;
     }
 }

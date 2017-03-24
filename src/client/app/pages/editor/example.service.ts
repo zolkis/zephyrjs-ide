@@ -5,7 +5,118 @@ import { Injectable } from '@angular/core';
 export class ExampleService {
     private _examples = [
         {
-            filename: 'Arduino Blink',
+            filename: 'Accelerometer',
+            code:
+`// Copyright (c) 2016, Intel Corporation.
+
+// Test code to use the Accelerometer (subclass of Generic Sensor) API
+// to communicate with the BMI160 inertia sensor on the Arduino 101
+// and obtaining information about acceleration applied to the X, Y and Z axis
+console.log("Accelerometer test...");
+
+var updateFrequency = 20 // maximum is 100Hz, but in ashell maximum is 20Hz
+
+var sensor = new Accelerometer({
+    includeGravity: false, // true is not supported, will throw error
+    frequency: updateFrequency
+});
+
+sensor.onchange = function() {
+    console.log("acceleration (m/s^2): " +
+                " x=" + sensor.x +
+                " y=" + sensor.y +
+                " z=" + sensor.z);
+};
+
+sensor.onstatechange = function(event) {
+    console.log("state: " + event);
+};
+
+sensor.onerror = function(event) {
+    console.log("error: " + event.error.name +
+                " - " + event.error.message);
+};
+
+sensor.start();`
+        },
+        {
+            filename: 'BLE',
+            code:
+`// Copyright (c) 2016, Intel Corporation.
+
+// Register a BLE echo service that expose read/write capabilities
+// write will allow client to send bytes to be stored
+// read will allow client to read back the stored value, or 0 if not found
+
+var ble = require ("ble");
+
+var deviceName = 'BLE Test';
+
+var echoValue = new Buffer(1);
+echoValue.writeUInt8(0);
+
+ble.on('stateChange', function(state) {
+    if (state === 'poweredOn') {
+        ble.startAdvertising(deviceName, ['ab00']);
+    }
+});
+
+ble.on('accept', function(clientAddress) {
+    console.log("Accepted Connection: " + clientAddress);
+    ble.updateRssi();
+});
+
+ble.on('disconnect', function(clientAddress) {
+    console.log("Disconnected Connection: " + clientAddress);
+});
+
+ble.on('rssiUpdate', function(rssi) {
+    console.log("RSSI value: " + rssi + "dBm");
+});
+
+ble.on('advertisingStart', function(error) {
+    if (error) {
+        console.log("Advertising start error: " + error);
+        return;
+    }
+
+    ble.setServices([
+        new ble.PrimaryService({
+            uuid: 'ab00',
+            characteristics: [
+                new ble.Characteristic({
+                    uuid: 'ab01',
+                    properties: ['read', 'write'],
+                    descriptors: [
+                        new ble.Descriptor({
+                            uuid: '2901',
+                            value: 'Echo'
+                        })
+                    ],
+                    onReadRequest: function(offset, callback) {
+                        console.log("Read value: " + echoValue.toString('hex'));
+                        callback(this.RESULT_SUCCESS, echoValue);
+                    },
+                    onWriteRequest: function(data, offset, withoutResponse,
+                                             callback) {
+                        console.log("Write value: " + data.toString('hex'));
+                        echoValue = data;
+                        callback(this.RESULT_SUCCESS);
+                    }
+                })
+            ]
+        })
+    ], function(error) {
+        if (error) {
+            console.log("Set services error: " + error);
+        }
+    });
+});
+
+console.log("BLE sample...");`
+        },
+        {
+            filename: 'Blink',
             code:
 `// Copyright (c) 2016, Intel Corporation.
 
@@ -50,7 +161,41 @@ setInterval(function () {
 }, 1000);`
         },
         {
-            filename: 'Arduino Traffic Light',
+            filename: 'Gyroscope',
+            code:
+`// Copyright (c) 2016-2017, Intel Corporation.
+
+// Test code to use the Gyroscope (subclass of Generic Sensor) API
+// to communicate with the BMI160 inertia sensor on the Arduino 101
+// and monitor the rate of rotation around the the X, Y and Z axis
+console.log("Gyroscope test...");
+
+var updateFrequency = 20 // maximum is 100Hz, but in ashell maximum is 20Hz
+
+var sensor = new Gyroscope({
+    frequency: updateFrequency
+});
+
+sensor.onchange = function() {
+    console.log("rotation (rad/s): " +
+                " x=" + sensor.x +
+                " y=" + sensor.y +
+                " z=" + sensor.z);
+};
+
+sensor.onstatechange = function(event) {
+    console.log("state: " + event);
+};
+
+sensor.onerror = function(event) {
+    console.log("error: " + event.error.name +
+                " - " + event.error.message);
+};
+
+sensor.start();`
+        },
+        {
+            filename: 'Traffic Light',
             code:
 `// Copyright (c) 2016, Intel Corporation.
 

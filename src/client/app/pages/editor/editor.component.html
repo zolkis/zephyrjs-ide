@@ -4,13 +4,13 @@
     pixels.
 </div>
 
-<ng-sidebar-container class="primary hidden-xs hidden-sm">
+<ng-sidebar-container class="primary-sidebar hidden-xs hidden-sm">
     <ng-sidebar
-        [opened]="sidebarOptions.opened"
-        [position]="sidebarOptions.position"
-        [mode]="sidebarOptions.mode"
-        [dockedSize]="sidebarOptions.dockedSize"
-        [animate]="sidebarOptions.animate">
+        [(opened)]="sidebarOptions.opened"
+        [position]="'left'"
+        [mode]="'dock'"
+        [dockedSize]="'52px'"
+        [animate]="false">
 
         <ul>
             <li>
@@ -50,14 +50,13 @@
     </ng-sidebar>
 
     <!-- secondary sidebar -->
-    <ng-sidebar-container class="secondary">
+    <ng-sidebar-container class="secondary-sidebar">
         <ng-sidebar
-            [opened]="secondarySidebarOptions.opened"
-            [position]="secondarySidebarOptions.position"
-            [mode]="secondarySidebarOptions.mode"
-            [animate]="secondarySidebarOptions.animate"
-            [closeOnClickOutside]="secondarySidebarOptions.closeOnClickOutside"
-            (onClosed)="secondarySidebarOptions.opened = false">
+            [(opened)]="secondarySidebarOptions.opened"
+            [position]="'left'"
+            [mode]="'over'"
+            [animate]="false"
+            [showBackdrop]="true">
 
             <button class="close" (click)="onCloseSecondarySidebar()">
                 <fa [name]="'close'"></fa>
@@ -94,69 +93,68 @@
                 </ul>
             </div>
         </ng-sidebar>
-    </ng-sidebar-container>
 
-    <vertical-split-pane
-        primary-component-minsize="400"
-        secondary-component-minsize="400"
-        local-storage-key="editor-split-pane-code"
-        (on-begin-resizing)="onBeginResizing($event)"
-        (on-ended-resizing)="onEndedResizing($event)">
+        <vertical-split-pane
+            primary-component-minsize="400"
+            secondary-component-minsize="400"
+            local-storage-key="editor-split-pane-code"
+            (on-begin-resizing)="onBeginResizing($event)"
+            (on-ended-resizing)="onEndedResizing($event)">
 
-        <div id="code-pane" class="split-pane-content-primary">
-            <sd-tab-bar></sd-tab-bar>
-            <div class="tab-content">
-                <div
-                    *ngFor="let tab of tabs"
-                    role="tabpanel"
-                    [ngClass]="{'tab-pane': true, 'active': tab.active}"
-                    id="tab-{{tab.id}}">
-
-                    <sd-monaco
-                        [tab]="tab"
-                        (onWarning)="onWarning($event)"
-                        (onError)="onError($event)">
-                    </sd-monaco>
-
-                    <sd-statusbar [tab]="tab"></sd-statusbar>
-                </div> <!-- ./tab-pane -->
-            </div> <!-- ./tab-content -->
-        </div> <!-- ./split-pane-contenty-primary -->
-
-        <div class="split-pane-content-secondary">
-
-            <horizontal-split-pane
-                primary-component-minsize="42"
-                secondary-component-minsize="42"
-                primary-component-initialratio="0.75"
-                local-storage-key="editor-split-pane-viewer"
-                [secondary-component-toggled-off]="consoleToggledOff"
-                (on-begin-resizing)="onBeginResizing($event)"
-                (on-ended-resizing)="onEndedResizing($event)">
-
-                <div id="board-viewer-pane" class="split-pane-content-primary">
-                    <div class="pane-title">Board viewer</div>
-                    <sd-board-explorer></sd-board-explorer>
-                </div>
-
-                <div id="console-pane" class="split-pane-content-secondary">
-                    <div class="pane-title">
-                        Console
-                        <a  href="#"
-                            class="close"
-                            (click)="onCloseConsole()">
-                            <fa [name]="'close'"></fa>
-                        </a>
-                    </div>
-                    <sd-console
+            <div id="code-pane" class="split-pane-content-primary">
+                <sd-tab-bar></sd-tab-bar>
+                <div class="tab-content">
+                    <div
                         *ngFor="let tab of tabs"
-                        [tab]="tab"
-                        [hidden]="!tab.active">
-                    </sd-console>
-                </div>
-            </horizontal-split-pane>
-        </div> <!-- ./split-pane-content-secondary -->
-    </vertical-split-pane>
+                        role="tabpanel"
+                        [ngClass]="{'tab-pane': true, 'active': tab.active}"
+                        id="tab-{{tab.id}}">
+
+                        <sd-monaco
+                            [tab]="tab"
+                            (onWarning)="onWarning($event)"
+                            (onError)="onError($event)">
+                        </sd-monaco>
+
+                        <sd-statusbar [tab]="tab"></sd-statusbar>
+                    </div> <!-- ./tab-pane -->
+                </div> <!-- ./tab-content -->
+            </div> <!-- ./split-pane-contenty-primary -->
+
+            <div class="split-pane-content-secondary">
+
+                <horizontal-split-pane
+                    primary-component-minsize="42"
+                    secondary-component-minsize="42"
+                    local-storage-key="editor-split-pane-viewer"
+                    [secondary-component-toggled-off]="consoleToggledOff"
+                    (on-begin-resizing)="onBeginResizing($event)"
+                    (on-ended-resizing)="onEndedResizing($event)">
+
+                    <div id="board-viewer-pane" class="split-pane-content-primary">
+                        <div class="pane-title">Board viewer</div>
+                        <sd-board-explorer></sd-board-explorer>
+                    </div>
+
+                    <div id="console-pane" class="split-pane-content-secondary">
+                        <div class="pane-title">
+                            Console
+                            <a  href="#"
+                                class="close"
+                                (click)="onCloseConsole()">
+                                <fa [name]="'close'"></fa>
+                            </a>
+                        </div>
+                        <sd-console
+                            *ngFor="let tab of tabs"
+                            [tab]="tab"
+                            [hidden]="!tab.active">
+                        </sd-console>
+                    </div>
+                </horizontal-split-pane>
+            </div> <!-- ./split-pane-content-secondary -->
+        </vertical-split-pane>
+    </ng-sidebar-container>
 </ng-sidebar-container>
 
 <div id="editor-footer">
@@ -167,7 +165,7 @@
                     v<%= VERSION %>
                 </a>
             </span>
-            /
+            <span class="separator">/</span>
             <span class="app-rev">
                 <a href="https://github.com/01org/zephyrjs-ide/commits" target="_blank">
                     <%= GIT_REV %>
