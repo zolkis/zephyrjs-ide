@@ -26,19 +26,11 @@ export class EditorComponent {
     };
 
     public sidebarOptions = {
-        opened: true,
-        position: 'left',
-        mode: 'dock',
-        dockedSize: '52x',
-        animate: false
+        opened: true
     };
 
     public secondarySidebarOptions = {
         opened: false,
-        position: 'left',
-        mode: 'over',
-        animate: false,
-        closeOnClickOutside: true,
         content: ''
     };
 
@@ -84,6 +76,7 @@ export class EditorComponent {
         } else {
             this.secondarySidebarOptions.content = 'files';
             this.secondarySidebarOptions.opened = true;
+            this._adjustBackdropPosition();
         }
         return false;
     }
@@ -143,6 +136,7 @@ export class EditorComponent {
         } else {
             this.secondarySidebarOptions.content = 'examples';
             this.secondarySidebarOptions.opened = true;
+            this._adjustBackdropPosition();
         }
         return false;
     }
@@ -227,5 +221,32 @@ export class EditorComponent {
         [].forEach.call(overlays, (overlay: HTMLElement) => {
             overlay.style.display = 'none';
         });
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    /*
+    Position the secondary sidebar's backdrop accurately. Unfortunately we
+    cannot do this via CSS because the secondary sidebar's backdrop does not
+    have an ancestor that specifies whether or not the primary sidebar is
+    closed, even tho the secondary sidebar is nested within the primary one.
+
+    We do stuff in a timeout to allow the DOM to be updated with the newly
+    created .ng-sidebar__backdrop element.
+    */
+    private _adjustBackdropPosition() {
+        let left = ['480px','372px'],
+            width = ['calc(100% - 480px)', 'calc(100% - 372px)'];
+
+        setTimeout(() => {
+            let backdrop = document.getElementsByClassName(
+                'ng-sidebar__backdrop')[0] as HTMLElement;
+            if (backdrop !== undefined) {
+                backdrop.style.left = left[this.sidebarOptions.opened ? 0 : 1];
+                backdrop.style.width =
+                    width[this.sidebarOptions.opened ? 0 : 1];
+            }
+        }, 1);
     }
 }

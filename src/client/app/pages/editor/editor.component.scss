@@ -11,7 +11,7 @@
         text-align: center;
     }
 
-    /deep/ ng-sidebar-container.primary {
+    /deep/ ng-sidebar-container.primary-sidebar {
         height: 100%;
 
         aside {
@@ -90,9 +90,8 @@
         }
     }
 
-    /deep/ ng-sidebar-container.secondary {
+    /deep/ ng-sidebar-container.secondary-sidebar {
         height: 100%;
-        float: left;
 
         aside {
             background-color: #f0f0f0;
@@ -164,6 +163,13 @@
                 right: 12px;
                 font-size: 16px;
             }
+        }
+
+        .ng-sidebar__backdrop {
+            top: 50px;
+            height: calc(100% - 50px - 60px); // header and footer
+            left: 480px;
+            width: calc(100% - 480px);
         }
     }
 
