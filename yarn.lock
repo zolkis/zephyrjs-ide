@@ -101,9 +101,9 @@
     "@types/node" "*"
     "@types/vinyl" "*"
 
-"@types/gulp-load-plugins@^0.0.28":
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/@types/gulp-load-plugins/-/gulp-load-plugins-0.0.28.tgz#50c1ccb6dce2a6b9e8015c23ab2cd7a5147006ec"
+"@types/gulp-load-plugins@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/gulp-load-plugins/-/gulp-load-plugins-0.0.29.tgz#4b5890fc19a1d746b8c1b46daf54576defa580a7"
   dependencies:
     "@types/node" "*"
 
@@ -114,9 +114,9 @@
     "@types/gulp" "*"
     "@types/node" "*"
 
-"@types/gulp-sass@^0.0.29":
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/@types/gulp-sass/-/gulp-sass-0.0.29.tgz#97fdbe20866e05add906f274b28669e61a3888c7"
+"@types/gulp-sass@^0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/gulp-sass/-/gulp-sass-0.0.30.tgz#86f33ac49fe9ed28aa686549d6d48c0223d90a14"
   dependencies:
     "@types/node" "*"
 
@@ -129,9 +129,9 @@
     "@types/through2" "*"
     "@types/vinyl" "*"
 
-"@types/gulp@*", "@types/gulp@^3.8.32":
-  version "3.8.32"
-  resolved "https://registry.yarnpkg.com/@types/gulp/-/gulp-3.8.32.tgz#83c59c681cc233d1ec7f82d269555566fa133156"
+"@types/gulp@*", "@types/gulp@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/gulp/-/gulp-4.0.2.tgz#71133c16a3c6f5ed17ee8094694be7824ed7d6f3"
   dependencies:
     "@types/node" "*"
     "@types/orchestrator" "*"
@@ -183,9 +183,9 @@
   version "0.0.28"
   resolved "https://registry.yarnpkg.com/@types/rimraf/-/rimraf-0.0.28.tgz#5562519bc7963caca8abf7f128cae3b594d41d06"
 
-"@types/run-sequence@^0.0.28":
-  version "0.0.28"
-  resolved "https://registry.yarnpkg.com/@types/run-sequence/-/run-sequence-0.0.28.tgz#117ec830d7434e519fb40fc9a50ea03549453e30"
+"@types/run-sequence@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/run-sequence/-/run-sequence-0.0.29.tgz#6ad0f7383136e13925322e69fc41db77b30b2075"
   dependencies:
     "@types/gulp" "*"
     "@types/node" "*"
@@ -205,9 +205,9 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
-"@types/systemjs@^0.19.31":
-  version "0.19.31"
-  resolved "https://registry.yarnpkg.com/@types/systemjs/-/systemjs-0.19.31.tgz#89f480f0c124d2f9a336011008af463ca24907db"
+"@types/systemjs@^0.20.2":
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/@types/systemjs/-/systemjs-0.20.2.tgz#52c5289a2834781660bc66e796bac6e05b7b048a"
 
 "@types/through2@*":
   version "2.0.31"
@@ -221,9 +221,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/yargs@^0.0.34":
-  version "0.0.34"
-  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-0.0.34.tgz#1560429fc550c43bc41a7b7d3dfa0afbcc914a35"
+"@types/yargs@^6.6.0":
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-6.6.0.tgz#91f8e2580a8083049f78311c059aa57d6949df6b"
 
 "@types/zone.js@^0.0.27":
   version "0.0.27"
@@ -5450,13 +5450,7 @@ systemjs-builder@0.15.33:
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-systemjs@^0.19.39:
-  version "0.19.40"
-  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.19.40.tgz#158f64a9f4ef541a7fda6b40e527ee46b6c54cd0"
-  dependencies:
-    when "^3.7.5"
-
-systemjs@^0.19.47:
+systemjs@^0.19.39, systemjs@^0.19.47:
   version "0.19.47"
   resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.19.47.tgz#c8c93937180f3f5481c769cd2720763fb4a31c6f"
   dependencies:
@@ -6183,10 +6177,6 @@ yn@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/yn/-/yn-1.2.0.tgz#d237a4c533f279b2b89d3acac2db4b8c795e4a63"
 
-zone.js@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.7.2.tgz#1a62b6be4b24d1b935e4566b0b4386b66966d1a7"
-
-zone.js@^0.7.8:
+zone.js@^0.7.2, zone.js@^0.7.8:
   version "0.7.8"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.7.8.tgz#4f3fe8834d44597f2639053a0fa438df34fffded"
