@@ -37,13 +37,16 @@ export class GitHubModalComponent implements AfterViewInit {
     @ViewChild('gitHubModal')
     private gitHubModal: ElementRef;
 
+    @ViewChild('gitHubRememberToggle')
+    private gitHubRememberToggle: ElementRef;
 
     // API
 
     public show() {
-        let el = $('#github_remember_me');
-        (el as any).bootstrapToggle().change(() => {
-            this.gitHubService.data.user.remember = (el as any).prop('checked');
+        let el = this.gitHubRememberToggle.nativeElement;
+        $(el).bootstrapToggle();
+        $(el).change(() => {
+            this.gitHubService.data.user.remember = $(el).prop('checked');
         });
         $(this.gitHubModal.nativeElement).modal('show');
     }
@@ -226,13 +229,6 @@ export class GitHubModalComponent implements AfterViewInit {
 
     private resetUI() {
         this.gitHubService.wizardStep = WIZARD_STEP.LOGIN;
-
-        setTimeout(() => {
-            let el = document.getElementById('github_remember_me');
-            if (el !== null) {
-                $(el).bootstrapToggle();
-            }
-        }, 0);
     }
 
     private resetUser() {
