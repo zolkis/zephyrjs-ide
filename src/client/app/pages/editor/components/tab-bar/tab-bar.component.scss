@@ -42,7 +42,6 @@
                 background-color: inherit;
                 color: $tab-color;
 
-                text-transform: uppercase;
                 line-height: 24px;
 
                 overflow: hidden;
@@ -68,11 +67,8 @@
                     border: 0;
                     padding: 0;
 
-
                     height: 24px;
                     width: 100%;
-
-                    text-transform: uppercase;
 
                     &:focus {
                         outline: none;

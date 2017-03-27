@@ -93,7 +93,7 @@ export class AppDataService {
     public renameEditorTab(tab: EditorTab, newTitle: string) {
         for(let other of this.editorTabs) {
             if (other.id !== tab.id &&
-                other.title.toLowerCase() === newTitle.toLowerCase()) {
+                other.title === newTitle) {
                 throw new Error('This title is already taken by another tab');
             }
         }

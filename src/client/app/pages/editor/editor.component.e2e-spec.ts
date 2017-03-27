@@ -62,8 +62,8 @@ describe('Editor', () => {
         newTabBtn.click();
         let tabs = element.all(by.css('#tab-bar .nav-item'));
         expect(tabs.count()).toBe(2);
-        expect(tabs.get(0).getText()).toBe('TAB # 1');
-        expect(tabs.get(1).getText()).toBe('TAB # 2');
+        expect(tabs.get(0).getText()).toBe('Tab # 1');
+        expect(tabs.get(1).getText()).toBe('Tab # 2');
 
         // Rename second oab
         browser.executeScript('arguments[0].click()',

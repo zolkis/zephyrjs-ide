@@ -122,11 +122,6 @@ export function main() {
             expect(() => {
                 service.renameEditorTab(tab2, 'New title');
             }).toThrow();
-
-            expect(() => {
-                // Case insensitive
-                service.renameEditorTab(tab2, 'new title');
-            }).toThrow();
         });
     });
 }

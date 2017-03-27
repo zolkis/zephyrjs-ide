@@ -85,7 +85,7 @@ export class EditorComponent {
     public onFilenameClicked(filename: string) {
         // Switch to it if we already have it open
         for(let tab of this.tabs) {
-            if (tab.title.toLowerCase() === filename.toLowerCase()) {
+            if (tab.title === filename) {
                 this.appDataService.activateEditorTab(tab);
                 this.onCloseSecondarySidebar();
                 return false;
@@ -145,7 +145,7 @@ export class EditorComponent {
     public onExampleFilenameClicked(filename: string) {
         // Switch to it if we already have it open
         for(let tab of this.tabs) {
-            if (tab.title.toLowerCase() === filename.toLowerCase()) {
+            if (tab.title === filename) {
                 this.appDataService.activateEditorTab(tab);
                 this.onCloseSecondarySidebar();
                 return false;
