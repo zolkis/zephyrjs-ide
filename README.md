@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/01org/zephyrjs-ide.svg?branch=master)](https://travis-ci.org/01org/zephyrjs-ide)
+[![Dependency Status](https://david-dm.org/01org/zephyrjs-ide.svg)](https://david-dm.org/01org/zephyrjs-ide)
+[![devDependency Status](https://david-dm.org/01org/zephyrjs-ide/dev-status.svg)](https://david-dm.org/01org/zephyrjs-ide#info=devDependencies)
 
 # Introduction
 
