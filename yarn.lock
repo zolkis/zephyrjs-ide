@@ -535,7 +535,7 @@ babel-code-frame@^6.20.0, babel-code-frame@^6.22.0:
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-babel-core@^6.24.0, babel-core@^6.9.0:
+babel-core@^6.18.2, babel-core@^6.24.0:
   version "6.24.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.24.0.tgz#8f36a0a77f5c155aed6f920b844d23ba56742a02"
   dependencies:
@@ -592,15 +592,16 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-cjs-system-require@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-cjs-system-require/-/babel-plugin-transform-cjs-system-require-0.1.1.tgz#ffef26d31bc270e82bdbbd437db2777e85162a29"
-
-babel-plugin-transform-cjs-system-wrapper@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-cjs-system-wrapper/-/babel-plugin-transform-cjs-system-wrapper-0.2.1.tgz#e855078877b56d4d1b92b9f91b37f599db0200e3"
+babel-plugin-transform-amd-system-wrapper@^0.3.3:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-amd-system-wrapper/-/babel-plugin-transform-amd-system-wrapper-0.3.4.tgz#8d85dda78a300bf89b3b89167b6eabe7648c8a1a"
   dependencies:
-    babel-plugin-transform-cjs-system-require "^0.1.1"
+    babel-template "^6.9.0"
+
+babel-plugin-transform-cjs-system-wrapper@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-cjs-system-wrapper/-/babel-plugin-transform-cjs-system-wrapper-0.6.0.tgz#e6eddad07b0412a103fe3667f13a48824ba8fba9"
+  dependencies:
     babel-template "^6.9.0"
 
 babel-plugin-transform-es2015-modules-systemjs@^6.6.5:
@@ -611,13 +612,13 @@ babel-plugin-transform-es2015-modules-systemjs@^6.6.5:
     babel-runtime "^6.11.6"
     babel-template "^6.14.0"
 
-babel-plugin-transform-global-system-wrapper@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-global-system-wrapper/-/babel-plugin-transform-global-system-wrapper-0.0.1.tgz#afb469cec0e04689b9fe7e8b1fd280fc94a6d8f2"
+babel-plugin-transform-global-system-wrapper@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-global-system-wrapper/-/babel-plugin-transform-global-system-wrapper-0.3.0.tgz#ddea2a2dc3f802593bdc0d026edb887763a53d6a"
   dependencies:
     babel-template "^6.9.0"
 
-babel-plugin-transform-system-register@0.0.1:
+babel-plugin-transform-system-register@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-system-register/-/babel-plugin-transform-system-register-0.0.1.tgz#9dff40390c2763ac518f0b2ad7c5ea4f65a5be25"
 
@@ -2548,7 +2549,7 @@ gulp-uglify@^2.0.0:
     uglify-save-license "^0.4.1"
     vinyl-sourcemaps-apply "^0.2.0"
 
-gulp-util@*, gulp-util@^3.0, gulp-util@~3.0.7, gulp-util@~3.0.8:
+gulp-util@*, gulp-util@~3.0.7, gulp-util@~3.0.8:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
   dependencies:
@@ -2571,7 +2572,7 @@ gulp-util@*, gulp-util@^3.0, gulp-util@~3.0.7, gulp-util@~3.0.8:
     through2 "^2.0.0"
     vinyl "^0.5.0"
 
-gulp-util@3.0.7, "gulp-util@>=2.2.14 <4.0.0", gulp-util@^3, gulp-util@^3.0.0, gulp-util@^3.0.1, gulp-util@^3.0.6, gulp-util@^3.0.7, gulp-util@~3.0.1, gulp-util@~3.0.6:
+gulp-util@3.0.7, "gulp-util@>=2.2.14 <4.0.0", gulp-util@^3, gulp-util@^3.0, gulp-util@^3.0.0, gulp-util@^3.0.1, gulp-util@^3.0.6, gulp-util@^3.0.7, gulp-util@~3.0.1, gulp-util@~3.0.6:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.7.tgz#78925c4b8f8b49005ac01a011c557e6218941cbb"
   dependencies:
@@ -5478,15 +5479,16 @@ sync-exec@~0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/sync-exec/-/sync-exec-0.6.2.tgz#717d22cc53f0ce1def5594362f3a89a2ebb91105"
 
-systemjs-builder@0.15.33:
-  version "0.15.33"
-  resolved "https://registry.yarnpkg.com/systemjs-builder/-/systemjs-builder-0.15.33.tgz#7bd4d045769a67b52f9596141ba21cd94b49910c"
+systemjs-builder@~0.16.4:
+  version "0.16.4"
+  resolved "https://registry.yarnpkg.com/systemjs-builder/-/systemjs-builder-0.16.4.tgz#516b3451c191fa17eb598f6e0254990b9aa97432"
   dependencies:
-    babel-core "^6.9.0"
-    babel-plugin-transform-cjs-system-wrapper "^0.2.1"
+    babel-core "^6.18.2"
+    babel-plugin-transform-amd-system-wrapper "^0.3.3"
+    babel-plugin-transform-cjs-system-wrapper "^0.6.0"
     babel-plugin-transform-es2015-modules-systemjs "^6.6.5"
-    babel-plugin-transform-global-system-wrapper "0.0.1"
-    babel-plugin-transform-system-register "0.0.1"
+    babel-plugin-transform-global-system-wrapper "^0.3.0"
+    babel-plugin-transform-system-register "^0.0.1"
     bluebird "^3.3.4"
     data-uri-to-buffer "0.0.4"
     es6-template-strings "^2.0.0"
@@ -5494,11 +5496,11 @@ systemjs-builder@0.15.33:
     mkdirp "^0.5.1"
     rollup "^0.36.3"
     source-map "^0.5.3"
-    systemjs "^0.19.39"
+    systemjs "^0.19.46"
     traceur "0.0.105"
     uglify-js "^2.6.1"
 
-systemjs@^0.19.39, systemjs@^0.19.47:
+systemjs@^0.19.46, systemjs@^0.19.47:
   version "0.19.47"
   resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-0.19.47.tgz#c8c93937180f3f5481c769cd2720763fb4a31c6f"
   dependencies:
