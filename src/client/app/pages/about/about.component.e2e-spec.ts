@@ -1,3 +1,6 @@
+import { browser, element, by } from 'protractor';
+
+
 describe('About', () => {
     beforeEach( () => {
         browser.get('/#/about');

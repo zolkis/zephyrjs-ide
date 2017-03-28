@@ -1,5 +1,6 @@
 // Modules
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
@@ -19,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   imports: [
+      BrowserAnimationsModule,
       BrowserModule,
       HttpModule,
       RouterModule.forRoot(routes, {useHash: true}),

@@ -1,3 +1,6 @@
+import { browser, element, by } from 'protractor';
+
+
 describe('App', () => {
     beforeEach( () => {
         browser.get('/');
@@ -21,21 +24,16 @@ describe('App', () => {
         expect(tabs.count()).toEqual(1);
 
         // Add a tab
-        element(by.id('new-tab-button')).click().then(() => {
-            tabs = element.all(by.css('sd-editor .left-component a.nav-link'));
-            expect(tabs.count()).toEqual(2);
+        element(by.id('new-tab-button')).click();
+        tabs = element.all(by.css('sd-editor .left-component a.nav-link'));
+        expect(tabs.count()).toEqual(2);
 
-            // Route to About
-            element(by.css('sd-navbar .navbar-right li:nth-child(1) a'))
-            .click().then(() => {
-                // Route back to Editor
-                element(by.css('sd-navbar .navbar-right li:nth-child(2) a'))
-                .click().then(() => {
-                    tabs = element.all(by.css('sd-editor .left-component a.nav-link'));
-                    expect(tabs.count()).toEqual(2);
-                });
-            });
-        });
+        // Route to About
+        element(by.css('sd-navbar .navbar-right li:nth-child(1) a')).click();
 
+        // Route back to Editor
+        element(by.css('sd-navbar .navbar-right li:nth-child(2) a')).click();
+        tabs = element.all(by.css('sd-editor .left-component a.nav-link'));
+        expect(tabs.count()).toEqual(2);
     });
 });

@@ -1,3 +1,6 @@
+import { browser, element, by, protractor, ElementFinder } from 'protractor';
+
+
 describe('Editor', () => {
     beforeEach( () => {
         // Needed because the Monaco workers confuse webdriver
@@ -209,7 +212,7 @@ describe('Editor', () => {
             saveModal = element(by.css('.save-modal')),
             filenameInput = element(by.css('.save-modal input[name="filename"]')),
             secondarySidebar = element(by.css('.secondary-sidebar aside')),
-            filename: protractor.ElementFinder = null;
+            filename: ElementFinder = null;
 
         // Save file
         saveBtn.click();
@@ -250,7 +253,7 @@ describe('Editor', () => {
     it('clicking on an example should open it', () => {
         let examplesLink = element(by.css('.primary-sidebar a.examples')),
             secondarySidebar = element(by.css('.secondary-sidebar aside')),
-            filename: protractor.ElementFinder = null;
+            filename: ElementFinder = null;
 
         // Open sidebar
         examplesLink.click();
