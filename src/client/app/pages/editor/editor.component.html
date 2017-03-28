@@ -62,26 +62,11 @@
                 <fa [name]="'close'"></fa>
             </button>
 
-            <div *ngIf="secondarySidebarOptions.content === 'files'" class="files">
-                <ul *ngIf="fileService.count() > 0">
-                    <li *ngFor="let filename of fileService.ls()">
-                        <a href="#" class="filename" (click)="onFilenameClicked(filename)">
-                            {{filename}}
-                            <div class="size">
-                                {{computeFileSize(filename)}} bytes
-                            </div>
-                        </a>
-
-                        <a href="#" class="delete" (click)="onDeleteFileClicked(filename)">
-                            <fa [name]="'trash'"></fa>
-                        </a>
-                    </li>
-                </ul>
-
-                <p *ngIf="fileService.count() === 0" class="empty">
-                    You have no saved files, on this browser.
-                </p>
-            </div>
+            <sd-sidebar-files
+                *ngIf="secondarySidebarOptions.content === 'files'"
+                (onFileSelected)="onCloseSecondarySidebar()"
+                class="files">
+            </sd-sidebar-files>
 
             <div *ngIf="secondarySidebarOptions.content === 'examples'" class="examples">
                 <ul>

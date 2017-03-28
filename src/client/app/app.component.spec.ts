@@ -29,6 +29,7 @@ import { StatusBarComponent } from './pages/editor/components/statusbar/statusba
 import { OcfExplorerComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.component';
 import { OcfResourceComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.resource.component';
 import { TabBarComponent } from './pages/editor/components/tab-bar/tab-bar.component';
+import { SidebarFilesComponent } from './pages/editor/components/sidebar-files/sidebar-files.component';
 
 import { OcfResourceValueFanComponent }
     from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.fan.component';
@@ -90,6 +91,7 @@ export function main() {
                             OcfResourceValueTemperatureComponent,
                             OcfResourceValueJsonComponent,
                         TabBarComponent,
+                        SidebarFilesComponent,
                     NavbarComponent,
                     FooterComponent
                 ],
