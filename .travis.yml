@@ -22,10 +22,11 @@ before_install:
 
 before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then nohup bash -c "webdriver-manager start 2>&1 &"; fi  # Protractor CI
+  - nohup bash -c "webdriver-manager start &" # Protractor CI
 
 after_failure:
   - cat /home/travis/build/01org/zephyrjs-ide/npm-debug.log
+  - cat /home/travis/build/01org/zephyrjs-ide/nohup.out
 
 branches:
   only:
