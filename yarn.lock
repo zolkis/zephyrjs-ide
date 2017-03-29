@@ -170,9 +170,9 @@
     "@types/orchestrator" "*"
     "@types/vinyl" "*"
 
-"@types/jasmine@^2.5.35":
-  version "2.5.35"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.35.tgz#5566406dc8417d380d6c2f9562ec3c71ec28ef78"
+"@types/jasmine@2.5.45":
+  version "2.5.45"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.45.tgz#58928a621d014ce6ab59c5a9c41071f7328b0ca9"
 
 "@types/micromatch@*":
   version "2.3.29"
