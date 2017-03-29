@@ -95,6 +95,68 @@ export class EditorComponent {
     }
 
     // tslint:disable-next-line:no-unused-locals
+    public onFileSelected(file: any) {
+        // Switch to it if we already have it open
+        for(let tab of this.tabs) {
+            if (tab.title === file.filename) {
+                this.appDataService.activateEditorTab(tab);
+                this.onCloseSecondarySidebar();
+                return;
+            }
+        }
+
+        // Otherwise we create a new tab
+
+        function _setContents(tab: EditorTab, contents: string) {
+            // Wait for editor to become available
+            setTimeout(() => {
+                if (tab.editor !== null) {
+                    tab.editor.setValue(contents);
+                } else {
+                    _setContents(tab, contents);
+                }
+            }, 100);
+        }
+
+        let tab = this.appDataService.newEditorTab();
+        tab.title = file.filename;
+        _setContents(tab, file.contents);
+
+        this.onCloseSecondarySidebar();
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onExampleSelected(example: any) {
+        // Switch to it if we already have it open
+        for(let tab of this.tabs) {
+            if (tab.title === example.filename) {
+                this.appDataService.activateEditorTab(tab);
+                this.onCloseSecondarySidebar();
+                return;
+            }
+        }
+
+        // Otherwise we create a new tab
+
+        function _setContents(tab: EditorTab, contents: string) {
+            // Wait for editor to become available
+            setTimeout(() => {
+                if (tab.editor !== null) {
+                    tab.editor.setValue(contents);
+                } else {
+                    _setContents(tab, contents);
+                }
+            }, 100);
+        }
+
+        let tab = this.appDataService.newEditorTab();
+        tab.title = example.filename;
+        _setContents(tab, example.contents);
+
+        this.onCloseSecondarySidebar();
+    }
+
+    // tslint:disable-next-line:no-unused-locals
     public onCloseConsole() {
         this.consoleToggledOff = true;
         return false;

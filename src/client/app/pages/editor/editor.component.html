@@ -64,13 +64,13 @@
 
             <sd-sidebar-files
                 *ngIf="secondarySidebarOptions.content === 'files'"
-                (onFileSelected)="onCloseSecondarySidebar()"
+                (onFileSelected)="onFileSelected($event)"
                 class="files">
             </sd-sidebar-files>
 
             <sd-sidebar-examples
                 *ngIf="secondarySidebarOptions.content === 'examples'"
-                (onFileSelected)="onCloseSecondarySidebar()"
+                (onFileSelected)="onExampleSelected($event)"
                 class="examples">
             </sd-sidebar-examples>
         </ng-sidebar>
