@@ -36,6 +36,17 @@
                     </span>
                 </a>
             </li>
+
+            <li>
+                <a href="#" class="github"
+                   [class.active]="secondarySidebarOptions.content === 'github'"
+                   (click)="onGitHubClicked()">
+                    <fa [name]="'github'"></fa>
+                    <span *ngIf="sidebarOptions.opened">
+                        GitHub
+                    </span>
+                </a>
+            </li>
         </ul>
 
         <button class="toggleCollapse" (click)="onToggleSidebar()">
@@ -73,6 +84,12 @@
                 (onFileSelected)="onExampleSelected($event)"
                 class="examples">
             </sd-sidebar-examples>
+
+            <sd-sidebar-github
+                *ngIf="secondarySidebarOptions.content === 'github'"
+                (onFileSelected)="onGitHubFileSelected($event)"
+                class="github">
+            </sd-sidebar-github>
         </ng-sidebar>
 
         <vertical-split-pane

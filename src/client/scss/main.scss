@@ -101,11 +101,15 @@ strong, .strong {
 /* BUTTONS */
 
 .btn {
-    @include button-variant(#333, #eee, #222);
+    @include button-variant(#333, #eee, transparent);
 }
 
 .btn-primary {
-    @include button-variant($panel-bg-color, $accent-color, darken($accent-color, 5%));
+    @include button-variant($panel-bg-color, $accent-color, transparent);
+}
+
+.btn-danger {
+    @include button-variant($panel-bg-color, $error-color, transparent);
 }
 
 /* TABLES */

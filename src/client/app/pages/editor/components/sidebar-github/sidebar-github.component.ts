@@ -1,6 +1,5 @@
 // Core
 import {
-    AfterViewInit,
     Component,
     ElementRef,
     EventEmitter,
@@ -8,8 +7,8 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { GitHubService, WIZARD_STEP } from './github.service';
-import { RepoService, UserService } from './github.api.services';
+import { SidebarGitHubService, WIZARD_STEP } from './sidebar-github.service';
+import { GitHubRepoService, GitHubUserService } from './sidebar-github.api-services';
 
 
 declare var $: any;
@@ -17,61 +16,23 @@ declare var $: any;
 
 @Component({
     moduleId: module.id,
-    selector: 'github-modal',
-    templateUrl: 'github.modal.component.html',
-    styleUrls: ['github.modal.component.css']
+    selector: 'sd-sidebar-github',
+    templateUrl: 'sidebar-github.component.html',
+    styleUrls: ['sidebar-github.component.css']
 })
-export class GitHubModalComponent implements AfterViewInit {
-    // Types
-
+export class SidebarGitHubComponent {
     // tslint:disable-next-line:no-unused-locals (used in template)
     public wizardStepEnum = WIZARD_STEP;
 
-    // Outputs
-
     @Output()
-    private fileFetched = new EventEmitter();
+    private onFileSelected = new EventEmitter();
 
-    // Children
-
-    @ViewChild('gitHubModal')
-    private gitHubModal: ElementRef;
-
-    @ViewChild('gitHubRememberToggle')
-    private gitHubRememberToggle: ElementRef;
-
-    // API
-
-    public show() {
-        let el = this.gitHubRememberToggle.nativeElement;
-        $(el).bootstrapToggle();
-        $(el).change(() => {
-            this.gitHubService.data.user.remember = $(el).prop('checked');
-        });
-        $(this.gitHubModal.nativeElement).modal('show');
-    }
-
-    public hide() {
-        $(this.gitHubModal.nativeElement).modal('hide');
-    }
-
-    // Functions
 
     public constructor(
-        private repoService: RepoService,
-        private userService: UserService,
-        public gitHubService: GitHubService) {
-    }
+        private repoService: GitHubRepoService,
+        private userService: GitHubUserService,
+        public gitHubService: SidebarGitHubService) { }
 
-    public ngAfterViewInit() {
-        $(this.gitHubModal.nativeElement).on('shown.bs.modal', () => {
-            this.onShown();
-        });
-
-        $(this.gitHubModal.nativeElement).on('hidden.bs.modal', () => {
-            this.onHidden();
-        });
-    }
 
     // tslint:disable-next-line:no-unused-locals
     public mayLogin() {
@@ -154,7 +115,7 @@ export class GitHubModalComponent implements AfterViewInit {
         };
 
         let repo = this.gitHubService.data.repos.current;
-        let branch = this.gitHubService.data.branches.selected = getBranchByName(name);
+        let branch = getBranchByName(name);
 
         this.resetFiles();
 
@@ -206,8 +167,10 @@ export class GitHubModalComponent implements AfterViewInit {
             }).$observable.subscribe(
                 (response: any) => {
             this.gitHubService.wizardStep = WIZARD_STEP.DOWNLOADING;
-                    this.fileFetched.emit(atob(response.content));
-                    this.hide();
+                    this.onFileSelected.emit({
+                        filename: file.path,
+                        contents: atob(response.content)
+                    });
                     this.gitHubService.wizardStep = WIZARD_STEP.CHOOSE_FILE;
                 }
             );
@@ -233,7 +196,6 @@ export class GitHubModalComponent implements AfterViewInit {
 
     private resetUser() {
         this.gitHubService.data.user.token = '';
-        this.gitHubService.data.user.remember = false;
         this.gitHubService.data.user.object = null;
         this.gitHubService.data.user.ui.hasError = false;
     }
@@ -270,21 +232,4 @@ export class GitHubModalComponent implements AfterViewInit {
         this.resetBranches();
         this.resetFiles();
     }
-
-    // tslint:disable-next-line:no-unused-locals
-    private onShown() {
-        let el = document.getElementById('github_token');
-        if (el !== null) {
-            el.focus();
-        }
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    private onHidden() {
-        if (!this.gitHubService.data.user.remember) {
-            this.reset();
-        }
-    }
-
-
 }

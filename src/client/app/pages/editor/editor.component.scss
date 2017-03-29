@@ -105,15 +105,15 @@
                 margin-left: initial;
             }
 
-            a {
-                color: $code-bg-color !important;
-            }
-
             ul > li {
                 border-bottom: 1px solid #ccc;
 
                 &:last-child {
                     border-bottom: 0;
+                }
+
+                > a {
+                    color: $code-bg-color !important;
                 }
 
                 > a:hover {

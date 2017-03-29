@@ -18,6 +18,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { OcfExplorerModule } from './components/ocf-explorer/ocf-explorer.module';
 import { SidebarFilesModule } from './components/sidebar-files/sidebar-files.module';
 import { SidebarExamplesModule } from './components/sidebar-examples/sidebar-examples.module';
+import { SidebarGitHubModule } from './components/sidebar-github/sidebar-github.module';
 
 // This module
 import { EditorComponent } from './editor.component';
@@ -41,6 +42,7 @@ import { TabBarComponent } from './components/tab-bar/tab-bar.component';
         OcfExplorerModule,
         SidebarFilesModule,
         SidebarExamplesModule,
+        SidebarGitHubModule,
 
         SharedModule.forRoot()
     ],

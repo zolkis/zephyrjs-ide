@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
 // This module
-import { GitHubModalComponent } from './github.modal.component';
+import { SidebarGitHubComponent } from './sidebar-github.component';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { GitHubModalComponent } from './github.modal.component';
         CommonModule,
         FormsModule
     ],
-    declarations: [GitHubModalComponent],
-    exports: [GitHubModalComponent]
+    declarations: [SidebarGitHubComponent],
+    exports: [SidebarGitHubComponent]
 })
-export class GitHubModule {}
+export class SidebarGitHubModule {}

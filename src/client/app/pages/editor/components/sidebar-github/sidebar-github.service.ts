@@ -9,7 +9,7 @@ export enum WIZARD_STEP {
 }
 
 @Injectable()
-export class GitHubService {
+export class SidebarGitHubService {
     public wizardStep: WIZARD_STEP;
     public data: any;
 
