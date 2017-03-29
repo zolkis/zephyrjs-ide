@@ -2,7 +2,7 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
 
 import { AppDataService } from './app.data.service';
-import { GitHubService } from './pages/editor/components/github/github.service';
+import { SidebarGitHubService } from './pages/editor/components/sidebar-github/sidebar-github.service';
 
 
 /**
@@ -14,7 +14,7 @@ import { GitHubService } from './pages/editor/components/github/github.service';
     selector: 'sd-app',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.css'],
-    providers: [AppDataService, GitHubService]
+    providers: [AppDataService, SidebarGitHubService]
 })
 export class AppComponent implements OnInit {
     @HostBinding('attr.id') public route: string;

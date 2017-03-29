@@ -1,0 +1,65 @@
+@import "../../../../../scss/main";
+
+:host {
+    padding: 10px;
+    display: block;
+    height: calc(100% - 30px); // for the buttons
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    .title {
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: absolute;
+        top: 12px;
+    }
+
+    .login-info {
+        margin-bottom: 40px;
+
+        .avatar {
+            float: left;
+            margin-right: 10px;
+
+            img {
+                height: 64px;
+                width: 64px;
+            }
+        }
+
+        .info {
+            padding-top: 12px;
+        }
+    }
+
+    .form-group {
+        position: relative;
+
+        label:not[for="github_remember_me"] {
+            text-transform: uppercase;
+        }
+
+        fa.loading {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+
+    .tree-browser {
+        td {
+            border-color: #dadada !important;
+        }
+
+        a {
+            color: #666;
+        }
+    }
+
+    .buttons {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+}

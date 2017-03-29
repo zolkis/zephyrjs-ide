@@ -9,9 +9,6 @@ import {
 
 // Own
 import { EditorTab } from '../../editor.tab';
-import { GitHubModule } from '../github/github.module';
-import { GitHubService } from '../github/github.service';
-import { RepoService, UserService } from '../github/github.api.services';
 import { MonacoModule } from './monaco.module';
 import { MonacoComponent } from './monaco.component';
 
@@ -60,10 +57,6 @@ export function main() {
                 declarations: [TestComponent],
                 providers: [
                     LocalStorageService,
-
-                    GitHubService,
-                    RepoService,
-                    UserService
                 ],
                 imports: [
                     LocalStorageModule.withConfig({
@@ -71,7 +64,6 @@ export function main() {
                         storageType: 'localStorage'
                     }),
 
-                    GitHubModule,
                     MonacoModule
                 ]
             });

@@ -1,3 +1,15 @@
+2017-03-29 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.13.0-alpha
+	* Monaco editor scrollbars are now thinner and less cluttered
+	* The UI of various buttons is now more uniform
+	* Dependency status is monitored via David-DM
+	* We are now on top of Angular 4, and many other dependencies have been
+	upgraded
+	* Tab titles are not uppercase anymore
+	* The Files and Examples sidebar elements are now their own Angular
+	components
+	* The GitHub modal is now a sidebar component
+
 2017-03-24 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Relase: 0.12.1-alpha
 	* Small UI improvements

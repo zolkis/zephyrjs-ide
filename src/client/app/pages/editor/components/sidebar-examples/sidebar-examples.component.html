@@ -1,0 +1,11 @@
+<ul *ngIf="exampleService.count() > 0">
+    <li *ngFor="let filename of exampleService.ls()">
+        <a href="#" class="example" (click)="onFilenameClicked(filename)">
+            {{filename}}
+        </a>
+    </li>
+</ul>
+
+<p *ngIf="exampleService.count() === 0" class="empty">
+    Sorry, there are no examples.
+</p>

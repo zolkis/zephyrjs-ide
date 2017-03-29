@@ -11,7 +11,6 @@ import {
 import { FileService } from '../../file.service';
 import { WebUsbService } from '../../../../shared/webusb/webusb.service';
 
-import { GitHubModalComponent } from '../github/github.modal.component';
 import { WebUsbPort } from '../../../../shared/webusb/webusb.port';
 import { EditorTab, OPERATION_STATUS, EDITOR_STATUS } from '../../editor.tab';
 
@@ -36,9 +35,6 @@ export class MonacoComponent implements AfterViewInit {
 
     @ViewChild('editor')
     private editorView: ElementRef;
-
-    @ViewChild('gitHubModal')
-    private gitHubModal: GitHubModalComponent;
 
     @ViewChild('saveModal')
     private saveModal: ElementRef;
@@ -113,7 +109,14 @@ export class MonacoComponent implements AfterViewInit {
             value: this.initialCode,
             language: 'javascript',
             automaticLayout: true,
-            theme: theme
+            theme: theme,
+            scrollbar: {
+                useShadows: false,
+                verticalScrollbarSize: 7,
+                horizontalScrollbarSize: 7
+            },
+            hideCursorInOverviewRuler: true,
+            scrollBeyondLastLine: false
         });
 
         if (model !== null) {
@@ -247,17 +250,6 @@ export class MonacoComponent implements AfterViewInit {
     // tslint:disable-next-line:no-unused-locals
     public onOverwrite() {
         this._doSave();
-    }
-
-
-    // tslint:disable-next-line:no-unused-locals
-    public onFetchFromGitHub() {
-        this.gitHubModal.show();
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onGitHubFileFetched(content: string) {
-        this.tab.editor.setValue(content);
     }
 
 

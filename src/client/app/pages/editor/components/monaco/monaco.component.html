@@ -25,12 +25,6 @@
             (click)="onSave()">
             <fa [name]="'save'"></fa> Save
         </button>
-
-        <button
-            class="btn btn-default github"
-            (click)="onFetchFromGitHub(tab.id)">
-            <fa [name]="'github'"></fa> GitHub
-        </button>
     </div> <!-- ./monaco-toolbar -->
 
     <div
@@ -40,11 +34,6 @@
     </div> <!-- ./monaco-editor -->
 
 </div> <!-- ./monaco-container -->
-
-<github-modal
-    #gitHubModal
-    (fileFetched)="onGitHubFileFetched($event)">
-</github-modal>
 
 <div #saveModal class="modal fade save-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

@@ -6,8 +6,8 @@ import { NotificationsService } from 'angular2-notifications';
 
 // Own
 import { AppDataService } from '../../app.data.service';
-import { ExampleService } from './example.service';
 import { FileService } from './file.service';
+import { ExampleService } from './example.service';
 import { EditorTab } from './editor.tab';
 import { WebUsbService } from '../../shared/webusb/webusb.service';
 
@@ -82,53 +82,6 @@ export class EditorComponent {
     }
 
     // tslint:disable-next-line:no-unused-locals
-    public onFilenameClicked(filename: string) {
-        // Switch to it if we already have it open
-        for(let tab of this.tabs) {
-            if (tab.title.toLowerCase() === filename.toLowerCase()) {
-                this.appDataService.activateEditorTab(tab);
-                this.onCloseSecondarySidebar();
-                return false;
-            }
-        }
-
-        // Otherwise we create a new tab
-
-        let contents = this.fileService.load(filename);
-        let tab = this.appDataService.newEditorTab();
-        tab.title = filename;
-
-        function _setContents(tab: EditorTab, contents: string) {
-            // Wait for editor to become available
-            setTimeout(() => {
-                if (tab.editor !== null) {
-                    tab.editor.setValue(contents);
-                } else {
-                    _setContents(tab, contents);
-                }
-            }, 100);
-        }
-
-        _setContents(tab, contents);
-
-        this.onCloseSecondarySidebar();
-        return false;
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public computeFileSize(filename: string) {
-        let contents = this.fileService.load(filename);
-        let m = encodeURIComponent(contents).match(/%[89ABab]/g);
-        return contents.length + (m ? m.length : 0);
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onDeleteFileClicked(filename: string) {
-        this.fileService.delete(filename);
-        return false;
-    }
-
-    // tslint:disable-next-line:no-unused-locals
     public onExamplesClicked() {
         if (this.secondarySidebarOptions.opened &&
             this.secondarySidebarOptions.content === 'examples') {
@@ -142,21 +95,30 @@ export class EditorComponent {
     }
 
     // tslint:disable-next-line:no-unused-locals
-    public onExampleFilenameClicked(filename: string) {
+    public onGitHubClicked() {
+        if (this.secondarySidebarOptions.opened &&
+            this.secondarySidebarOptions.content === 'github') {
+            this.onCloseSecondarySidebar();
+        } else {
+            this.secondarySidebarOptions.content = 'github';
+            this.secondarySidebarOptions.opened = true;
+            this._adjustBackdropPosition();
+        }
+        return false;
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onFileSelected(file: any) {
         // Switch to it if we already have it open
         for(let tab of this.tabs) {
-            if (tab.title.toLowerCase() === filename.toLowerCase()) {
+            if (tab.title === file.filename) {
                 this.appDataService.activateEditorTab(tab);
                 this.onCloseSecondarySidebar();
-                return false;
+                return;
             }
         }
 
         // Otherwise we create a new tab
-
-        let contents = this.exampleService.load(filename);
-        let tab = this.appDataService.newEditorTab();
-        tab.title = filename;
 
         function _setContents(tab: EditorTab, contents: string) {
             // Wait for editor to become available
@@ -169,10 +131,73 @@ export class EditorComponent {
             }, 100);
         }
 
-        _setContents(tab, contents);
+        let tab = this.appDataService.newEditorTab();
+        tab.title = file.filename;
+        _setContents(tab, file.contents);
 
         this.onCloseSecondarySidebar();
-        return false;
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onExampleSelected(example: any) {
+        // Switch to it if we already have it open
+        for(let tab of this.tabs) {
+            if (tab.title === example.filename) {
+                this.appDataService.activateEditorTab(tab);
+                this.onCloseSecondarySidebar();
+                return;
+            }
+        }
+
+        // Otherwise we create a new tab
+
+        function _setContents(tab: EditorTab, contents: string) {
+            // Wait for editor to become available
+            setTimeout(() => {
+                if (tab.editor !== null) {
+                    tab.editor.setValue(contents);
+                } else {
+                    _setContents(tab, contents);
+                }
+            }, 100);
+        }
+
+        let tab = this.appDataService.newEditorTab();
+        tab.title = example.filename;
+        _setContents(tab, example.contents);
+
+        this.onCloseSecondarySidebar();
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onGitHubFileSelected(file: any) {
+        // Switch to it if we already have it open
+        for(let tab of this.tabs) {
+            if (tab.title === file.filename) {
+                this.appDataService.activateEditorTab(tab);
+                this.onCloseSecondarySidebar();
+                return;
+            }
+        }
+
+        // Otherwise we create a new tab
+
+        function _setContents(tab: EditorTab, contents: string) {
+            // Wait for editor to become available
+            setTimeout(() => {
+                if (tab.editor !== null) {
+                    tab.editor.setValue(contents);
+                } else {
+                    _setContents(tab, contents);
+                }
+            }, 100);
+        }
+
+        let tab = this.appDataService.newEditorTab();
+        tab.title = file.filename;
+        _setContents(tab, file.contents);
+
+        this.onCloseSecondarySidebar();
     }
 
     // tslint:disable-next-line:no-unused-locals

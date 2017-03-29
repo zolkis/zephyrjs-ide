@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 
 // Third-party modules
 import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
-import { LocalStorageModule } from 'angular-2-local-storage';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { SidebarModule } from 'ng-sidebar/lib/sidebar.module';
 import { SplitPaneModule } from 'ng2-split-pane/lib/ng2-split-pane';
@@ -17,6 +16,9 @@ import { StatusBarModule } from './components/statusbar/statusbar.module';
 import { BoardExplorerModule } from './components/board-explorer/board-explorer.module';
 import { SharedModule } from '../../shared/shared.module';
 import { OcfExplorerModule } from './components/ocf-explorer/ocf-explorer.module';
+import { SidebarFilesModule } from './components/sidebar-files/sidebar-files.module';
+import { SidebarExamplesModule } from './components/sidebar-examples/sidebar-examples.module';
+import { SidebarGitHubModule } from './components/sidebar-github/sidebar-github.module';
 
 // This module
 import { EditorComponent } from './editor.component';
@@ -29,10 +31,6 @@ import { TabBarComponent } from './components/tab-bar/tab-bar.component';
         FormsModule,
 
         Angular2FontawesomeModule,
-        LocalStorageModule.withConfig({
-            prefix: 'zephyrjs-ide',
-            storageType: 'localStorage'
-        }),
         SimpleNotificationsModule.forRoot(),
         SidebarModule,
         SplitPaneModule,
@@ -42,6 +40,9 @@ import { TabBarComponent } from './components/tab-bar/tab-bar.component';
         StatusBarModule,
         BoardExplorerModule,
         OcfExplorerModule,
+        SidebarFilesModule,
+        SidebarExamplesModule,
+        SidebarGitHubModule,
 
         SharedModule.forRoot()
     ],

@@ -42,7 +42,7 @@ export interface IQueryInput {
 @ResourceParams({
   url: '/user'
 })
-export class UserService extends RestClient {
+export class GitHubUserService extends RestClient {
   @ResourceAction({
     path: '/'
   })
@@ -60,7 +60,7 @@ export class UserService extends RestClient {
 @ResourceParams({
   url: '/repos'
 })
-export class RepoService extends RestClient {
+export class GitHubRepoService extends RestClient {
   @ResourceAction({
     isArray: true,
     path: '/{!owner}/{!repo}/branches'
