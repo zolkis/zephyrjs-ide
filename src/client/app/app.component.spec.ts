@@ -23,7 +23,6 @@ import { EditorComponent } from './pages/editor/editor.component';
 // Editor components
 import { BoardExplorerComponent } from './pages/editor/components/board-explorer/board-explorer.component';
 import { ConsoleComponent } from './pages/editor/components/console/console.component';
-import { GitHubModalComponent } from './pages/editor/components/github/github.modal.component';
 import { MonacoComponent } from './pages/editor/components/monaco/monaco.component';
 import { StatusBarComponent } from './pages/editor/components/statusbar/statusbar.component';
 import { OcfExplorerComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.component';
@@ -31,6 +30,7 @@ import { OcfResourceComponent } from './pages/editor/components/ocf-explorer/ocf
 import { TabBarComponent } from './pages/editor/components/tab-bar/tab-bar.component';
 import { SidebarFilesComponent } from './pages/editor/components/sidebar-files/sidebar-files.component';
 import { SidebarExamplesComponent } from './pages/editor/components/sidebar-examples/sidebar-examples.component';
+import { SidebarGitHubComponent } from './pages/editor/components/sidebar-github/sidebar-github.component';
 
 import { OcfResourceValueFanComponent }
     from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.fan.component';
@@ -80,7 +80,6 @@ export function main() {
                     EditorComponent,
                         BoardExplorerComponent,
                         ConsoleComponent,
-                        GitHubModalComponent,
                         MonacoComponent,
                         StatusBarComponent,
                         OcfExplorerComponent,
@@ -94,6 +93,7 @@ export function main() {
                         TabBarComponent,
                         SidebarFilesComponent,
                         SidebarExamplesComponent,
+                        SidebarGitHubComponent,
                     NavbarComponent,
                     FooterComponent
                 ],
