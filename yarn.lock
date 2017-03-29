@@ -3814,9 +3814,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-ng-sidebar@^3.3.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/ng-sidebar/-/ng-sidebar-3.4.1.tgz#6cf9fe9c4132a83a600669cf5eec2de5310c84fb"
+ng-sidebar@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/ng-sidebar/-/ng-sidebar-3.4.2.tgz#63e3c58b1effb2a40713a1da327529054e2a1668"
 
 ng2-resource-rest@^2.0.4:
   version "2.0.4"

@@ -143,7 +143,7 @@
     "intl": "^1.2.5",
     "jquery": "^3.1.1",
     "monaco-editor": "^0.8.0",
-    "ng-sidebar": "^3.3.1",
+    "ng-sidebar": "^3.4.2",
     "ng2-resource-rest": "^2.0.4",
     "ng2-split-pane": "^1.2.0",
     "reflect-metadata": "^0.1.8",
