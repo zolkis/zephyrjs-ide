@@ -17,6 +17,7 @@ import { BoardExplorerModule } from './components/board-explorer/board-explorer.
 import { SharedModule } from '../../shared/shared.module';
 import { OcfExplorerModule } from './components/ocf-explorer/ocf-explorer.module';
 import { SidebarFilesModule } from './components/sidebar-files/sidebar-files.module';
+import { SidebarExamplesModule } from './components/sidebar-examples/sidebar-examples.module';
 
 // This module
 import { EditorComponent } from './editor.component';
@@ -39,6 +40,7 @@ import { TabBarComponent } from './components/tab-bar/tab-bar.component';
         BoardExplorerModule,
         OcfExplorerModule,
         SidebarFilesModule,
+        SidebarExamplesModule,
 
         SharedModule.forRoot()
     ],

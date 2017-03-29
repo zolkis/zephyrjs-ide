@@ -30,6 +30,7 @@ import { OcfExplorerComponent } from './pages/editor/components/ocf-explorer/ocf
 import { OcfResourceComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.resource.component';
 import { TabBarComponent } from './pages/editor/components/tab-bar/tab-bar.component';
 import { SidebarFilesComponent } from './pages/editor/components/sidebar-files/sidebar-files.component';
+import { SidebarExamplesComponent } from './pages/editor/components/sidebar-examples/sidebar-examples.component';
 
 import { OcfResourceValueFanComponent }
     from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.fan.component';
@@ -92,6 +93,7 @@ export function main() {
                             OcfResourceValueJsonComponent,
                         TabBarComponent,
                         SidebarFilesComponent,
+                        SidebarExamplesComponent,
                     NavbarComponent,
                     FooterComponent
                 ],

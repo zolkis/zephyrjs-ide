@@ -68,15 +68,11 @@
                 class="files">
             </sd-sidebar-files>
 
-            <div *ngIf="secondarySidebarOptions.content === 'examples'" class="examples">
-                <ul>
-                    <li *ngFor="let example of exampleService.ls()">
-                        <a href="#" class="example" (click)="onExampleFilenameClicked(example)">
-                            {{example}}
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <sd-sidebar-examples
+                *ngIf="secondarySidebarOptions.content === 'examples'"
+                (onFileSelected)="onCloseSecondarySidebar()"
+                class="examples">
+            </sd-sidebar-examples>
         </ng-sidebar>
 
         <vertical-split-pane
