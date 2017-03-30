@@ -9,6 +9,7 @@
 	* The Files and Examples sidebar elements are now their own Angular
 	components
 	* The GitHub modal is now a sidebar component
+	* The separators between panes are now thinner
 
 2017-03-24 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Relase: 0.12.1-alpha

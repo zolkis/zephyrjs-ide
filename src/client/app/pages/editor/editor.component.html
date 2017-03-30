@@ -95,6 +95,7 @@
         <vertical-split-pane
             primary-component-minsize="400"
             secondary-component-minsize="400"
+            separator-thickness="3"
             local-storage-key="editor-split-pane-code"
             (on-begin-resizing)="onBeginResizing($event)"
             (on-ended-resizing)="onEndedResizing($event)">
@@ -124,6 +125,7 @@
                 <horizontal-split-pane
                     primary-component-minsize="42"
                     secondary-component-minsize="42"
+                    separator-thickness="3"
                     local-storage-key="editor-split-pane-viewer"
                     [secondary-component-toggled-off]="consoleToggledOff"
                     (on-begin-resizing)="onBeginResizing($event)"
