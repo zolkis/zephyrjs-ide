@@ -39,6 +39,7 @@ gulp.task('build.e2e', (done: any) =>
               'build.assets.dev',
               'build.fonts',
               'build.monaco',
+              'build.html_css',
               'build.js.e2e',
               'build.index.dev',
               'build.templatelocals',
