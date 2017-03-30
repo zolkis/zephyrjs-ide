@@ -7,6 +7,7 @@
   <title><%= APP_TITLE %></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="<%= APP_BASE %>assets/favicon/favicon-<%= ENV_CONFIG.ENV %>.ico" type="image/x-icon">
 
   <!-- Origin Trial Token, feature = WebUSB (For Chrome M57+), origin = https://01org.github.io, expires = 2017-04-18 -->
   <meta http-equiv="origin-trial" data-feature="WebUSB (For Chrome M57+)" data-expires="2017-04-18" content="An4Eu8A6M+ZONfkySmzaAhov9AuzCXwZV8LwiBqn78JlUN4UMZTMDaieVby56goHi78lzNu7Lr/te4g4WwS10AIAAABQeyJvcmlnaW4iOiJodHRwczovLzAxb3JnLmdpdGh1Yi5pbzo0NDMiLCJmZWF0dXJlIjoiV2ViVVNCMiIsImV4cGlyeSI6MTQ5MjUyNTc0OX0=">
@@ -60,6 +61,15 @@
     </div>
   </sd-app>
 
+  <script defer>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', '<%= GOOGLE_ANALYTICS_ID %>', 'auto');
+    ga('send', 'pageview');
+  </script>
+
   <script>
     // Fixes undefined module function in SystemJS bundle
     function module() {};
@@ -90,12 +100,6 @@
       console.error(e.stack || e,
         'Not expecting this error? Report it at https://github.com/01org/zephyrjs-ide/issues');
     });
-
-  System.config({
-      map: {
-          'github-api': 'github-api/dist/GitHub.bundle'
-      }
-  });
   </script>
   <% } %>
 
