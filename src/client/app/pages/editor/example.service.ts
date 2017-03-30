@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 
 
+// We mask the 'require' keyword in the examples because Karma parses those,
+// ignoring the fact that they're just hardcoded strings, and split out errors
+// about missing modules.
+const REQUIRE: string = 'require';
+
+
 @Injectable()
 export class ExampleService {
     private _examples = [
@@ -48,7 +54,7 @@ sensor.start();`
 // write will allow client to send bytes to be stored
 // read will allow client to read back the stored value, or 0 if not found
 
-var ble = require ("ble");
+var ble = ` + REQUIRE + ` ("ble");
 
 var deviceName = 'BLE Test';
 
@@ -141,8 +147,8 @@ console.log("BLE sample...");`
 console.log("Starting Blink example...");
 
 // import gpio module
-var gpio = require("gpio");
-var pins = require("arduino101_pins");
+var gpio = ` + REQUIRE + `("gpio");
+var pins = ` + REQUIRE + `("arduino101_pins");
 
 // pin 8 is one of the onboard LEDs on the Arduino 101
 // 'out' direction is default, could be left out
@@ -222,8 +228,8 @@ console.log("Starting TrafficLight example...");
 // WARNING: These traffic light timings are appropriate for hummingbirds only
 
 // import gpio module
-var gpio = require("gpio");
-var pins = require("arduino101_pins");
+var gpio = ` + REQUIRE + `("gpio");
+var pins = ` + REQUIRE + `("arduino101_pins");
 
 var red    = gpio.open({pin: pins.LED2, direction: 'out', activeLow: true});
 var yellow = gpio.open({pin: pins.LED1, direction: 'out', activeLow: true});
