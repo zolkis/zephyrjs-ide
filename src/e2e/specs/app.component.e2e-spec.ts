@@ -1,25 +1,39 @@
 import { browser, element, by } from 'protractor';
 
+
 describe('App', () => {
+    beforeEach( () => {
+        browser.get('/');
+    });
 
-  beforeEach(async () => {
-    return await browser.get('/');
-  });
+    it('should have a title', () => {
+        expect(browser.getTitle()).toEqual('JS IDE for Zephyr OS');
+    });
 
-  it('should have a title', () => {
-    expect(browser.getTitle()).toEqual('Welcome to angular-seed!');
-  });
+    it('should have <nav>', () => {
+        expect(element(by.css('sd-navbar nav')).isPresent()).toEqual(true);
+    });
 
-  it('should have <nav>', () => {
-    expect(element(by.css('sd-app sd-navbar nav')).isPresent()).toEqual(true);
-  });
+    it('routing should preserve editor tabs', () => {
+        let tabs;
 
-  it('should have correct nav text for Home', () => {
-    expect(element(by.css('sd-app sd-navbar nav a:first-child')).getText()).toEqual('HOME');
-  });
+        // Initial check
+        browser.ignoreSynchronization = true;
+        browser.get('/#/editor');
+        tabs = element.all(by.css('sd-editor .left-component a.nav-link'));
+        expect(tabs.count()).toEqual(1);
 
-  it('should have correct nav text for About', () => {
-    expect(element(by.css('sd-app sd-navbar nav a:nth-child(2)')).getText()).toEqual('ABOUT');
-  });
+        // Add a tab
+        element(by.id('new-tab-button')).click();
+        tabs = element.all(by.css('sd-editor .left-component a.nav-link'));
+        expect(tabs.count()).toEqual(2);
 
+        // Route to About
+        element(by.css('sd-navbar .navbar-right li:nth-child(1) a')).click();
+
+        // Route back to Editor
+        element(by.css('sd-navbar .navbar-right li:nth-child(2) a')).click();
+        tabs = element.all(by.css('sd-editor .left-component a.nav-link'));
+        expect(tabs.count()).toEqual(2);
+    });
 });

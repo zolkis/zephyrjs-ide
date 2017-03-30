@@ -1,3 +1,4 @@
+import { argv } from 'yargs';
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
@@ -36,7 +37,6 @@ export class ProjectConfig extends SeedConfig {
     this.APP_SHORT_DESC_HTML = 'JavaScript <strong>Web IDE</strong> for Zephyr OS';
 
     this.PORT = argv['port'] || 8000;
-    this.PLUGIN_CONFIGS['browser-sync']['port'] = this.PORT;
     this.GIT_REV = this.getGitRev();
     // this.GOOGLE_ANALYTICS_ID = 'Your site's ID';
 
