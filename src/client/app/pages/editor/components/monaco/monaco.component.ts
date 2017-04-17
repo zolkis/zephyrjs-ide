@@ -177,7 +177,7 @@ export class MonacoComponent implements AfterViewInit {
             .catch((error: DOMException) => {
                 this.tab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
                 this.onError.emit({
-                    header: 'Conneciton failed',
+                    header: 'Connection failed',
                     body: error.message
                 });
             });
