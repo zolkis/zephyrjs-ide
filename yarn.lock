@@ -327,9 +327,9 @@ angular-2-local-storage@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/angular-2-local-storage/-/angular-2-local-storage-1.0.1.tgz#3b846c90b2fffc9124f7bacc347f22d043a1e3a4"
 
-angular2-fontawesome@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/angular2-fontawesome/-/angular2-fontawesome-0.8.0.tgz#e1c3452bb1e87278421521a9ddefa9ec11a9bdc9"
+angular2-fontawesome@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/angular2-fontawesome/-/angular2-fontawesome-0.9.0.tgz#f3ddf65fcf633eb0e1adc4aa907ecd5eddb85dba"
 
 angular2-notifications@0.4.53:
   version "0.4.53"
@@ -3814,9 +3814,9 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-ng-sidebar@^3.4.2:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/ng-sidebar/-/ng-sidebar-3.4.2.tgz#63e3c58b1effb2a40713a1da327529054e2a1668"
+ng-sidebar@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/ng-sidebar/-/ng-sidebar-4.1.1.tgz#e34fa7846ef17564c84e7690520a8cbe6ba68948"
 
 ng2-resource-rest@^2.0.4:
   version "2.0.4"
