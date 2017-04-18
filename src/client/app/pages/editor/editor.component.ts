@@ -231,7 +231,7 @@ export class EditorComponent {
     }
 
     // tslint:disable-next-line:no-unused-locals
-    public onBeginResizing() {
+    public onBeginResizing($event: any) {
         let overlays = document.getElementsByClassName(
             'console-resizing-overlay');
         [].forEach.call(overlays, (overlay: HTMLElement) => {
@@ -240,7 +240,7 @@ export class EditorComponent {
     }
 
     // tslint:disable-next-line:no-unused-locals
-    public onEndedResizing() {
+    public onEndedResizing($event: any) {
         let overlays = document.getElementsByClassName(
             'console-resizing-overlay');
         [].forEach.call(overlays, (overlay: HTMLElement) => {
