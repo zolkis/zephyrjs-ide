@@ -2,31 +2,31 @@ version: '2'
 
 services:
 
-  angular-seed:
+  zephyrjs-ide:
     build:
       context: .
       dockerfile: ./.docker/angular-seed.production.dockerfile
     command: npm run build.prod
-    container_name: angular-seed-build-prod
-    image: angular-seed
+    container_name: zephyrjs-ide-build-prod
+    image: zephyrjs-ide
     networks:
       - prod-network
     volumes:
-      - ./dist:/home/app/angular-seed/dist
+      - ./dist:/home/app/zephyrjs-ide/dist
 
-  angular-seed-nginx:
-    command: /bin/bash -c "envsubst '$$NGINX_HOST $$NGINX_PORT' < /etc/nginx/conf.d/angular-seed.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-    container_name: angular-seed-nginx-prod
+  zephyrjs-ide-nginx:
+    command: /bin/bash -c "envsubst '$$NGINX_HOST $$NGINX_PORT' < /etc/nginx/conf.d/zephyrjs-ide.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    container_name: zephyrjs-ide-nginx-prod
     environment:
       - NGINX_HOST=localhost
-      - NGINX_PORT=80
+      - NGINX_PORT=8000
     image: nginx
     networks:
       - prod-network
     ports:
       - '8000:8000'
     volumes:
-      - ./.docker/nginx.conf:/etc/nginx/conf.d/angular-seed.template
+      - ./.docker/nginx.conf:/etc/nginx/conf.d/zephyrjs-ide.template
       - ./dist/prod:/var/www/dist/prod
 
 networks:

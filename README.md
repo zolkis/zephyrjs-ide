@@ -105,7 +105,7 @@ $ docker-compose build
 $ docker-compose up -d
 ```
 
-Now open your browser at http://localhost:5555
+Now open your browser at http://localhost:8000
 
 ## Production build and deployment
 
@@ -113,11 +113,11 @@ Run the following:
 
 ```bash
 $ docker-compose -f docker-compose.production.yml build
-$ docker-compose -f docker-compose.production.yml up angular-seed   # Wait until this container has finished building, as the nginx container is dependent on the production build artifacts
-$ docker-compose -f docker-compose.production.yml up -d angular-seed-nginx  # Start the nginx container in detached mode
+$ docker-compose -f docker-compose.production.yml up zephyrjs-ide   # Wait until this container has finished building, as the nginx container is dependent on the production build artifacts
+$ docker-compose -f docker-compose.production.yml up -d zephyrjs-ide-nginx  # Start the nginx container in detached mode, in another terminal window
 ```
 
-Now open your browser at http://localhost:5555
+Now open your browser at http://localhost:8000
 
 # Table of Contents
 

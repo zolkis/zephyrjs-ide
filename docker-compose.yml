@@ -2,17 +2,17 @@ version: '2'
 
 services:
 
-  angular-seed:
+  zephyrjs-ide:
     build:
       context: .
       dockerfile: ./.docker/angular-seed.development.dockerfile
     command: npm start
-    container_name: angular-seed-start
-    image: angular-seed
+    container_name: zephyrjs-ide-start
+    image: zephyrjs-ide
     networks:
       - dev-network
     ports:
-      - '5555:5555'
+      - '8000:8000'
 
 networks:
   dev-network:
