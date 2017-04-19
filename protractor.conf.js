@@ -26,7 +26,11 @@ const config = {
     browserName: 'chrome',
     version: 'latest',
     'chromeOptions' : {
-      args: ['--window-size=1024,800']
+      args: [
+        '--window-size=1024,800',
+        '--enable-experimental-web-platform-features',
+        '--enable-webusb'
+      ]
     }
   },
 
