@@ -3,10 +3,10 @@ import { browser, element, by, protractor, ElementFinder } from 'protractor';
 
 describe('Editor', () => {
     beforeEach( () => {
-        // Needed because the Monaco workers confuse webdriver
-        browser.ignoreSynchronization = true;
-
         browser.get('/#/editor');
+        browser.wait(() => {
+            return browser.driver.isElementPresent(by.css('sd-editor'));
+        });
     });
 
     it('should have correct nav text for About', () => {

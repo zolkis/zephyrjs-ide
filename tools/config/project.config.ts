@@ -2,6 +2,7 @@ import { argv } from 'yargs';
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
+// import { ExtendPackages } from './seed.config.interfaces';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -36,8 +37,8 @@ export class ProjectConfig extends SeedConfig {
     this.APP_SHORT_DESC_HTML = 'JavaScript <strong>Web IDE</strong> for Zephyr OS';
 
     this.PORT = argv['port'] || 8000;
-    this.PLUGIN_CONFIGS['browser-sync']['port'] = this.PORT;
     this.GIT_REV = this.getGitRev();
+    // this.GOOGLE_ANALYTICS_ID = 'Your site's ID';
 
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;
@@ -64,6 +65,14 @@ export class ProjectConfig extends SeedConfig {
       {src: `${this.APP_SRC}/app/shared/webusb/ihex.js`, inject: true, vendor: false}
     ];
 
+    // Add packages (e.g. ng2-translate)
+    // let additionalPackages: ExtendPackages[] = [{
+    //   name: 'ng2-translate',
+    //   // Path to the package's bundle
+    //   path: 'node_modules/ng2-translate/bundles/ng2-translate.umd.js'
+    // }];
+    //
+    // this.addPackagesBundles(additionalPackages);
 
     let extraPackages = [
         {
@@ -121,7 +130,7 @@ export class ProjectConfig extends SeedConfig {
     }
 
     /* Add to or override NPM module configurations: */
-    // this.mergeObject(this.PLUGIN_CONFIGS['browser-sync'], { ghostMode: false });
+    // this.PLUGIN_CONFIGS['browser-sync'] = { ghostMode: false };
 
     this.ENABLE_SCSS = true;
   }

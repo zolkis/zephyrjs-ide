@@ -4,7 +4,7 @@
     pixels.
 </div>
 
-<ng-sidebar-container class="primary-sidebar hidden-xs hidden-sm">
+<ng-sidebar-container [animate]="false" class="primary-sidebar hidden-xs hidden-sm">
     <ng-sidebar
         [(opened)]="sidebarOptions.opened"
         [position]="'left'"
@@ -61,7 +61,7 @@
     </ng-sidebar>
 
     <!-- secondary sidebar -->
-    <ng-sidebar-container class="secondary-sidebar">
+    <ng-sidebar-container [animate]="false" class="secondary-sidebar">
         <ng-sidebar
             [(opened)]="secondarySidebarOptions.opened"
             [position]="'left'"

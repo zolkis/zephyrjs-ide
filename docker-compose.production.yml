@@ -2,11 +2,33 @@ version: '2'
 
 services:
 
-  dist-build:
-    container_name: dist-build
-    image: dist-build
+  zephyrjs-ide:
     build:
       context: .
-      dockerfile: ./.docker/dist-build.production.dockerfile
+      dockerfile: ./.docker/angular-seed.production.dockerfile
+    command: npm run build.prod
+    container_name: zephyrjs-ide-build-prod
+    image: zephyrjs-ide
+    networks:
+      - prod-network
+    volumes:
+      - ./dist:/home/app/zephyrjs-ide/dist
+
+  zephyrjs-ide-nginx:
+    command: /bin/bash -c "envsubst '$$NGINX_HOST $$NGINX_PORT' < /etc/nginx/conf.d/zephyrjs-ide.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    container_name: zephyrjs-ide-nginx-prod
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=8000
+    image: nginx
+    networks:
+      - prod-network
     ports:
       - '8000:8000'
+    volumes:
+      - ./.docker/nginx.conf:/etc/nginx/conf.d/zephyrjs-ide.template
+      - ./dist/prod:/var/www/dist/prod
+
+networks:
+  prod-network:
+    driver: bridge

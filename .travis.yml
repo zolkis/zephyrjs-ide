@@ -26,7 +26,6 @@ before_script:
 
 after_failure:
   - cat $TRAVIS_BUILD_DIR/npm-debug.log
-  - cat $TRAVIS_BUILD_DIR/nohup.out
 
 branches:
   only:
@@ -37,4 +36,4 @@ cache:
   directories: node_modules
 
 script:
-  - ./test.sh
+    - npm run tests.all && npm run build.prod.exp

@@ -5,8 +5,8 @@
 </div>
 
  <div class="title"
-     *ngIf="gitHubService.wizardStep === wizardStepEnum.CHOOSE_FILE &&
-            gitHubService.wizardStep !== wizardStepEnum.DOWNLOADING">
+     *ngIf="gitHubService.wizardStep === wizardStepEnum.CHOOSE_FILE ||
+            gitHubService.wizardStep === wizardStepEnum.DOWNLOADING">
     Pick a file from your repositoty
 </div>
  
@@ -24,7 +24,7 @@
               [(ngModel)]="gitHubService.data.user.token"/>
 
         <span id="token-help-block" class="help-block">
-            You can get your Gitub API token
+            You can get your GitHub API token
             <a target="_blank" href="https://github.com/settings/tokens">
                 here
             </a>.

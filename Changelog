@@ -1,3 +1,11 @@
+2017-04-20 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.13.1-alpha
+	* Fix various English spelling mistakes and typos
+	* Upgrade the angular2-fontawesome and ng-sidebar dependencies
+	* Fix problems with dockerizations and continuous integration
+	* Fix AoT compilation
+	* Update WebUSB origin trial token
+
 2017-03-29 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.13.0-alpha
 	* Monaco editor scrollbars are now thinner and less cluttered
