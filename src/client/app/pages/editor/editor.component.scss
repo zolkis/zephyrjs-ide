@@ -233,7 +233,7 @@
     /deep/ vertical-split-separator, /deep/ horizontal-split-separator {
         border: none;
         background-color: $navbar-bg-color;
-        z-index: 999; // Remember that modals are 1050
+        z-index: 7; // Remember that the Monaco context menu is 8.
 
         .handle {
             background-color: darken($accent-color, 10%);
