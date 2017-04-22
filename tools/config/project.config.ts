@@ -107,6 +107,16 @@ export class ProjectConfig extends SeedConfig {
                 defaultExtension: 'js'
             }
         },
+
+        {
+            name: 'ts-guard-decorator',
+            path: 'node_modules/ts-guard-decorator/dist/guard.js',
+            packageMeta: {
+                main: 'guard.js',
+                defaultExtension: 'js'
+            }
+        },
+
         {
             name: 'ng-sidebar',
             path: 'node_modules/ng-sidebar/lib/index.js',
