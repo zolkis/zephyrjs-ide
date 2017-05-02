@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 
 // Third party
-import { ResourceModule } from 'ng2-resource-rest';
+import { ResourceModule } from 'ngx-resource';
 
 
 // This app

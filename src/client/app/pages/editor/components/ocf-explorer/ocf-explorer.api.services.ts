@@ -1,5 +1,5 @@
 import { Http, RequestMethod } from '@angular/http';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 
 import {
@@ -7,7 +7,7 @@ import {
     ResourceAction,
     ResourceMethod,
     ResourceParams
-} from 'ng2-resource-rest';
+} from 'ngx-resource';
 
 export class RestClient extends Resource {
     private baseUrl = '';
@@ -71,7 +71,7 @@ export class OcfApiService extends RestClient {
     })
     updateResource: ResourceMethod<any, any>;
 
-    constructor(public http: Http, public injector: Injector) {
-        super(http, injector);
+    constructor(public http: Http) {
+        super(http);
     }
 }
