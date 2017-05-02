@@ -131,9 +131,9 @@ export class EditorComponent {
             }, 100);
         }
 
-        let tab = this.appDataService.newEditorTab();
-        tab.title = file.filename;
-        _setContents(tab, file.contents);
+        let newTab = this.appDataService.newEditorTab();
+        newTab.title = file.filename;
+        _setContents(newTab, file.contents);
 
         this.onCloseSecondarySidebar();
     }
@@ -162,9 +162,9 @@ export class EditorComponent {
             }, 100);
         }
 
-        let tab = this.appDataService.newEditorTab();
-        tab.title = example.filename;
-        _setContents(tab, example.contents);
+        let newTab = this.appDataService.newEditorTab();
+        newTab.title = example.filename;
+        _setContents(newTab, example.contents);
 
         this.onCloseSecondarySidebar();
     }
@@ -193,9 +193,9 @@ export class EditorComponent {
             }, 100);
         }
 
-        let tab = this.appDataService.newEditorTab();
-        tab.title = file.filename;
-        _setContents(tab, file.contents);
+        let newTab = this.appDataService.newEditorTab();
+        newTab.title = file.filename;
+        _setContents(newTab, file.contents);
 
         this.onCloseSecondarySidebar();
     }
