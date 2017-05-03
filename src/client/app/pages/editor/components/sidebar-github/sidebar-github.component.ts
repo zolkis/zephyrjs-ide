@@ -53,6 +53,27 @@ export class SidebarGitHubComponent {
             this.gitHubService.data.user.ui.hasError = true;
         };
 
+        let getRepos = (page: number = 1) => {
+            this.userService.getRepos({page: page}).$observable.subscribe(
+                (repos: any[]) => {
+                    this.gitHubService.data.repos.objects =
+                        this.gitHubService.data.repos.objects.concat(repos.sort((a: any, b: any) => {
+                            if (a.full_name.toLowerCase() < b.full_name.toLowerCase()) return -1;
+                            if (a.full_name.toLowerCase() > b.full_name.toLowerCase()) return 1;
+                            return 0;
+                        }));
+
+                    if (repos.length > 0) {
+                        getRepos(page + 1);
+                    } else {
+                        // Done!
+                        this.gitHubService.wizardStep = WIZARD_STEP.CHOOSE_FILE;
+                    }
+                },
+                (error: any) => { onError(error); }
+            );
+        };
+
         this.gitHubService.wizardStep = WIZARD_STEP.LOGGING_IN;
         setTimeout(() => {
             this.userService.setToken(this.gitHubService.data.user.token);
@@ -61,18 +82,7 @@ export class SidebarGitHubComponent {
             this.userService.getUser().$observable.subscribe(
                 (user: any) => {
                     this.gitHubService.data.user.object = user;
-
-                    this.userService.getRepos().$observable.subscribe(
-                        (repos: any[]) => {
-                            this.gitHubService.data.repos.objects = repos.sort((a: any, b: any) => {
-                                if (a.full_name.toLowerCase() < b.full_name.toLowerCase()) return -1;
-                                if (a.full_name.toLowerCase() > b.full_name.toLowerCase()) return 1;
-                                return 0;
-                            });
-                            this.gitHubService.wizardStep = WIZARD_STEP.CHOOSE_FILE;
-                        },
-                        (error: any) => { onError(error); }
-                    );
+                    getRepos();
                 },
                 (error: any) => { onError(error); }
             );
@@ -182,8 +192,7 @@ export class SidebarGitHubComponent {
 
     // tslint:disable-next-line:no-unused-locals
     public onLogoutClicked() {
-        this.resetUser();
-        this.resetUI();
+        this.reset();
     }
 
 

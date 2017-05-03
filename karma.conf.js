@@ -59,7 +59,7 @@ module.exports = function (config) {
       { pattern: 'node_modules/angular2-fontawesome/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/angular2-notifications/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/hterm-umdjs/**/*.js', included: false, watched: false },
-      { pattern: 'node_modules/ng2-resource-rest/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/ngx-resource/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/ng2-split-pane/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/ng-sidebar/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/angular-2-local-storage/**/*.js', included: false, watched: false },

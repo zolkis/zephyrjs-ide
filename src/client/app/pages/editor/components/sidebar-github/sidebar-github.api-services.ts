@@ -5,7 +5,7 @@ import {
     ResourceAction,
     ResourceMethod,
     ResourceParams
-} from 'ng2-resource-rest';
+} from 'ngx-resource';
 
 
 export class RestClient extends Resource {

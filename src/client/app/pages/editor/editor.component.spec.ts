@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 
 // Third-party
-import { ResourceModule } from 'ng2-resource-rest';
+import { ResourceModule } from 'ngx-resource';
 
 // Own
 import { AppDataService } from '../../app.data.service';

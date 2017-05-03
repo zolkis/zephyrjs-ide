@@ -76,8 +76,8 @@ export class ProjectConfig extends SeedConfig {
 
     let extraPackages = [
         {
-            name: 'ng2-resource-rest',
-            path: 'node_modules/ng2-resource-rest/bundles/ng2-resource-rest.umd.js',
+            name: 'ngx-resource',
+            path: 'node_modules/ngx-resource/bundles/ngx-resource.umd.js',
             packageMeta: {
                 main: 'index.js',
                 defaultExtension: 'js'

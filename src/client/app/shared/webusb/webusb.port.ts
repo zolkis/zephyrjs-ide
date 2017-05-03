@@ -65,6 +65,11 @@ export class WebUsbPort {
                 });
             };
 
+            if (this.device.opened) {
+                reject('You are already connected to this device');
+                return;
+            }
+
             this.device.open()
             .then(() => {
                 if (this.device.configuration === null) {
