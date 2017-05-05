@@ -40,6 +40,13 @@
                [hidden]="tab.editing">
                 <fa [name]="'close'"></fa>
             </a>
+
+            <div
+                *ngIf="tab.port && tab.port.device.opened"
+                class="connection-indicator"
+                title="Connected">
+                &#8226;
+            </div>
         </a>
     </li>
 </ul>

@@ -53,6 +53,18 @@ export class WebUsbService {
         });
     }
 
+    public disconnect(port: WebUsbPort): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            if (port === null) {
+                resolve();
+            } else {
+                port.disconnect()
+                    .then(() => { resolve(); })
+                    .catch(() => { reject(); });
+            }
+        });
+    }
+
     public send(port: WebUsbPort, data: string) {
         return port.send(data);
     }

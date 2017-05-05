@@ -8,6 +8,7 @@ import {
     ViewChild
 } from '@angular/core';
 
+import { AppDataService } from '../../../../app.data.service';
 import { FileService } from '../../file.service';
 import { WebUsbService } from '../../../../shared/webusb/webusb.service';
 
@@ -30,6 +31,7 @@ export class MonacoComponent implements AfterViewInit {
     @Input('tab') tab: EditorTab;
     @Output() onWarning = new EventEmitter();
     @Output() onError = new EventEmitter();
+    @Output() onSuccess = new EventEmitter();
 
     public filename: string = '';
 
@@ -45,6 +47,7 @@ export class MonacoComponent implements AfterViewInit {
     private initialCode: string = '';
 
     constructor(
+        private appDataService: AppDataService,
         private fileService: FileService,
         private webusbService: WebUsbService) {
     }
@@ -155,15 +158,47 @@ export class MonacoComponent implements AfterViewInit {
             .then(() => {
                 this.tab.connectionStatus = OPERATION_STATUS.DONE;
                 this.tab.editorStatus = EDITOR_STATUS.READY;
+                this.tab.term.io.print('\r\nConnection established\r\n> ');
+                this.onSuccess.emit({
+                    header: 'Success',
+                    body: 'You are now connected to the USB device'
+                });
             })
             .catch((error: string) => {
-                this.tab.connectionStatus = OPERATION_STATUS.ERROR;
-                this.tab.editorStatus = EDITOR_STATUS.READY;
-                this.tab.port = null;
-                this.onError.emit({
-                    header: 'Connection failed',
-                    body: error
-                });
+                if (error === 'You are already connected to this device') {
+                    // First we close the connections to any other open devices
+                    // and then we try again.
+                    let promises: Promise<void>[] = [];
+                    for (let otherTab of this.appDataService.editorTabs) {
+                        if (otherTab.id !== this.tab.id) {
+                            promises.push(this.webusbService
+                            .disconnect(otherTab.port)
+                            .then(() => {
+                                otherTab.port = null;
+                                otherTab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
+                                console.log('Tab disconnected: ' + otherTab.title);
+                            })
+                            .catch(() => {
+                                this.onError.emit({
+                                    header: 'Connection error',
+                                    body: 'Unable to disconnect previous connection'
+                                });
+                            }));
+                        }
+                    }
+                    Promise.all(promises).then(() => {
+                        console.log('Performing connection...');
+                        doConnect();
+                    });
+                } else {
+                    this.tab.connectionStatus = OPERATION_STATUS.ERROR;
+                    this.tab.editorStatus = EDITOR_STATUS.READY;
+                    this.tab.port = null;
+                    this.onError.emit({
+                        header: 'Connection failed',
+                        body: error
+                    });
+                }
             });
         };
 
