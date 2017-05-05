@@ -59,7 +59,9 @@ export class WebUsbPort {
                         this.onReceive(str);
                     }
 
-                    readLoop();
+                    if (this.device.opened) {
+                        readLoop();
+                    }
                 }, (error: DOMException) => {
                     this.onReceiveError(error);
                 });
@@ -99,6 +101,24 @@ export class WebUsbPort {
              .catch((error: DOMException) => {
                  reject('Unable to open the device');
              });
+        });
+    }
+
+    public disconnect(): Promise<void> {
+        // Mute the 'device unavailable' error because of previously
+        // pending `transferIn` operation
+
+        // tslint:disable-next-line:no-empty
+        this.onReceiveError = () => {};
+
+        return new Promise<void>((resolve, reject) => {
+            this.device.releaseInterface(2)
+            .then(() => {
+                this.device.close()
+                .then(() => { resolve(); })
+                .catch(() => { reject(); });
+            })
+            .catch(() => { reject(); });
         });
     }
 

@@ -127,6 +127,15 @@
                         color: #e67171;
                     }
                 }
+
+                .connection-indicator {
+                    position: absolute;
+                    top: 2px;
+                    right: 6px;
+                    font-size: 18px;
+                    color: greenyellow;
+                    text-shadow: 0 0 8px yellow;
+                }
             }
         }
 

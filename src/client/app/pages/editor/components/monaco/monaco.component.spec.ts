@@ -8,6 +8,7 @@ import {
 } from 'angular-2-local-storage';
 
 // Own
+import { AppDataService } from '../../../../app.data.service';
 import { EditorTab } from '../../editor.tab';
 import { MonacoModule } from './monaco.module';
 import { MonacoComponent } from './monaco.component';
@@ -56,6 +57,7 @@ export function main() {
             TestBed.configureTestingModule({
                 declarations: [TestComponent],
                 providers: [
+                    AppDataService,
                     LocalStorageService,
                 ],
                 imports: [

@@ -231,6 +231,18 @@ export class EditorComponent {
     }
 
     // tslint:disable-next-line:no-unused-locals
+    public onSuccess(message: any) {
+        let overrides: any = {};
+
+        if (message.sticky) {
+            overrides['timeOut'] = 0;
+        }
+
+        this.notificationsService.success(
+            message.header, message.body, overrides);
+    }
+
+    // tslint:disable-next-line:no-unused-locals
     public onBeginResizing($event: any) {
         let overlays = document.getElementsByClassName(
             'protect-resizing-overlay');
