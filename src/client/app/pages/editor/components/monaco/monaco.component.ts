@@ -158,7 +158,8 @@ export class MonacoComponent implements AfterViewInit {
             .then(() => {
                 this.tab.connectionStatus = OPERATION_STATUS.DONE;
                 this.tab.editorStatus = EDITOR_STATUS.READY;
-                this.tab.term.io.print('\r\nConnection established\r\n> ');
+                this.tab.term.io.print('\r\nConnection established\r\n');
+                this.tab.port.send('\n'); // Force getting a prompt
                 this.onSuccess.emit({
                     header: 'Success',
                     body: 'You are now connected to the USB device'
