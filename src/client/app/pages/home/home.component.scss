@@ -1,4 +1,5 @@
-@import '../../../scss/main';
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
 
 :host {
     background: url('assets/images/landing-bg.jpg') no-repeat 50% 50% fixed;

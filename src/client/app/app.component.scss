@@ -1,4 +1,5 @@
-@import '../scss/main';
+@import '../scss/variables';
+@import '../scss/mixins';
 
 :host {
     background: $panel-bg-color;
@@ -7,26 +8,142 @@
     height: 100%;
     font-family: $default-font;
 
-    &#home-route sd-navbar, &#home-route sd-footer {
+    &#home-route /deep/ sd-navbar, &#home-route /deep/ sd-footer {
         display: none;
     }
 
-    &#editor-route sd-footer {
+    &#editor-route /deep/ sd-footer {
         display: none;
     }
 
-    h1, h2, h3, h4, h5, h6, strong {
-        color: $text-highlight-color;
-        font-family: $bold-font;
-        font-weight: bold;
-    }
+    /deep/ {
+        /* MISC */
 
-    /deep/ a {
-        text-decoration: none;
-        color: $accent-color;
+        h1, h2, h3, h4, h5, h6, strong, .strong {
+            color: $text-highlight-color;
+            font-family: $bold-font;
+        }
 
-        &:hover, &:focus {
-            color: lighten($accent-color, 5%);
+        a {
+            text-decoration: none;
+            color: $accent-color;
+
+            &:hover, &:focus {
+                color: lighten($accent-color, 5%);
+            }
+        }
+
+        .well {
+            background: lighten($panel-bg-color, 10%);
+            border-color: lighten($panel-bg-color, 5%);
+        }
+
+        .absolutely-centered {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+
+            .container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* FORMS */
+
+        .has-error .form-control {
+            background-color: #ff5555;
+            color: white;
+
+            &::-webkit-input-placeholder {
+               color: #b92e14;
+            }
+
+            &:-moz-placeholder { /* Firefox 18- */
+               color: #b92e14;
+            }
+
+            &::-moz-placeholder { /* Firefox 19+ */
+               color: #b92e14;
+            }
+
+            &:-ms-input-placeholder {
+               color: #b92e14;
+            }
+        }
+
+        /* MODALS */
+
+        .modal-header {
+            border-bottom-color: darken($panel-bg-color, 10%);
+            color: $text-highlight-color;
+
+            .close {
+                color: $text-highlight-color;
+            }
+        }
+
+        .modal-content {
+            background-color: $panel-bg-color;
+            color: $text-color;
+
+            h3 {
+                margin-top: 0;
+                color: $text-highlight-color;
+            }
+        }
+
+        .modal-error .modal-header {
+            background: $error-color;
+        }
+
+        .modal-warning .modal-header {
+            background: $warning-color;
+        }
+
+        .modal-footer {
+            border-top-color: lighten($panel-bg-color, 10%);
+        }
+
+        /deep/ .toggle {
+            &.btn { border-radius: 18px; }
+            .toggle-handle {
+                border-radius: 18px;
+                width: 36px;
+            }
+        }
+
+        /* BUTTONS */
+
+        .btn {
+            @include button-variant(#333, #eee, transparent);
+        }
+
+        .btn-primary {
+            @include button-variant($panel-bg-color, $accent-color, transparent);
+        }
+
+        .btn-danger {
+            @include button-variant($panel-bg-color, $error-color, transparent);
+        }
+
+        /* TABLES */
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td,
+        .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+            border-color: lighten($panel-bg-color, 5%);
+        }
+
+        .table>thead>tr>th {
+            background-color: lighten($panel-bg-color, 5%);
+            padding-top: 15px;
+            padding-bottom: 15px;
+            color: white;
+            font: $bold-font;
+            font-weight: bold;
         }
     }
 }
