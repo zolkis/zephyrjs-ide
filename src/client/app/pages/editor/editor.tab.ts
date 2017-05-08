@@ -6,13 +6,13 @@ export enum OPERATION_STATUS {
     IN_PROGRESS,
     DONE,
     ERROR
-};
+}
 
 export enum EDITOR_STATUS {
     READY,
     CONNECTING,
     UPLOADING
-};
+}
 
 
 export interface EditorTab {
@@ -27,4 +27,4 @@ export interface EditorTab {
     editorStatus?: EDITOR_STATUS;
     editing?: boolean;
     hasError?: boolean;
-};
+}

@@ -37,14 +37,14 @@ export class RestClient extends Resource {
 export interface IQueryInput {
   page?: number;
   perPage?: number;
-};
+}
 
 
 export interface IOcfResourceApi {
     di: string;
     path: string;
     rt?: string;
-};
+}
 
 
 // Services

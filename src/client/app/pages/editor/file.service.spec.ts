@@ -9,7 +9,7 @@ import { FileService } from './file.service';
 interface MockContent {
     filename: string;
     contents: string;
-};
+}
 
 @Injectable()
 class MockLocalStorageService {
