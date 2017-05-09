@@ -12,6 +12,7 @@ export class WebUsbPort {
     decoder: any;
     encoder: any;
     rawMode: boolean;
+    echoMode: boolean;
     previousRead: string;
 
     constructor(device: any) {
@@ -30,22 +31,36 @@ export class WebUsbPort {
 
     public connect(): Promise<void> {
         this.rawMode = true;
+        this.echoMode = true;
 
         return new Promise<void>((resolve, reject) => {
             let readLoop = () => {
                 this.device.transferIn(3, 64).then((result: any) => {
                     let skip = true,
+                        skip_prompt = true,
                         str = this.decoder.decode(result.data);
 
                     if (str === 'raw') {
                         this.rawMode = true;
+                        str = '';
                     } else if (str === 'ihex') {
                         this.rawMode = false;
+                        str = '';
                     }
 
                     skip = !this.rawMode && /^(\n|\[.*\])/.test(str);
 
-                    if (!skip) {
+                    if (str === 'echo_off') {
+                        this.echoMode = false;
+                        str = '';
+                    } else if (str === 'echo_on') {
+                        this.echoMode = true;
+                        str = '';
+                    }
+
+                    skip_prompt = !this.echoMode && /^(\r|\n|\x1b\[)/.test(str);
+
+                    if (!skip && !skip_prompt) {
                         if (str.length === 1 &&
                             str.charCodeAt(0) !== 13 &&
                             str.charCodeAt(0) !== 10 &&
@@ -149,7 +164,8 @@ export class WebUsbPort {
                 reject('Empty data');
             }
 
-            this.send('set transfer ihex\n')
+            this.send('echo off\n')
+                .then(() => this.send('set transfer ihex\n'))
                 .then(() => this.send('stop\n'))
                 .then(() => this.send('load\n'))
                 .then(() => {
@@ -164,6 +180,7 @@ export class WebUsbPort {
                 })
                 .then(() => this.send('run temp.dat\n'))
                 .then(() => this.send('set transfer raw\n'))
+                .then(() => this.send('echo on\n'))
                 .then((warning: string) => resolve(warning))
                 .catch((error: string) => reject(error));
         });
