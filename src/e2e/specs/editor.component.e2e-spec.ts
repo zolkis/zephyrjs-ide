@@ -5,7 +5,7 @@ describe('Editor', () => {
     beforeEach( () => {
         browser.get('/#/editor');
         browser.wait(() => {
-            return browser.driver.isElementPresent(by.css('sd-editor'));
+            return element(by.css('sd-editor')).isPresent();
         });
     });
 

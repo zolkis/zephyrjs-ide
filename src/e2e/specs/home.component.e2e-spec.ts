@@ -6,7 +6,7 @@ describe('Home', () => {
   beforeEach( () => {
     browser.get('/');
     browser.wait(() => {
-      return browser.driver.isElementPresent(by.css('sd-home'));
+      return element(by.css('sd-home')).isPresent();
     });
   });
 
