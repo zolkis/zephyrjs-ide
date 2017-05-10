@@ -40,6 +40,7 @@ export class WebUsbPort {
                         skip_prompt = true,
                         str = this.decoder.decode(result.data);
 
+
                     if (str === 'raw') {
                         this.rawMode = true;
                         str = '';
@@ -67,12 +68,14 @@ export class WebUsbPort {
                             this.previousRead !== undefined &&
                             this.previousRead.charCodeAt(
                                 this.previousRead.length - 1) === 13) {
-                            str = '\n' + str;
+                            str = '\r\n' + str;
                         }
 
-                        this.previousRead = str;
                         this.onReceive(str);
                     }
+
+                    if (!skip)
+                        this.previousRead = str;
 
                     if (this.device.opened) {
                         readLoop();
