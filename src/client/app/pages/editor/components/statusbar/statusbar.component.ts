@@ -6,7 +6,7 @@ import { EditorTab, EDITOR_STATUS } from '../../editor.tab';
 interface IData {
     cls: string;
     msg: string;
-};
+}
 
 
 @Component({

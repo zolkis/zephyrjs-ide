@@ -63,6 +63,10 @@ export class AppDataService {
             wasActive = tab.active,
             wasOnly = this.editorTabs.length === 1;
 
+        if (tab.port !== null && tab.port.device.opened) {
+            tab.port.disconnect();
+        }
+
         this.editorTabs.splice(index, 1);
 
         if (wasActive && !wasOnly) {

@@ -1,3 +1,17 @@
+2017-05-10 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.14.0-alpha
+	* Fix issue with GitHub API paging, so we now actually get all repos
+	* Fix issue with misassigned tab after opening a file or an example
+	* Fix issue with status bar label text being stuck in 'Connecting'
+	* Restrict connections to one device at a time
+	* Add connection led to editor tabs
+	* Do not display unneeded WebUSB commands in the console
+	* Add app logo
+	* Minor UI fixes
+	* Minor SCSS code deorg
+	* Update lots of dependencies and dev dependencies to the latest
+	* Start Windows CI
+
 2017-04-25 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.13.2-alpha
 	* Add favicon

@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/01org/zephyrjs-ide.svg?branch=master)](https://travis-ci.org/01org/zephyrjs-ide)
+[![Linux/OSX Build Status](https://travis-ci.org/01org/zephyrjs-ide.svg?branch=master)](https://travis-ci.org/01org/zephyrjs-ide)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/n0mg3nc5lhsb8s46/branch/master?svg=true)](https://ci.appveyor.com/project/siovene/zephyrjs-ide/branch/master)
 [![Dependency Status](https://david-dm.org/01org/zephyrjs-ide.svg)](https://david-dm.org/01org/zephyrjs-ide)
 [![devDependency Status](https://david-dm.org/01org/zephyrjs-ide/dev-status.svg)](https://david-dm.org/01org/zephyrjs-ide#info=devDependencies)
 

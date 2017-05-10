@@ -13,7 +13,7 @@ import { OcfApiService } from './ocf-explorer.api.services';
 import {
     OcfResource,
     OcfResourceComponent
-} from './ocf-explorer.resource.component';
+} from './ocf-explorer.resource.component';
 
 interface OcfServer {
     https: boolean;
@@ -22,7 +22,7 @@ interface OcfServer {
     path: string;
     resources?: OcfResource[];
     isExploring?: boolean;
-};
+}
 
 
 declare var $: any;

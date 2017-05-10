@@ -1,4 +1,5 @@
-@import '../../../scss/main';
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
 
 :host {
     background: url('assets/images/landing-bg.jpg') no-repeat 50% 50% fixed;
@@ -35,26 +36,15 @@
 
     #navbar {
         margin-top: 100px;
+        padding-left: 0;
 
         > li {
             display: inline-block;
             padding: 0 35px;
 
             > a {
-                text-transform: uppercase;
-                font-size: 14px;
-                padding: 5px 0;
-                color: white;
-
-                &:hover {
-                    color: $accent-color;
-                    text-decoration: none;
-                }
-
-                > fa {
-                    margin-left: 40px;
-                    padding-top: 2px;
-                }
+                @include button-variant($panel-bg-color, #00ffff, transparent);
+                padding: 2px 40px;
             }
         }
 
