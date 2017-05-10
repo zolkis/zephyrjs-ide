@@ -1,19 +1,21 @@
 <div id="landing-page" class="absolutely-centered">
     <div class="container">
+        <div id="logo">
+            <img src="assets/images/logo.png"
+                 alt="JS IDE for Zephyr OS" />
+        </div>
+
         <div id="app-name">JS <strong>IDE</strong> for Zephyr OS</div>
-        <div id="hello">Hello!</div>
 
         <ul id="navbar">
             <li>
-                <a [routerLink]="['/about']">
+                <a [routerLink]="['/about']" class="btn btn-mini">
                     About
-                    <fa [name]="'chevron-right'" style="color:#46D7E8"></fa>
                 </a>
             </li>
             <li>
-                <a [routerLink]="['/editor']">
+                <a [routerLink]="['/editor']" class="btn btn-mini">
                     Editor
-                    <fa [name]="'chevron-right'" style="color:#00E185"></fa>
                 </a>
             </li>
         </ul>
