@@ -49,6 +49,7 @@ import { OcfResourceValueJsonComponent }
 // Shared
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { WebUsbService } from './shared/webusb/webusb.service';
 
 
 export function main() {
@@ -98,7 +99,8 @@ export function main() {
                     FooterComponent
                 ],
                 providers: [
-                    { provide: APP_BASE_HREF, useValue: '/' }
+                    { provide: APP_BASE_HREF, useValue: '/' },
+                    WebUsbService
                 ]
             });
         });
