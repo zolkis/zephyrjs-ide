@@ -140,6 +140,10 @@ export class WebUsbPort {
         });
     }
 
+    public isConnected(): boolean {
+        return this.device && this.device.opened;
+    }
+
     public read(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             this.device.transferIn(3, 64).then((response: any) => {

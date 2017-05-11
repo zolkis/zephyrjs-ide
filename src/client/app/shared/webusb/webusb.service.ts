@@ -6,7 +6,8 @@ import { WebUsbPort } from './webusb.port';
  */
 @Injectable()
 export class WebUsbService {
-    public usb: any;
+    public usb: any = null;
+    public port: WebUsbPort = null;
 
     constructor() {
         this.usb = (navigator as any).usb;
@@ -41,31 +42,59 @@ export class WebUsbService {
         });
     }
 
-    public connect(port: WebUsbPort) {
-        return port.connect().then(() => {
-            port.onReceive = (data: string) => {
-                this.onReceive(data);
-            };
+    public connect(): Promise<void> {
+        let _doConnect = (): Promise<void> => {
+            return this.port.connect().then(() => {
+                this.port.onReceive = (data: string) => {
+                    this.onReceive(data);
+                };
 
-            port.onReceiveError = (error: DOMException) => {
-                this.onReceiveError(error);
-            };
+                this.port.onReceiveError = (error: DOMException) => {
+                    this.onReceiveError(error);
+                };
+            });
+        };
+
+        if (this.port !== null) {
+            return _doConnect();
+        }
+
+        return new Promise<void>((resolve, reject) => {
+            this.requestPort()
+            .then((p: WebUsbPort) => {
+                this.port = p;
+                _doConnect()
+                .then(() => resolve())
+                .catch((error: DOMException) => reject(error));
+            })
+            .catch((error: DOMException) => reject(error));
         });
     }
 
-    public disconnect(port: WebUsbPort): Promise<void> {
+    public disconnect(): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            if (port === null) {
+            if (this.port === null) {
                 resolve();
             } else {
-                port.disconnect()
-                    .then(() => { resolve(); })
-                    .catch(() => { reject(); });
+                this.port.disconnect()
+                .then(() => {
+                    this.port = null;
+                    resolve();
+                })
+                .catch((error: DOMException) => reject(error));
             }
         });
     }
 
-    public send(port: WebUsbPort, data: string) {
-        return port.send(data);
+    public isConnected(): boolean {
+        return this.port && this.port.isConnected();
+    }
+
+    public send(data: string) {
+        return this.port.send(data);
+    }
+
+    public run(data: string) {
+        return this.port.run(data);
     }
 }

@@ -1,4 +1,5 @@
 @import '../../../scss/variables';
+@import '../../../scss/animations';
 
 $active-link-border-width: 4px;
 
@@ -24,8 +25,16 @@ $active-link-border-width: 4px;
                 left: 18px;
             }
 
-            span {
+            .app-title {
                 margin-left: 46px;
+            }
+
+            .connection-led {
+                color: greenyellow;
+                font-size: 28px;
+                margin-left: 8px;
+                vertical-align: bottom;
+                animation: yellow-glow .5s infinite alternate;
             }
         }
 

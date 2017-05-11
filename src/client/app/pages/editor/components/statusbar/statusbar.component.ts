@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { EditorTab, EDITOR_STATUS } from '../../editor.tab';
+import { EditorTab } from '../../editor.tab';
 
 
 interface IData {
@@ -29,31 +29,10 @@ export class StatusBarComponent {
     }
 
     private getData(): IData {
-        if (this.tab !== null) {
-            let map: {[key: number]: IData;} = {
-                [EDITOR_STATUS.READY]: {
-                    cls: 'info',
-                    msg: 'Ready.'
-                },
-
-                [EDITOR_STATUS.CONNECTING]: {
-                    cls: 'info',
-                    msg: 'Connecting...'
-                },
-
-                [EDITOR_STATUS.UPLOADING]: {
-                    cls: 'info',
-                    msg: 'Uploading...'
-                }
-            };
-
-            if (this.tab.editorStatus in map)
-                return map[this.tab.editorStatus];
-        }
-
+        // TODO: support multiple statuses
         return {
-            cls: 'error',
-            msg: 'Unknown status.'
+            cls: 'info',
+            msg: 'Ready.'
         };
     }
 }

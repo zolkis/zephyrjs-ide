@@ -4,7 +4,7 @@ import {
   TestBed
 } from '@angular/core/testing';
 
-import { EDITOR_STATUS, EditorTab } from '../../editor.tab';
+import { EditorTab } from '../../editor.tab';
 import { StatusBarModule } from './statusbar.module';
 
 
@@ -31,13 +31,6 @@ export function main() {
 
             fixture.detectChanges();
             expect(el.querySelectorAll('.statusbar')[0].textContent)
-                .toContain('Unknown status.');
-            expect(el.querySelectorAll('.statusbar')[0].className)
-                .toContain('error');
-
-            testComponent.tab.editorStatus = EDITOR_STATUS.READY;
-            fixture.detectChanges();
-            expect(el.querySelectorAll('.statusbar')[0].textContent)
                 .toContain('Ready.');
             expect(el.querySelectorAll('.statusbar')[0].className)
                 .toContain('info');
@@ -55,8 +48,6 @@ class TestComponent {
         id: 1,
         active: true,
         title: 'Tab # 1',
-        editor: null,
-        port: null,
-        term: null
+        editor: null
     };
 }

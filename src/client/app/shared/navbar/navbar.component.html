@@ -22,7 +22,12 @@
                     [routerLinkActiveOptions]="{exact:true}">
 
                     <img src="assets/images/logo.png" />
-                    <span><%= APP_TITLE_HTML %></span>
+                    <span class="app-title"><%= APP_TITLE_HTML %></span>
+                    <span
+                        *ngIf="webusbService.isConnected()"
+                        class="connection-led">
+                        &bull;
+                    </span>
                 </a>
 
             </div> <!-- /.navbar-header -->

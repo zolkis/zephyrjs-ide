@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
 
 import {
-    EditorTab, OPERATION_STATUS, EDITOR_STATUS
+    EditorTab, OPERATION_STATUS
 } from './pages/editor/editor.tab';
 
 
 /* A service to hold data that's shared across the whole app */
 @Injectable()
 export class AppDataService {
-    // Tabs in the editor, containing handles for the editor object,
-    // webusb port object, and terminal console object.
+    // The hterm object
+    public term: any = null;
+
     public editorTabs: Array<EditorTab> = [{
         id: 1,
         active: true,
         title: 'Tab # 1',
-        editor: null,
-        port: null,
-        term: null
+        editor: null
     }];
 
     public footerButtons: Array<any> = [];
@@ -37,9 +36,7 @@ export class AppDataService {
             id: id,
             active: true,
             title: 'Tab # ' + id,
-            editor: null,
-            port: null,
-            term: null
+            editor: null
         };
 
         this._setDefaultEditorTabStatuses(tab);
@@ -62,10 +59,6 @@ export class AppDataService {
         let index = this.editorTabs.indexOf(tab),
             wasActive = tab.active,
             wasOnly = this.editorTabs.length === 1;
-
-        if (tab.port !== null && tab.port.device.opened) {
-            tab.port.disconnect();
-        }
 
         this.editorTabs.splice(index, 1);
 
@@ -120,8 +113,6 @@ export class AppDataService {
     }
 
     private _setDefaultEditorTabStatuses(tab: EditorTab) {
-        tab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
         tab.runStatus = OPERATION_STATUS.NOT_STARTED;
-        tab.editorStatus = EDITOR_STATUS.READY;
     }
 }

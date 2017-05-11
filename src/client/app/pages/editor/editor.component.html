@@ -47,6 +47,31 @@
                     </span>
                 </a>
             </li>
+
+            <li class="separator"></li>
+
+            <li class="has-btn">
+                <button
+                    class="btn btn-xs btn-primary"
+                    (click)="onConnectClicked()"
+                    *ngIf="!webusbService.isConnected()"
+                    [disabled]="!mayConnect()">
+                    <fa [name]="'plug'"></fa>
+                    <span *ngIf="sidebarOptions.opened">
+                        Connect
+                    </span>
+                </button>
+
+                <button
+                    class="btn btn-xs btn-danger"
+                    (click)="onDisconnectClicked()"
+                    *ngIf="webusbService.isConnected()">
+                    <fa [name]="'plug'"></fa>
+                    <span *ngIf="sidebarOptions.opened">
+                        Disconnect
+                    </span>
+                </button>
+            </li>
         </ul>
 
         <button class="toggleCollapse" (click)="onToggleSidebar()">
@@ -147,11 +172,7 @@
                                 <fa [name]="'close'"></fa>
                             </a>
                         </div>
-                        <sd-console
-                            *ngFor="let tab of tabs"
-                            [tab]="tab"
-                            [hidden]="!tab.active">
-                        </sd-console>
+                        <sd-console></sd-console>
                     </div>
                 </horizontal-split-pane>
             </div> <!-- ./split-pane-content-secondary -->

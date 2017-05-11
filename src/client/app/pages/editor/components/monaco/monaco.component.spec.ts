@@ -12,6 +12,7 @@ import { AppDataService } from '../../../../app.data.service';
 import { EditorTab } from '../../editor.tab';
 import { MonacoModule } from './monaco.module';
 import { MonacoComponent } from './monaco.component';
+import { WebUsbService } from '../../../../shared/webusb/webusb.service';
 
 
 export function main() {
@@ -20,9 +21,7 @@ export function main() {
             id: 1,
             active: true,
             title: 'Tab # 1',
-            editor: null,
-            port: null,
-            term: null
+            editor: null
         };
 
         let loadMonaco = (component: MonacoComponent): Promise<void> => {
@@ -59,6 +58,7 @@ export function main() {
                 providers: [
                     AppDataService,
                     LocalStorageService,
+                    WebUsbService
                 ],
                 imports: [
                     LocalStorageModule.withConfig({

@@ -8,23 +8,12 @@ export enum OPERATION_STATUS {
     ERROR
 }
 
-export enum EDITOR_STATUS {
-    READY,
-    CONNECTING,
-    UPLOADING
-}
-
-
 export interface EditorTab {
     id: number;
     active: boolean;
     title: string;
     editor: any;
-    port: WebUsbPort;
-    term: any;
-    connectionStatus?: OPERATION_STATUS;
     runStatus?: OPERATION_STATUS;
-    editorStatus?: EDITOR_STATUS;
     editing?: boolean;
     hasError?: boolean;
 }
