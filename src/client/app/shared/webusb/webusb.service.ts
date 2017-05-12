@@ -97,4 +97,8 @@ export class WebUsbService {
     public run(data: string) {
         return this.port.run(data);
     }
+
+    public save(filename: string, data: string) {
+        return this.port.save(filename, data);
+    }
 }

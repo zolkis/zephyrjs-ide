@@ -40,7 +40,6 @@ export class WebUsbPort {
                         skip_prompt = true,
                         str = this.decoder.decode(result.data);
 
-
                     if (str === 'raw') {
                         this.rawMode = true;
                         str = '';
@@ -59,7 +58,7 @@ export class WebUsbPort {
                         str = '';
                     }
 
-                    skip_prompt = !this.echoMode && /^(\r|\n|\x1b\[)/.test(str);
+                    skip_prompt = !this.echoMode && /^(\r|\n|\x1b\[33macm)/.test(str);
 
                     if (!skip && !skip_prompt) {
                         if (str.length === 1 &&
@@ -162,6 +161,32 @@ export class WebUsbPort {
             this.device.transferOut(2, this.encoder.encode(data))
             .then(() => { resolve(); })
             .catch((error: string) => { reject(error); });
+        });
+    }
+
+    public save(filename: string, data: string): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
+            if (data.length === 0) {
+                reject('Empty data');
+            }
+
+            if (filename.length === 0) {
+                reject('Empty File Name');
+            }
+
+            this.send('echo off\n')
+                .then(() => this.send('set transfer raw\n'))
+                .then(() => this.send('stop\n'))
+                .then(() => this.send('load ' + filename + '\n'))
+                .then(() => {
+                    for (let line of data.split('\n')) {
+                        this.send(line + '\n');
+                    }
+                })
+                .then(() => this.send('\x1A\n'))
+                .then(() => this.send('echo on\n'))
+                .then((warning: string) => resolve(warning))
+                .catch((error: string) => reject(error));
         });
     }
 

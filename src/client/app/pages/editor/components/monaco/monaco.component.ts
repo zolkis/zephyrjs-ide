@@ -161,6 +161,30 @@ export class MonacoComponent implements AfterViewInit {
     }
 
     // tslint:disable-next-line:no-unused-locals
+    public onSaveToDevice() {
+        this.tab.runStatus = OPERATION_STATUS.IN_PROGRESS;
+
+        this.webusbService.save(this.filename, this.tab.editor.getValue())
+        .then((warning: string) => {
+            this.tab.runStatus = OPERATION_STATUS.DONE;
+
+            if (warning !== undefined) {
+                this.onWarning.emit({
+                    header: 'Saving to device failed',
+                    body: warning
+                });
+            }
+        })
+        .catch((error: DOMException) => {
+            this.tab.runStatus = OPERATION_STATUS.NOT_STARTED;
+            this.onError.emit({
+                header: 'Saving to device failed',
+                body: error.message
+            });
+        });
+    }
+
+    // tslint:disable-next-line:no-unused-locals
     public onSave() {
         // Initialize filename to tab.title if filename was not previously
         // set and tab title is not pristine.
@@ -183,12 +207,16 @@ export class MonacoComponent implements AfterViewInit {
             $(this.overwriteModal.nativeElement).modal('show');
         } else {
             this._doSave();
+            //TODO: Call this only when the 'Save to divice' option is enabled.
+            this.onSaveToDevice();
         }
     }
 
     // tslint:disable-next-line:no-unused-locals
     public onOverwrite() {
         this._doSave();
+        //TODO: Call this only when the 'Save to divice' option is enabled.
+        this.onSaveToDevice();
     }
 
 
