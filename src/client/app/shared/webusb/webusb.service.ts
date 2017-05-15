@@ -81,7 +81,10 @@ export class WebUsbService {
                     this.port = null;
                     resolve();
                 })
-                .catch((error: DOMException) => reject(error));
+                .catch((error: DOMException) => {
+                    this.port = null;
+                    reject(error);
+                });
             }
         });
     }

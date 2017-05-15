@@ -130,6 +130,12 @@ export class WebUsbPort {
         this.onReceiveError = () => {};
 
         return new Promise<void>((resolve, reject) => {
+            if (this.device === null || !this.device.opened) {
+                // Already disconnected.
+                resolve();
+                return;
+            }
+
             this.device.releaseInterface(2)
             .then(() => {
                 this.device.close()

@@ -213,7 +213,12 @@ export class EditorComponent {
         };
 
         this.webusbService.onReceiveError = (error: DOMException) => {
-            this.webusbService.disconnect();
+            this.webusbService.disconnect()
+            .catch(() => {
+                // The port was unable to release the interface but that's no
+                // big deal as we cleaned up anyway. We still need to catch and
+                // ignore this tho.
+            });
             this.onError({
                 header: 'Connection error',
                 body: error.message
