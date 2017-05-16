@@ -1,6 +1,12 @@
 @import "../../../../../scss/variables";
 
 :host {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background-color: $code-bg-color;
+    border-bottom: 1px solid $panel-bg-color;
+
     .nav-tabs  {
         $tab-color: #abacaf;
         $active-tab-color: #ffffff;
@@ -9,9 +15,9 @@
         padding: 8px 0;
         padding-left: 14px;
         border: 0;
-        background-color: $panel-bg-color;
+        border-right: 1px solid $panel-bg-color;
         height: 40px;
-        width: calc(100% - 96px); // for the new tab button
+        width: calc(100% - 40px); // for the new tab button
 
         > li {
             padding: 0;
@@ -36,7 +42,7 @@
                 margin: 0;
 
                 border: none;
-                border-right: 1px solid lighten($panel-bg-color, 10%);
+                border-right: 1px solid $panel-bg-color;
                 border-radius: 0;
 
                 background-color: inherit;
@@ -150,10 +156,15 @@
 
 #new-tab-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0;
+    right: 0;
 
-    padding: 2px 10px;
+    box-shadow: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+
+    padding: 14px 14px;
     font-size: 11px;
     line-height: 14px;
     font-weight: normal;
@@ -161,5 +172,6 @@
     fa {
         margin-right: 4px;
         font-size: 10px;
+        color: $accent-color;
     }
 }

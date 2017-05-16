@@ -12,6 +12,8 @@ export interface EditorTab {
     id: number;
     active: boolean;
     title: string;
+    filename?: string;
+    saveToDevice?: boolean;
     editor: any;
     runStatus?: OPERATION_STATUS;
     editing?: boolean;

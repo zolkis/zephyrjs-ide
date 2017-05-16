@@ -8,22 +8,18 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { AppDataService } from '../../../../app.data.service';
-import { FileService } from '../../file.service';
 import { WebUsbService } from '../../../../shared/webusb/webusb.service';
 
 import { WebUsbPort } from '../../../../shared/webusb/webusb.port';
 import { EditorTab, OPERATION_STATUS } from '../../editor.tab';
 
 
-declare var $: any;
 declare const monaco: any;
 
 
 @Component({
     moduleId: module.id,
     selector: 'sd-monaco',
-    providers: [FileService],
     templateUrl: 'monaco.component.html',
     styleUrls: ['monaco.component.css']
 })
@@ -39,18 +35,9 @@ export class MonacoComponent implements AfterViewInit {
     @ViewChild('editor')
     private editorView: ElementRef;
 
-    @ViewChild('saveModal')
-    private saveModal: ElementRef;
-
-    @ViewChild('overwriteModal')
-    private overwriteModal: ElementRef;
-
     private initialCode: string = '';
 
-    constructor(
-        private appDataService: AppDataService,
-        private fileService: FileService,
-        private webusbService: WebUsbService) {
+    constructor(private webusbService: WebUsbService) {
     }
 
     public ngAfterViewInit() {
@@ -80,11 +67,6 @@ export class MonacoComponent implements AfterViewInit {
                 sticky: true
             });
         }
-
-        $(this.saveModal.nativeElement).on('shown.bs.modal', () => {
-            document.getElementById(
-                'saveModal_filename_' + this.tab.id).focus();
-        });
     }
 
     // Will be called once monaco library is available
@@ -126,143 +108,5 @@ export class MonacoComponent implements AfterViewInit {
         if (model !== null) {
             this.tab.editor.setModel(model);
         }
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public mayRun(): boolean {
-        return this.webusbService.usb !== null &&
-               this.tab.editor !== null &&
-               this.tab.editor.getValue().length > 0 &&
-               this.tab.runStatus !== OPERATION_STATUS.IN_PROGRESS &&
-               this.webusbService.isConnected();
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onRun() {
-        this.tab.runStatus = OPERATION_STATUS.IN_PROGRESS;
-
-        this.webusbService.run(this.tab.editor.getValue())
-        .then((warning: string) => {
-            this.tab.runStatus = OPERATION_STATUS.DONE;
-
-            if (warning !== undefined) {
-                this.onWarning.emit({
-                    header: 'Running failed',
-                    body: warning
-                });
-            }
-        })
-        .catch((error: DOMException) => {
-            this.tab.runStatus = OPERATION_STATUS.NOT_STARTED;
-            this.onError.emit({
-                header: 'Running failed',
-                body: error.message
-            });
-        });
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public maySave() {
-        return this.filename.length > 0 &&
-            !this.saveToDevice ||
-            this._isValidFilename();
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onSave() {
-        // Initialize filename to tab.title if filename was not previously
-        // set and tab title is not pristine.
-        if (this.filename.length === 0 &&
-            !this.tab.title.match(/Tab # \d+/i)) {
-            this.filename = this.tab.title;
-        }
-
-        $(this.saveModal.nativeElement).modal('show');
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onSaveConfirm() {
-        if (this.filename.length === 0) {
-            return;
-        }
-
-        if (this.filename !== this.tab.title &&
-            this.fileService.exists(this.filename)) {
-            $(this.overwriteModal.nativeElement).modal('show');
-        } else {
-            this._doSave();
-        }
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onOverwrite() {
-        this._doSave();
-    }
-
-
-    ///////////////////////////////////////////////////////////////////////////
-
-
-    private _doSave() {
-        this.fileService.save(this.filename, this.tab.editor.getValue(), true);
-        if (this.saveToDevice) {
-            this._saveToDevice();
-        }
-
-        this.tab.title = this.filename;
-        $(this.overwriteModal.nativeElement).modal('hide');
-        $(this.saveModal.nativeElement).modal('hide');
-    }
-
-    private _saveToDevice() {
-        this.tab.runStatus = OPERATION_STATUS.IN_PROGRESS;
-
-        this.webusbService.save(this.filename, this.tab.editor.getValue())
-        .then((warning: string) => {
-            this.tab.runStatus = OPERATION_STATUS.DONE;
-
-            if (warning !== undefined) {
-                this.onWarning.emit({
-                    header: 'Saving to device failed',
-                    body: warning
-                });
-            } else {
-                this.onSuccess.emit({
-                    header: 'Saving to device successful',
-                    body: 'Your file was saved'
-                });
-            }
-        })
-        .catch((error: string)  => {
-            this.tab.runStatus = OPERATION_STATUS.NOT_STARTED;
-            this.onError.emit({
-                header: 'Saving to device failed',
-                body: error
-            });
-        });
-    }
-
-    private _isValidFilename(): boolean {
-        // Check there aren't multiple slashes.
-        if ((this.filename.split('/').length) > 2) {
-            return false;
-        }
-
-        let fnsplit = this.filename.split('.');
-
-        // Check there aren't multiple periods.
-        if (fnsplit.length > 2) {
-            return false;
-        }
-
-        let namelen = fnsplit[0].length;
-        let extlen = fnsplit[1] ? fnsplit[1].length : 0;
-
-        // Check the filename is in 8.3 format or not.
-        if (namelen === 0 || namelen > 8 || extlen > 3) {
-            return false;
-        }
-
-        return true;
     }
 }

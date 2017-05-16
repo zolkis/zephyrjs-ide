@@ -201,65 +201,6 @@ export class EditorComponent {
     }
 
     // tslint:disable-next-line:no-unused-locals
-    public mayConnect(): boolean {
-        return this.webusbService.usb !== null &&
-               !this.webusbService.isConnected();
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onConnectClicked() {
-        this.webusbService.onReceive = (data: string) => {
-            this.appDataService.term.io.print(data);
-        };
-
-        this.webusbService.onReceiveError = (error: DOMException) => {
-            this.webusbService.disconnect()
-            .catch(() => {
-                // The port was unable to release the interface but that's no
-                // big deal as we cleaned up anyway. We still need to catch and
-                // ignore this tho.
-            });
-            this.onError({
-                header: 'Connection error',
-                body: error.message
-            });
-        };
-
-        this.webusbService.connect()
-        .then(() => {
-            this.appDataService.term.io.print('\r\nConnection established\r\n');
-            this.webusbService.send('\n'); // Force getting a prompt
-            this.onSuccess({
-                header: 'Success',
-                body: 'You are now connected to the USB device'
-            });
-        })
-        .catch((error: string) => {
-            this.onError({
-                header: 'Connection failed',
-                body: error
-            });
-        });
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onDisconnectClicked() {
-        this.webusbService.disconnect()
-        .then(() => {
-            this.onSuccess({
-                header: 'Success',
-                body: 'You are now disconnected from the USB device'
-            });
-        })
-        .catch((error: string) => {
-            this.onError({
-                header: 'Disconnection failed',
-                body: error
-            });
-        });
-    }
-
-    // tslint:disable-next-line:no-unused-locals
     public onCloseConsole() {
         this.consoleToggledOff = true;
         return false;

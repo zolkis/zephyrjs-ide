@@ -18,15 +18,22 @@ export class AppDataService {
         editor: null
     }];
 
-    public footerButtons: Array<any> = [];
+    public activeEditorTab: EditorTab;
+
 
     public constructor() {
+        this.activeEditorTab = this.editorTabs[0];
         this._setDefaultEditorTabStatuses(this.editorTabs[0]);
     }
 
     // Returns an editor tab by index.
     public getEditorTab(index: number): EditorTab {
         return this.editorTabs[index];
+    }
+
+    // Returns the active editor tab.
+    public getActiveEditorTab(): EditorTab {
+        return this.activeEditorTab;
     }
 
     // Create and return a new default editor tab.
@@ -52,6 +59,7 @@ export class AppDataService {
             t.active = false;
         }
         tab.active = true;
+        this.activeEditorTab = tab;
     }
 
     // Remove an editor tab.
@@ -66,11 +74,11 @@ export class AppDataService {
             if (index === this.editorTabs.length) {
                 // We removed the last tab, so we activate the tab that is now
                 // last.
-                this.editorTabs[this.editorTabs.length - 1].active = true;
+                this.activateEditorTab(this.editorTabs[this.editorTabs.length - 1]);
             } else {
                 // Let's activate the tab that was right after the one we
                 // removed, and that now has its index.
-                this.editorTabs[index].active = true;
+                this.activateEditorTab(this.editorTabs[index]);
             }
         }
 

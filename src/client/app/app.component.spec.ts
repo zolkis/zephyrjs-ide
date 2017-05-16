@@ -21,16 +21,18 @@ import { AboutComponent } from './pages/about/about.component';
 import { EditorComponent } from './pages/editor/editor.component';
 
 // Editor components
+// TODO: shouldn't these imports come from the module?
 import { BoardExplorerComponent } from './pages/editor/components/board-explorer/board-explorer.component';
 import { ConsoleComponent } from './pages/editor/components/console/console.component';
+import { DeviceToolbarComponent } from './pages/editor/components/device-toolbar/device-toolbar.component';
 import { MonacoComponent } from './pages/editor/components/monaco/monaco.component';
-import { StatusBarComponent } from './pages/editor/components/statusbar/statusbar.component';
 import { OcfExplorerComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.component';
 import { OcfResourceComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.resource.component';
-import { TabBarComponent } from './pages/editor/components/tab-bar/tab-bar.component';
 import { SidebarFilesComponent } from './pages/editor/components/sidebar-files/sidebar-files.component';
 import { SidebarExamplesComponent } from './pages/editor/components/sidebar-examples/sidebar-examples.component';
 import { SidebarGitHubComponent } from './pages/editor/components/sidebar-github/sidebar-github.component';
+import { StatusBarComponent } from './pages/editor/components/statusbar/statusbar.component';
+import { TabBarComponent } from './pages/editor/components/tab-bar/tab-bar.component';
 
 import { OcfResourceValueFanComponent }
     from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.fan.component';
@@ -81,8 +83,8 @@ export function main() {
                     EditorComponent,
                         BoardExplorerComponent,
                         ConsoleComponent,
+                        DeviceToolbarComponent,
                         MonacoComponent,
-                        StatusBarComponent,
                         OcfExplorerComponent,
                         OcfResourceComponent,
                             OcfResourceValueFanComponent,
@@ -91,10 +93,11 @@ export function main() {
                             OcfResourceValueRgbLedComponent,
                             OcfResourceValueTemperatureComponent,
                             OcfResourceValueJsonComponent,
-                        TabBarComponent,
                         SidebarFilesComponent,
                         SidebarExamplesComponent,
                         SidebarGitHubComponent,
+                        StatusBarComponent,
+                        TabBarComponent,
                     NavbarComponent,
                     FooterComponent
                 ],
