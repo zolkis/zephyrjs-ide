@@ -76,6 +76,23 @@
             }
         }
 
+        .checkbox {
+            label {
+                padding-left: 10px;
+            }
+
+            input[type="checkbox"] {
+                position: relative;
+                float: left;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+
+        .help-block .highlight-error {
+            color: $error-color;
+        }
+
         /* MODALS */
 
         .modal-header {

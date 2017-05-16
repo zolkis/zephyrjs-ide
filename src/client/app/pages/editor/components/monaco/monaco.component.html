@@ -37,7 +37,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group">
+                    <div class="form-group" [class.has-error]="filename.length > 0 && !maySave()">
                         <label class="sr-only" for="saveModal_filename">File name</label>
                         <input
                             type="text"
@@ -53,6 +53,23 @@
                         local storage memory of your browser. Please pick a
                         name.
                     </p>
+
+                    <div class="checkbox">
+                        <label for="saveModal_saveToDevice">Save to device</label>
+                        <input
+                           type="checkbox"
+                           aria-describedBy="save-to-device-help-block"
+                           id="saveModal_saveToDevice"
+                           name="saveToDevice"
+                           [(ngModel)]="saveToDevice" />
+                    </div> <!-- ./checkbox -->
+                    <p id="save-to-device-help-block" class="help-block">
+                        Also attempt to save on the connected device.
+                        <span [class.highlight-error]="filename.length > 0 && !maySave()">
+                            This will require the filename to be in the 8.3
+                            format.
+                        </span>
+                    </p>
                 </form>
             </div>
 
@@ -67,7 +84,7 @@
                 <button
                     type="button"
                     class="btn btn-primary"
-                    [disabled]="filename.length === 0"
+                    [disabled]="!maySave()"
                     (click)="onSaveConfirm()">
                     Save
                 </button>

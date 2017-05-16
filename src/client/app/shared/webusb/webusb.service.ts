@@ -101,7 +101,13 @@ export class WebUsbService {
         return this.port.run(data);
     }
 
-    public save(filename: string, data: string) {
+    public save(filename: string, data: string): Promise<string> {
+        if (this.port === null) {
+            return new Promise<string>((resolve, reject) => {
+                reject('No device connection established');
+            });
+        }
+
         return this.port.save(filename, data);
     }
 }

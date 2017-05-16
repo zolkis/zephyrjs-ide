@@ -202,5 +202,14 @@ export function main() {
                 });
             });
         });
+
+        it('save should work', done => {
+            port.connect().then(() => {
+                port.save('foo.txt', 'foo').then((result: string) => {
+                    expect(result).toBe(undefined); // no warning
+                    done();
+                });
+            });
+        });
     });
 }

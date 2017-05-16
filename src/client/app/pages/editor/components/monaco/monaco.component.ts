@@ -34,6 +34,7 @@ export class MonacoComponent implements AfterViewInit {
     @Output() onSuccess = new EventEmitter();
 
     public filename: string = '';
+    public saveToDevice: boolean = false;
 
     @ViewChild('editor')
     private editorView: ElementRef;
@@ -161,27 +162,10 @@ export class MonacoComponent implements AfterViewInit {
     }
 
     // tslint:disable-next-line:no-unused-locals
-    public onSaveToDevice() {
-        this.tab.runStatus = OPERATION_STATUS.IN_PROGRESS;
-
-        this.webusbService.save(this.filename, this.tab.editor.getValue())
-        .then((warning: string) => {
-            this.tab.runStatus = OPERATION_STATUS.DONE;
-
-            if (warning !== undefined) {
-                this.onWarning.emit({
-                    header: 'Saving to device failed',
-                    body: warning
-                });
-            }
-        })
-        .catch((error: DOMException) => {
-            this.tab.runStatus = OPERATION_STATUS.NOT_STARTED;
-            this.onError.emit({
-                header: 'Saving to device failed',
-                body: error.message
-            });
-        });
+    public maySave() {
+        return this.filename.length > 0 &&
+            !this.saveToDevice ||
+            this._isValidFilename();
     }
 
     // tslint:disable-next-line:no-unused-locals
@@ -207,16 +191,12 @@ export class MonacoComponent implements AfterViewInit {
             $(this.overwriteModal.nativeElement).modal('show');
         } else {
             this._doSave();
-            //TODO: Call this only when the 'Save to divice' option is enabled.
-            this.onSaveToDevice();
         }
     }
 
     // tslint:disable-next-line:no-unused-locals
     public onOverwrite() {
         this._doSave();
-        //TODO: Call this only when the 'Save to divice' option is enabled.
-        this.onSaveToDevice();
     }
 
 
@@ -225,8 +205,64 @@ export class MonacoComponent implements AfterViewInit {
 
     private _doSave() {
         this.fileService.save(this.filename, this.tab.editor.getValue(), true);
+        if (this.saveToDevice) {
+            this._saveToDevice();
+        }
+
         this.tab.title = this.filename;
         $(this.overwriteModal.nativeElement).modal('hide');
         $(this.saveModal.nativeElement).modal('hide');
+    }
+
+    private _saveToDevice() {
+        this.tab.runStatus = OPERATION_STATUS.IN_PROGRESS;
+
+        this.webusbService.save(this.filename, this.tab.editor.getValue())
+        .then((warning: string) => {
+            this.tab.runStatus = OPERATION_STATUS.DONE;
+
+            if (warning !== undefined) {
+                this.onWarning.emit({
+                    header: 'Saving to device failed',
+                    body: warning
+                });
+            } else {
+                this.onSuccess.emit({
+                    header: 'Saving to device successful',
+                    body: 'Your file was saved'
+                });
+            }
+        })
+        .catch((error: string)  => {
+            this.tab.runStatus = OPERATION_STATUS.NOT_STARTED;
+            this.onError.emit({
+                header: 'Saving to device failed',
+                body: error
+            });
+        });
+    }
+
+    private _isValidFilename(): boolean {
+        // Check there aren't multiple slashes.
+        if ((this.filename.split('/').length) > 2) {
+            return false;
+        }
+
+        let fnsplit = this.filename.split('.');
+
+        // Check there aren't multiple periods.
+        if (fnsplit.length > 2) {
+            return false;
+        }
+
+        let namelen = fnsplit[0].length;
+        let extlen = fnsplit[1] ? fnsplit[1].length : 0;
+
+        // Check the filename is in 8.3 format or not.
+        if (namelen === 0 || namelen > 8 || extlen > 3) {
+            return false;
+        }
+
+        return true;
     }
 }
