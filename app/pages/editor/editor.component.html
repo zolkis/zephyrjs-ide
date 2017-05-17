@@ -102,7 +102,14 @@
             (on-ended-resizing)="onEndedResizing($event)">
 
             <div id="code-pane" class="split-pane-content-primary">
+                <sd-device-toolbar
+                    (onWarning)="onWarning($event)"
+                    (onError)="onError($event)"
+                    (onSuccess)="onSuccess($event)">
+                </sd-device-toolbar>
+
                 <sd-tab-bar></sd-tab-bar>
+
                 <div class="tab-content">
                     <div
                         *ngFor="let tab of tabs"
@@ -147,11 +154,7 @@
                                 <fa [name]="'close'"></fa>
                             </a>
                         </div>
-                        <sd-console
-                            *ngFor="let tab of tabs"
-                            [tab]="tab"
-                            [hidden]="!tab.active">
-                        </sd-console>
+                        <sd-console></sd-console>
                     </div>
                 </horizontal-split-pane>
             </div> <!-- ./split-pane-content-secondary -->
@@ -164,13 +167,13 @@
         <div class="about">
             <span class="app-version">
                 <a href="https://github.com/01org/zephyrjs-ide/releases" target="_blank">
-                    v0.14.0-alpha
+                    v0.15.0-alpha
                 </a>
             </span>
             <span class="separator">/</span>
             <span class="app-rev">
                 <a href="https://github.com/01org/zephyrjs-ide/commits" target="_blank">
-                    e860ba6
+                    efbd106
                 </a>
             </span>
         </div> <!-- ./about -->
