@@ -1,3 +1,13 @@
+2017-05-17 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.15.0-alpha
+	* Make the device connection global instead of per tab
+	* Use a single console instance instead of one per tab
+	* Add ability to save files to the device
+	* Reorg Connect/Run/Save buttons UI to their own toolbar
+	* Fix issue with disconnection upon device reset
+	* Fix blur issue on logos
+	* Add unit tests for WebUSBPort
+
 2017-05-10 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.14.0-alpha
 	* Fix issue with GitHub API paging, so we now actually get all repos
