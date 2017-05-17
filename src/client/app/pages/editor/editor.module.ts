@@ -19,13 +19,12 @@ import { SidebarFilesModule } from './components/sidebar-files/sidebar-files.mo
 import { SidebarExamplesModule } from './components/sidebar-examples/sidebar-examples.module';
 import { SidebarGitHubModule } from './components/sidebar-github/sidebar-github.module';
 import { StatusBarModule } from './components/statusbar/statusbar.module';
+import { TabBarModule } from './components/tab-bar/tab-bar.module';
 
 import { SharedModule } from '../../shared/shared.module';
 
 // This module
 import { EditorComponent } from './editor.component';
-import { DeviceToolbarComponent } from './components/device-toolbar/device-toolbar.component';
-import { TabBarComponent } from './components/tab-bar/tab-bar.component';
 
 
 @NgModule({
@@ -40,19 +39,19 @@ import { TabBarComponent } from './components/tab-bar/tab-bar.component';
 
         MonacoModule,
         ConsoleModule,
-        StatusBarModule,
+        DeviceToolbarModule,
         BoardExplorerModule,
         OcfExplorerModule,
         SidebarFilesModule,
         SidebarExamplesModule,
         SidebarGitHubModule,
+        StatusBarModule,
+        TabBarModule,
 
         SharedModule.forRoot()
     ],
     declarations: [
-        EditorComponent,
-        DeviceToolbarComponent,
-        TabBarComponent
+        EditorComponent
     ],
     exports: [EditorComponent]
 })
