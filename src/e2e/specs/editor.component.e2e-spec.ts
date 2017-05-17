@@ -108,7 +108,7 @@ describe('Editor', () => {
         saveBtn.click();
         browser.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('.save-modal'))), 1000);
         // No filename is there by default if the tab is pristine
-        expect(element(by.css('.save-modal input')).getAttribute('value')).toBe('');
+        expect(element(by.css('.save-modal input[name="filename"]')).getAttribute('value')).toBe('');
         // Cancel
         element(by.css('.save-modal .modal-footer button[data-dismiss="modal"]')).click();
         browser.wait(protractor.ExpectedConditions.stalenessOf(element(by.css('.modal-backdrop'))), 1000);
@@ -124,7 +124,7 @@ describe('Editor', () => {
         saveBtn.click();
         browser.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('.save-modal'))), 1000);
         // The title is there as a default for the filename
-        expect(element(by.css('.save-modal input')).getAttribute('value')).toBe('New title');
+        expect(element(by.css('.save-modal input[name="filename"]')).getAttribute('value')).toBe('New title');
         // Save
         element(by.css('.save-modal .modal-footer .btn-primary')).click();
         browser.wait(protractor.ExpectedConditions.stalenessOf(element(by.css('.modal-backdrop'))), 1000);
