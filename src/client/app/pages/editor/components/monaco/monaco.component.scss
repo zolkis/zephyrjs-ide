@@ -4,38 +4,13 @@
     height: calc(100% - 24px); // for the statusbar
     display: block;
 
-    .monaco-toolbar {
-        background-color: $code-bg-color;
-        padding: 5px 0 30px 42px;
-        text-align: right;
-
-        fa {
-            color: $accent-color;
-        }
-
-        button {
-            background: none;
-            border: 0;
-            color: $text-color;
-            box-shadow: none;
-            text-shadow: none;
-            font-family: $default-font;
-            font-size: 12px;
-            font-weight: normal;
-
-            fa {
-                margin-right: 4px;
-                color: darken($text-color, 50%);
-            }
-        }
-    }
-
     .monaco-container {
+        padding-top: 12px;
         height: 100%;
+        background-color: $code-bg-color;
 
         .monaco-editor {
-            height: calc(100% - 62px); // 62px for the toolbar
-            background-color: $code-bg-color;
+            height: 100%;
 
             /deep/ {
                 .monaco-editor.vs-dark, .monaco-editor-background {

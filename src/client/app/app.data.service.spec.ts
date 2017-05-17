@@ -57,6 +57,12 @@ export function main() {
             expect(tab).toBeTruthy();
         });
 
+        it('getting the active editor tab should work', () => {
+            let tab = service.getActiveEditorTab();
+            expect(tab).toBeTruthy();
+            expect(tab.active).toBe(true);
+        });
+
         it('removing an editor tab should work', () => {
             // Removing the only tab should not alter the tab count
             service.removeEditorTab(service.getEditorTab(0));

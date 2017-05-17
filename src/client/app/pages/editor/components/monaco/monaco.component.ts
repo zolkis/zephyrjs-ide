@@ -8,22 +8,18 @@ import {
     ViewChild
 } from '@angular/core';
 
-import { AppDataService } from '../../../../app.data.service';
-import { FileService } from '../../file.service';
 import { WebUsbService } from '../../../../shared/webusb/webusb.service';
 
 import { WebUsbPort } from '../../../../shared/webusb/webusb.port';
-import { EditorTab, OPERATION_STATUS, EDITOR_STATUS } from '../../editor.tab';
+import { EditorTab, OPERATION_STATUS } from '../../editor.tab';
 
 
-declare var $: any;
 declare const monaco: any;
 
 
 @Component({
     moduleId: module.id,
     selector: 'sd-monaco',
-    providers: [FileService, WebUsbService],
     templateUrl: 'monaco.component.html',
     styleUrls: ['monaco.component.css']
 })
@@ -34,22 +30,14 @@ export class MonacoComponent implements AfterViewInit {
     @Output() onSuccess = new EventEmitter();
 
     public filename: string = '';
+    public saveToDevice: boolean = false;
 
     @ViewChild('editor')
     private editorView: ElementRef;
 
-    @ViewChild('saveModal')
-    private saveModal: ElementRef;
-
-    @ViewChild('overwriteModal')
-    private overwriteModal: ElementRef;
-
     private initialCode: string = '';
 
-    constructor(
-        private appDataService: AppDataService,
-        private fileService: FileService,
-        private webusbService: WebUsbService) {
+    constructor(private webusbService: WebUsbService) {
     }
 
     public ngAfterViewInit() {
@@ -79,11 +67,6 @@ export class MonacoComponent implements AfterViewInit {
                 sticky: true
             });
         }
-
-        $(this.saveModal.nativeElement).on('shown.bs.modal', () => {
-            document.getElementById(
-                'saveModal_filename_' + this.tab.id).focus();
-        });
     }
 
     // Will be called once monaco library is available
@@ -125,179 +108,5 @@ export class MonacoComponent implements AfterViewInit {
         if (model !== null) {
             this.tab.editor.setModel(model);
         }
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public mayConnect(): boolean {
-        return this.webusbService.usb !== undefined &&
-               this.tab.connectionStatus === OPERATION_STATUS.NOT_STARTED ||
-               this.tab.connectionStatus === OPERATION_STATUS.ERROR;
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onConnect() {
-        this.tab.connectionStatus = OPERATION_STATUS.IN_PROGRESS;
-        this.tab.editorStatus = EDITOR_STATUS.CONNECTING;
-
-        let doConnect = () => {
-            this.webusbService.onReceive = (data: string) => {
-                this.tab.term.io.print(data);
-            };
-
-            this.webusbService.onReceiveError = (error: DOMException) => {
-                this.tab.editorStatus = EDITOR_STATUS.READY;
-                this.tab.connectionStatus = OPERATION_STATUS.ERROR;
-                this.tab.port = null;
-                this.onError.emit({
-                    header: 'Connection error',
-                    body: error.message
-                });
-            };
-
-            this.webusbService.connect(this.tab.port)
-            .then(() => {
-                this.tab.connectionStatus = OPERATION_STATUS.DONE;
-                this.tab.editorStatus = EDITOR_STATUS.READY;
-                this.tab.term.io.print('\r\nConnection established\r\n');
-                this.tab.port.send('\n'); // Force getting a prompt
-                this.onSuccess.emit({
-                    header: 'Success',
-                    body: 'You are now connected to the USB device'
-                });
-            })
-            .catch((error: string) => {
-                if (error === 'You are already connected to this device') {
-                    // First we close the connections to any other open devices
-                    // and then we try again.
-                    let promises: Promise<void>[] = [];
-                    for (let otherTab of this.appDataService.editorTabs) {
-                        if (otherTab.id !== this.tab.id) {
-                            promises.push(this.webusbService
-                            .disconnect(otherTab.port)
-                            .then(() => {
-                                otherTab.port = null;
-                                otherTab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
-                                console.log('Tab disconnected: ' + otherTab.title);
-                            })
-                            .catch(() => {
-                                this.onError.emit({
-                                    header: 'Connection error',
-                                    body: 'Unable to disconnect previous connection'
-                                });
-                            }));
-                        }
-                    }
-                    Promise.all(promises).then(() => {
-                        console.log('Performing connection...');
-                        doConnect();
-                    });
-                } else {
-                    this.tab.connectionStatus = OPERATION_STATUS.ERROR;
-                    this.tab.editorStatus = EDITOR_STATUS.READY;
-                    this.tab.port = null;
-                    this.onError.emit({
-                        header: 'Connection failed',
-                        body: error
-                    });
-                }
-            });
-        };
-
-        if (this.tab.port !== null) {
-            doConnect();
-        } else {
-            this.webusbService.requestPort()
-            .then((port: WebUsbPort) => {
-                this.tab.port = port;
-                doConnect();
-            })
-            .catch((error: DOMException) => {
-                this.tab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
-                this.tab.editorStatus = EDITOR_STATUS.READY;
-                this.onError.emit({
-                    header: 'Connection failed',
-                    body: error.message
-                });
-            });
-        }
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public mayRun(): boolean {
-        return this.webusbService.usb !== undefined &&
-               this.tab.connectionStatus === OPERATION_STATUS.DONE &&
-               this.tab.editor.getValue().length > 0 &&
-               this.tab.runStatus !== OPERATION_STATUS.IN_PROGRESS &&
-               this.tab.port !== null;
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onRun() {
-        this.tab.runStatus = OPERATION_STATUS.IN_PROGRESS;
-        this.tab.editorStatus = EDITOR_STATUS.UPLOADING;
-
-        this.tab.port.run(this.tab.editor.getValue())
-        .then((warning: string) => {
-            this.tab.runStatus = OPERATION_STATUS.DONE;
-            this.tab.editorStatus = EDITOR_STATUS.READY;
-
-            if (warning !== undefined) {
-                this.onWarning.emit({
-                    header: 'Running failed',
-                    body: warning
-                });
-            }
-        })
-        .catch((error: DOMException) => {
-            this.tab.connectionStatus = OPERATION_STATUS.NOT_STARTED;
-            this.tab.runStatus = OPERATION_STATUS.NOT_STARTED;
-            this.tab.editorStatus = EDITOR_STATUS.READY;
-            this.onError.emit({
-                header: 'Running failed',
-                body: error.message
-            });
-        });
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onSave() {
-        // Initialize filename to tab.title if filename was not previously
-        // set and tab title is not pristine.
-        if (this.filename.length === 0 &&
-            !this.tab.title.match(/Tab # \d+/i)) {
-            this.filename = this.tab.title;
-        }
-
-        $(this.saveModal.nativeElement).modal('show');
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onSaveConfirm() {
-        if (this.filename.length === 0) {
-            return;
-        }
-
-        if (this.filename !== this.tab.title &&
-            this.fileService.exists(this.filename)) {
-            $(this.overwriteModal.nativeElement).modal('show');
-        } else {
-            this._doSave();
-        }
-    }
-
-    // tslint:disable-next-line:no-unused-locals
-    public onOverwrite() {
-        this._doSave();
-    }
-
-
-    ///////////////////////////////////////////////////////////////////////////
-
-
-    private _doSave() {
-        this.fileService.save(this.filename, this.tab.editor.getValue(), true);
-        this.tab.title = this.filename;
-        $(this.overwriteModal.nativeElement).modal('hide');
-        $(this.saveModal.nativeElement).modal('hide');
     }
 }

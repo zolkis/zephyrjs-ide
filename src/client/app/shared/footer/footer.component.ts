@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { AppDataService } from '../../app.data.service';
-
 
 /**
  * This class represents the navigation bar component.
@@ -13,10 +11,4 @@ import { AppDataService } from '../../app.data.service';
   styleUrls: ['footer.component.css'],
 })
 
-export class FooterComponent {
-    public buttons: Array<any>;
-
-    public constructor(private _appDataService: AppDataService) {
-        this.buttons = this._appDataService.footerButtons;
-    }
-}
+export class FooterComponent { }

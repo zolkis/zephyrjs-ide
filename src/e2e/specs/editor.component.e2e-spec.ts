@@ -102,7 +102,7 @@ describe('Editor', () => {
     });
 
     it('saving a file should work', () => {
-        let saveBtn = element(by.css('.monaco-toolbar .save')),
+        let saveBtn = element(by.css('sd-device-toolbar .save')),
             filesLink = element(by.css('.primary-sidebar a.files'));
 
         saveBtn.click();
@@ -140,7 +140,7 @@ describe('Editor', () => {
         let count = element(by.css('ng-sidebar aside ul li a.files .count')),
             emptyLabel = element(by.css('.secondary-sidebar .files .empty')),
             filesLink = element(by.css('.primary-sidebar a.files')),
-            saveBtn = element(by.css('.monaco-toolbar .save')),
+            saveBtn = element(by.css('sd-device-toolbar .save')),
             saveModal = element(by.css('.save-modal')),
             filenameInput = element(by.css('.save-modal input[name="filename"]'));
 
@@ -207,7 +207,7 @@ describe('Editor', () => {
     });
 
     it('clicking on a file should open it', () => {
-        let saveBtn = element(by.css('.monaco-toolbar .save')),
+        let saveBtn = element(by.css('sd-device-toolbar .save')),
             filesLink = element(by.css('.primary-sidebar a.files')),
             saveModal = element(by.css('.save-modal')),
             filenameInput = element(by.css('.save-modal input[name="filename"]')),
@@ -276,7 +276,7 @@ describe('Editor', () => {
     });
 
     it('deleting a file should work', () => {
-        let saveBtn = element(by.css('.monaco-toolbar .save')),
+        let saveBtn = element(by.css('sd-device-toolbar .save')),
             filesLink = element(by.css('.primary-sidebar a.files')),
             saveModal = element(by.css('.save-modal')),
             filenameInput = element(by.css('.save-modal input[name="filename"]')),

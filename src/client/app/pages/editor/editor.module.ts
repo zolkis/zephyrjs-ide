@@ -12,16 +12,19 @@ import { SplitPaneModule } from 'ng2-split-pane/lib/ng2-split-pane';
 // Own modules
 import { MonacoModule } from './components/monaco/monaco.module';
 import { ConsoleModule } from './components/console/console.module';
-import { StatusBarModule } from './components/statusbar/statusbar.module';
+import { DeviceToolbarModule } from './components/device-toolbar/device-toolbar.module';
 import { BoardExplorerModule } from './components/board-explorer/board-explorer.module';
-import { SharedModule } from '../../shared/shared.module';
 import { OcfExplorerModule } from './components/ocf-explorer/ocf-explorer.module';
 import { SidebarFilesModule } from './components/sidebar-files/sidebar-files.module';
 import { SidebarExamplesModule } from './components/sidebar-examples/sidebar-examples.module';
 import { SidebarGitHubModule } from './components/sidebar-github/sidebar-github.module';
+import { StatusBarModule } from './components/statusbar/statusbar.module';
+
+import { SharedModule } from '../../shared/shared.module';
 
 // This module
 import { EditorComponent } from './editor.component';
+import { DeviceToolbarComponent } from './components/device-toolbar/device-toolbar.component';
 import { TabBarComponent } from './components/tab-bar/tab-bar.component';
 
 
@@ -46,7 +49,11 @@ import { TabBarComponent } from './components/tab-bar/tab-bar.component';
 
         SharedModule.forRoot()
     ],
-    declarations: [EditorComponent, TabBarComponent],
+    declarations: [
+        EditorComponent,
+        DeviceToolbarComponent,
+        TabBarComponent
+    ],
     exports: [EditorComponent]
 })
 export class EditorModule {}

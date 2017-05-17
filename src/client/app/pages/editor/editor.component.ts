@@ -48,7 +48,7 @@ export class EditorComponent {
         public exampleService: ExampleService,
         public fileService: FileService,
         private notificationsService: NotificationsService,
-        private webusbService: WebUsbService) {
+        public webusbService: WebUsbService) {
         this.tabs = appDataService.editorTabs;
     }
 

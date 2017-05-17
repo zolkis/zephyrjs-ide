@@ -102,7 +102,14 @@
             (on-ended-resizing)="onEndedResizing($event)">
 
             <div id="code-pane" class="split-pane-content-primary">
+                <sd-device-toolbar
+                    (onWarning)="onWarning($event)"
+                    (onError)="onError($event)"
+                    (onSuccess)="onSuccess($event)">
+                </sd-device-toolbar>
+
                 <sd-tab-bar></sd-tab-bar>
+
                 <div class="tab-content">
                     <div
                         *ngFor="let tab of tabs"
@@ -147,11 +154,7 @@
                                 <fa [name]="'close'"></fa>
                             </a>
                         </div>
-                        <sd-console
-                            *ngFor="let tab of tabs"
-                            [tab]="tab"
-                            [hidden]="!tab.active">
-                        </sd-console>
+                        <sd-console></sd-console>
                     </div>
                 </horizontal-split-pane>
             </div> <!-- ./split-pane-content-secondary -->

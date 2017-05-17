@@ -32,7 +32,7 @@
                 > li {
                     list-style: none;
 
-                    > a {
+                    > a:not(.btn) {
                         display: block;
                         width: 100%;
                         padding: 10px 20px;
@@ -56,6 +56,17 @@
                             display: inline-block;
                         }
                     }
+
+                    &.separator {
+                        border-bottom: 1px solid lighten($panel-bg-color, 10%);
+                        margin-top: 0px;
+                        margin-bottom: 10px;
+                    }
+
+                    &.has-btn {
+                        text-align: center;
+                        padding-top: 10px;
+                    }
                 }
             }
 
@@ -70,6 +81,10 @@
                     > li > a {
                         padding: 10px 12px;
                         text-align: centeR;
+                    }
+
+                    > li > button {
+                        padding: 2px 4px;
                     }
                 }
             }
@@ -217,7 +232,7 @@
             }
 
             .tab-content {
-                height: calc(100% - 40px); // for the tab bar
+                height: calc(100% - 41px - 43px); // for the tab bar and device toolbar
 
                 .tab-pane {
                     height: 100%;
