@@ -234,7 +234,7 @@ export class WebUsbPort {
     }
 
     private stripComments(source: string): string {
-      return source.replace(RegExp('[ \t]*//.*', 'g'), '');
+      return source.replace(RegExp('^[ \t]{0,}//.*', 'g'), '');
     }
 
     private stripBlankLines(source: string): string {
