@@ -14,6 +14,7 @@ export class WebUsbPort {
     rawMode: boolean;
     echoMode: boolean;
     previousRead: string;
+    ashellReady: boolean;
 
     constructor(device: any) {
         this.device = device;
@@ -32,6 +33,7 @@ export class WebUsbPort {
     public connect(): Promise<void> {
         this.rawMode = true;
         this.echoMode = true;
+        this.ashellReady = false;
 
         return new Promise<void>((resolve, reject) => {
             let readLoop = () => {
@@ -39,6 +41,9 @@ export class WebUsbPort {
                     let skip = true,
                         skip_prompt = true,
                         str = this.decoder.decode(result.data);
+
+                    if (!this.ashellReady)
+                        this.ashellReady = /^(\x1b\[33macm)/.test(str);
 
                     if (str === 'raw') {
                         this.rawMode = true;
@@ -149,6 +154,10 @@ export class WebUsbPort {
         return this.device && this.device.opened;
     }
 
+    public isAshellReady(): boolean {
+        return this.ashellReady;
+    }
+
     public read(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             this.device.transferIn(3, 64).then((response: any) => {
@@ -234,7 +243,7 @@ export class WebUsbPort {
     }
 
     private stripComments(source: string): string {
-      return source.replace(RegExp('[ \t]*//.*', 'g'), '');
+      return source.replace(RegExp('^[ \t]{0,}//.*', 'g'), '');
     }
 
     private stripBlankLines(source: string): string {

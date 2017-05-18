@@ -108,7 +108,7 @@ describe('Editor', () => {
         saveBtn.click();
         browser.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('.save-modal'))), 1000);
         // No filename is there by default if the tab is pristine
-        expect(element(by.css('.save-modal input')).getAttribute('value')).toBe('');
+        expect(element(by.css('.save-modal input[name="filename"]')).getAttribute('value')).toBe('');
         // Cancel
         element(by.css('.save-modal .modal-footer button[data-dismiss="modal"]')).click();
         browser.wait(protractor.ExpectedConditions.stalenessOf(element(by.css('.modal-backdrop'))), 1000);
@@ -124,7 +124,7 @@ describe('Editor', () => {
         saveBtn.click();
         browser.wait(protractor.ExpectedConditions.visibilityOf(element(by.css('.save-modal'))), 1000);
         // The title is there as a default for the filename
-        expect(element(by.css('.save-modal input')).getAttribute('value')).toBe('New title');
+        expect(element(by.css('.save-modal input[name="filename"]')).getAttribute('value')).toBe('New title');
         // Save
         element(by.css('.save-modal .modal-footer .btn-primary')).click();
         browser.wait(protractor.ExpectedConditions.stalenessOf(element(by.css('.modal-backdrop'))), 1000);
@@ -168,7 +168,7 @@ describe('Editor', () => {
 
     it('examples link in sidebar should have correct count', () => {
         let count = element(by.css('ng-sidebar aside ul li a.examples .count'));
-        expect(count.getText()).toBe('(5)');
+        expect(count.getText()).toBe('(6)');
     });
 
     it('secondary sidebar toggles when clicking on Files menu', () => {
@@ -298,5 +298,62 @@ describe('Editor', () => {
 
         expect(count.getText()).toBe('(0)');
         browser.executeScript('localStorage.removeItem("zephyrjs-ide.FILES.FILENAME");');
+    });
+
+    it('should have 10 tabs at the most', () => {
+        let btn = element(by.id('new-tab-button')),
+            tablist = element.all(by.css('#tab-bar .nav-item')),
+            closeTabBtn = element(by.css('#tab-bar .nav-item.active .close-tab'));
+
+        expect(btn.isEnabled()).toBe(true);
+        for (let i = 0; i < 9; i++) {
+            btn.click();
+        }
+        expect(btn.isEnabled()).toBe(false);
+        expect(tablist.count()).toBe(10);
+    });
+
+    it('toggling the sidebar should work', () => {
+        let sidebarFiles = element(by.css('#editor-route .primary-sidebar a.files span.count')),
+            sidebarExamples = element(by.css('#editor-route .primary-sidebar a.examples span.count')),
+            sidebarGithub = element(by.css('#editor-route .primary-sidebar a.github span'));
+
+        var sidebarBtns = [sidebarFiles, sidebarExamples, sidebarGithub];
+        sidebarBtns.forEach((ele) => {
+            expect(ele.isDisplayed()).toBe(true);
+        });
+
+        let toggleBtn = element(by.css('#editor-route .primary-sidebar button.toggleCollapse'));
+        toggleBtn.click();
+        sidebarBtns.forEach((ele) => {
+            expect(ele.isPresent()).toBe(false);
+        });
+
+        toggleBtn.click();
+        sidebarBtns.forEach((ele) => {
+            expect(ele.isDisplayed()).toBe(true);
+        });
+    });
+
+    it('closing multiple tabs should work', () => {
+        let btn = element(by.id('new-tab-button')),
+            tablist = element.all(by.css('#tab-bar .nav-item')),
+            activeTab = element(by.css('#tab-bar .nav-item.active .tab-title')),
+            closeTabBtn = element(by.css('#tab-bar .nav-item.active .close-tab'));
+
+        expect(tablist.count()).toBe(1);
+
+        for (let i = 2; i <= 4; i++) {
+            btn.click();
+        }
+        Array.from(Array(4).keys()).reverse().forEach((index) => {
+            expect(tablist.count()).toBe(index + 1);
+            expect(activeTab.getText()).toEqual('Tab # ' + (index + 1));
+            closeTabBtn.click();
+        });
+
+        // Tab # 1 is always reserved.
+        expect(tablist.count()).toBe(1);
+        expect(activeTab.getText()).toEqual('Tab # 1');
     });
 });
