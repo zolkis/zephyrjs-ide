@@ -61,6 +61,7 @@
                            aria-describedBy="save-to-device-help-block"
                            id="saveModal_saveToDevice"
                            name="saveToDevice"
+                           [disabled]="!webusbService.isConnected()"
                            [(ngModel)]="appDataService.activeEditorTab.saveToDevice" />
                     </div> <!-- ./checkbox -->
                     <p id="save-to-device-help-block" class="help-block">
