@@ -108,7 +108,8 @@ export class DeviceToolbarComponent implements AfterViewInit {
                tab.editor !== null &&
                tab.editor.getValue().length > 0 &&
                tab.runStatus !== OPERATION_STATUS.IN_PROGRESS &&
-               this.webusbService.isConnected();
+               this.webusbService.isConnected() &&
+               this.webusbService.isAshellReady();
     }
 
     // tslint:disable-next-line:no-unused-locals

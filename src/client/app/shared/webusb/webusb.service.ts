@@ -93,6 +93,10 @@ export class WebUsbService {
         return this.port !== null && this.port.isConnected();
     }
 
+    public isAshellReady(): boolean {
+        return this.port.isAshellReady();
+    }
+
     public send(data: string) {
         return this.port.send(data);
     }
