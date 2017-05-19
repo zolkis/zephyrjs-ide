@@ -102,11 +102,11 @@ export class WebUsbService {
         return this.port.isAshellReady();
     }
 
-    public send(data: string) {
+    public send(data: string): Promise<string> {
         return this.port.send(data);
     }
 
-    public run(data: string) {
+    public run(data: string): Promise<string> {
         return this.port.run(data);
     }
 
