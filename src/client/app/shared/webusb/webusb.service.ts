@@ -60,14 +60,19 @@ export class WebUsbService {
         }
 
         return new Promise<void>((resolve, reject) => {
+            let _onError = (error: DOMException) => {
+                this.port = null;
+                reject(error);
+            }
+
             this.requestPort()
             .then((p: WebUsbPort) => {
                 this.port = p;
                 _doConnect()
                 .then(() => resolve())
-                .catch((error: DOMException) => reject(error));
+                .catch((error: DOMException) => _onError(error));
             })
-            .catch((error: DOMException) => reject(error));
+            .catch((error: DOMException) => _onError(error));
         });
     }
 
