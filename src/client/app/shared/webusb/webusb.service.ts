@@ -63,7 +63,7 @@ export class WebUsbService {
             let _onError = (error: DOMException) => {
                 this.port = null;
                 reject(error);
-            }
+            };
 
             this.requestPort()
             .then((p: WebUsbPort) => {
