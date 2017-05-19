@@ -6,6 +6,13 @@
     </button>
 
     <button
+        class="btn btn-default stop"
+        [disabled]="!mayStop()"
+        (click)="onStop()">
+        <fa [name]="'stop'"></fa> Stop
+    </button>
+
+    <button
         class="btn btn-default run"
         [disabled]="!mayRun()"
         (click)="onRun()">

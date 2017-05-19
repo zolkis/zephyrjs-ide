@@ -228,6 +228,10 @@ export class WebUsbPort {
         });
     }
 
+    public stop(): Promise<string> {
+        return this.send('stop\n');
+    }
+
     private convIHex(source: string): string {
       let array = intArrayFromString(source);
       let ptr = allocate(array, 'i8', ALLOC_NORMAL);

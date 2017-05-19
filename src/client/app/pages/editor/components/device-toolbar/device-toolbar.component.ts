@@ -100,7 +100,6 @@ export class DeviceToolbarComponent implements AfterViewInit {
         });
     }
 
-
     // tslint:disable-next-line:no-unused-locals
     public mayRun(): boolean {
         let tab = this.appDataService.getActiveEditorTab();
@@ -133,6 +132,37 @@ export class DeviceToolbarComponent implements AfterViewInit {
             tab.runStatus = OPERATION_STATUS.NOT_STARTED;
             this.onError.emit({
                 header: 'Running failed',
+                body: error.message
+            });
+        });
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public mayStop(): boolean {
+        let tab = this.appDataService.getActiveEditorTab();
+        return this.webusbService.usb !== null &&
+               this.webusbService.isConnected() &&
+               this.webusbService.isAshellReady();
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onStop() {
+        let tab = this.appDataService.getActiveEditorTab();
+
+        this.webusbService.stop()
+        .then((warning: string) => {
+            tab.runStatus = OPERATION_STATUS.DONE;
+
+            if (warning !== undefined) {
+                this.onWarning.emit({
+                    header: 'Stopping failed',
+                    body: warning
+                });
+            }
+        })
+        .catch((error: DOMException) => {
+            this.onError.emit({
+                header: 'Stopping failed',
                 body: error.message
             });
         });
