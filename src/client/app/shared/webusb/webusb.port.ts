@@ -212,9 +212,7 @@ export class WebUsbPort {
                 .then(() => this.send('load\n'))
                 .then(() => {
                     let ihex =
-                        this.convIHex(
-                            this.stripBlankLines(
-                                this.stripComments(data)));
+                        this.convIHex(data);
 
                     for (let line of ihex.split('\n')) {
                         this.send(line + '\n');
@@ -235,13 +233,5 @@ export class WebUsbPort {
       let iHexString = Pointer_stringify(output);
       _free(ptr);
       return iHexString;
-    }
-
-    private stripComments(source: string): string {
-      return source.replace(RegExp('^[ \t]{0,}//.*', 'g'), '');
-    }
-
-    private stripBlankLines(source: string): string {
-      return source.replace(RegExp('^[ \t]*\n', 'gm'), '');
     }
 }
