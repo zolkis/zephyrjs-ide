@@ -89,11 +89,6 @@ export class WebUsbPort {
                 });
             };
 
-            if (this.device.opened) {
-                reject('You are already connected to this device');
-                return;
-            }
-
             this.device.open()
             .then(() => {
                 if (this.device.configuration === null) {
@@ -217,9 +212,7 @@ export class WebUsbPort {
                 .then(() => this.send('load\n'))
                 .then(() => {
                     let ihex =
-                        this.convIHex(
-                            this.stripBlankLines(
-                                this.stripComments(data)));
+                        this.convIHex(data);
 
                     for (let line of ihex.split('\n')) {
                         this.send(line + '\n');
@@ -240,13 +233,5 @@ export class WebUsbPort {
       let iHexString = Pointer_stringify(output);
       _free(ptr);
       return iHexString;
-    }
-
-    private stripComments(source: string): string {
-      return source.replace(RegExp('^[ \t]{0,}//.*', 'g'), '');
-    }
-
-    private stripBlankLines(source: string): string {
-      return source.replace(RegExp('^[ \t]*\n', 'gm'), '');
     }
 }
