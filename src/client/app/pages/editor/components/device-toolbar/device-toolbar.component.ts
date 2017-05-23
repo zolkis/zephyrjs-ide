@@ -189,7 +189,7 @@ export class DeviceToolbarComponent implements AfterViewInit {
 
         this.fileService.save(tab.filename, tab.editor.getValue(), true);
 
-        if (tab.saveToDevice) {
+        if (this.webusbService.isConnected() && tab.saveToDevice) {
             this._saveToDevice();
         }
 
