@@ -55,6 +55,7 @@ export class EditorComponent {
     // tslint:disable-next-line:no-unused-locals
     public onToggleSidebar() {
         this.sidebarOptions.opened = !this.sidebarOptions.opened;
+        this._adjustBackdropPosition();
     }
 
     // tslint:disable-next-line:no-unused-locals
