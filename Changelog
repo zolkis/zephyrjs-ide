@@ -19,6 +19,7 @@
 	* Fix URLs being treated as comments and stripped
 	* Fix readability of hover status in sidebar files/examples
 	* Add more e2e tests and do minor CI fixes
+
 2017-05-17 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.15.0-alpha
 	* Make the device connection global instead of per tab
