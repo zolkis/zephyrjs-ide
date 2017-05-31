@@ -20,7 +20,7 @@
     "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
     "i18n": "ng-xi18n -p src/client/tsconfig.json && gulp clean.i18n",
-    "lint": "gulp tslint",
+    "lint": "tslint -c tslint.json src/**/*.ts",
     "karma": "karma",
     "karma.start": "karma start",
     "postinstall": "gulp check.versions && gulp build.bundle.rxjs && npm prune && gulp webdriver && gulp print.banner",
