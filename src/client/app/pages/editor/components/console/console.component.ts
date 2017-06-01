@@ -29,7 +29,7 @@ export class ConsoleComponent implements AfterViewInit {
     constructor(
             private appDataService: AppDataService,
             private webusbService: WebUsbService) {
-        let htermUMDjs = require('hterm-umdjs/dist/index');
+        let htermUMDjs = require('hterm-umdjs');
         this.hterm = htermUMDjs.hterm;
         // tslint:disable-next-line:no-empty
         this.hterm.Terminal.prototype.showOverlay = () => {};

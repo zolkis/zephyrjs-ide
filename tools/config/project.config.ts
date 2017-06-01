@@ -2,7 +2,8 @@ import { argv } from 'yargs';
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
-// import { ExtendPackages } from './seed.config.interfaces';
+import { ExtendPackages } from './seed.config.interfaces';
+
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -84,20 +85,16 @@ export class ProjectConfig extends SeedConfig {
     //
     // this.addPackagesBundles(additionalPackages);
 
-    let extraPackages = [
+    let additionalPackages: ExtendPackages[] = [
         {
             name: 'ngx-resource',
-            path: 'node_modules/ngx-resource/bundles/ngx-resource.umd.js',
-            packageMeta: {
-                main: 'index.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/ngx-resource/bundles/ngx-resource.umd.js'
         },
         {
             name: 'angular2-fontawesome',
             path: 'node_modules/angular2-fontawesome/angular2-fontawesome.js',
             packageMeta: {
-                main: 'angular2-fontawesome.js',
+                main: './angular2-fontawesome.js',
                 defaultExtension: 'js'
             }
         },
@@ -105,15 +102,15 @@ export class ProjectConfig extends SeedConfig {
             name: 'angular2-notifications',
             path: 'node_modules/angular2-notifications/components.js',
             packageMeta: {
-                main: 'components.js',
+                main: './components.js',
                 defaultExtension: 'js'
             }
         },
         {
             name: 'ng2-split-pane',
-            path: 'node_modules/ng2-split-pane/components.js',
+            path: 'node_modules/ng2-split-pane/ng2-split-pane.js',
             packageMeta: {
-                main: 'components.js',
+                main: './ng2-split-pane.js',
                 defaultExtension: 'js'
             }
         },
@@ -121,23 +118,29 @@ export class ProjectConfig extends SeedConfig {
             name: 'ng-sidebar',
             path: 'node_modules/ng-sidebar/lib/index.js',
             packageMeta: {
-                main: 'index.js',
+                main: './index.js',
                 defaultExtension: 'js'
             }
         },
         {
             name: 'angular-2-local-storage',
             path: 'node_modules/angular-2-local-storage/dist/index.js',
-            packageMEta: {
-                main: 'index.js',
+            packageMeta: {
+                main: './index.js',
+                defaultExtension: 'js'
+            }
+        },
+        {
+            name: 'hterm-umdjs',
+            path: 'node_modules/hterm-umdjs/dist/index.js',
+            packageMeta: {
+                main: './index.js',
                 defaultExtension: 'js'
             }
         }
     ];
 
-    for (let pack of extraPackages) {
-        this.addPackageBundles(pack);
-    }
+    this.addPackagesBundles(additionalPackages);
 
     /* Add proxy middleware */
     // this.PROXY_MIDDLEWARE = [
