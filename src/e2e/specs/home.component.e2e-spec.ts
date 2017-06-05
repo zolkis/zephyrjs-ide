@@ -3,11 +3,8 @@ import { browser, element, by } from 'protractor';
 
 describe('Home', () => {
 
-  beforeEach( () => {
-    browser.get('/');
-    browser.wait(() => {
-      return element(by.css('sd-home')).isPresent();
-    });
+  beforeEach(async () => {
+    return await browser.get('/');
   });
 
   it('should have about button links to /#/about', () => {

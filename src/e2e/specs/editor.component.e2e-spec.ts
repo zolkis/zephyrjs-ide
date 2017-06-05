@@ -2,11 +2,8 @@ import { browser, element, by, protractor, ElementFinder } from 'protractor';
 
 
 describe('Editor', () => {
-    beforeEach( () => {
-        browser.get('/#/editor');
-        browser.wait(() => {
-            return element(by.css('sd-editor')).isPresent();
-        });
+    beforeEach(async () => {
+        return await browser.get('/#/editor');
     });
 
     it('should have correct nav text for About', () => {
