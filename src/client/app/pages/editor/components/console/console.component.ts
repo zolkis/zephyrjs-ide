@@ -6,6 +6,9 @@ import {
     ViewChild
 } from '@angular/core';
 
+// tslint:disable-next-line:no-implicit-any
+import { hterm, lib } from 'hterm-umdjs';
+
 import { EditorTab } from '../../editor.tab';
 import { AppDataService } from '../../../../app.data.service';
 import { WebUsbService } from '../../../../shared/webusb/webusb.service';
@@ -30,18 +33,15 @@ export class ConsoleComponent implements AfterViewInit {
                 private webusbService: WebUsbService) {}
 
     public ngAfterViewInit()  {
-        require(['hterm-umdjs'], (htermUMDjs: any) => {
-            this.hterm = htermUMDjs.hterm;
-            // tslint:disable-next-line:no-empty
-            this.hterm.Terminal.prototype.showOverlay = () => {};
-            this.hterm.defaultStorage = new htermUMDjs.lib.Storage.Memory();
-            this.initTerminal();
-        });
+        // tslint:disable-next-line:no-empty
+        hterm.Terminal.prototype.showOverlay = () => {};
+        hterm.defaultStorage = new lib.Storage.Memory();
+        this.initTerminal();
     }
 
     private initTerminal() {
         if (this.appDataService.term === null) {
-            this.appDataService.term = new this.hterm.Terminal();
+            this.appDataService.term = new hterm.Terminal();
 
             this.appDataService.term.onTerminalReady = () => {
                 let io = this.appDataService.term.io.push();
