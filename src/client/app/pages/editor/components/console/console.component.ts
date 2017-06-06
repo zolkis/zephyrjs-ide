@@ -26,18 +26,17 @@ export class ConsoleComponent implements AfterViewInit {
 
     private hterm: any = undefined;
 
-    constructor(
-            private appDataService: AppDataService,
-            private webusbService: WebUsbService) {
-        let htermUMDjs = require('hterm-umdjs');
-        this.hterm = htermUMDjs.hterm;
-        // tslint:disable-next-line:no-empty
-        this.hterm.Terminal.prototype.showOverlay = () => {};
-        this.hterm.defaultStorage = new htermUMDjs.lib.Storage.Memory();
-    }
+    constructor(private appDataService: AppDataService,
+                private webusbService: WebUsbService) {}
 
     public ngAfterViewInit()  {
-        this.initTerminal();
+        require(['hterm-umdjs'], (htermUMDjs: any) => {
+            this.hterm = htermUMDjs.hterm;
+            // tslint:disable-next-line:no-empty
+            this.hterm.Terminal.prototype.showOverlay = () => {};
+            this.hterm.defaultStorage = new htermUMDjs.lib.Storage.Memory();
+            this.initTerminal();
+        });
     }
 
     private initTerminal() {
