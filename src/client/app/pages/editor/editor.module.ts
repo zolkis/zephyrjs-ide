@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 // Third-party modules
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { SidebarModule } from 'ng-sidebar';
-import { SplitPaneModule } from 'ng2-split-pane/lib/ng2-split-pane';
+import { SplitPaneModule } from 'ng2-split-pane';
 
 // Own modules
 import { MonacoModule } from './components/monaco/monaco.module';

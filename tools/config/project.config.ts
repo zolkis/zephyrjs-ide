@@ -92,51 +92,27 @@ export class ProjectConfig extends SeedConfig {
         },
         {
             name: 'angular2-fontawesome',
-            path: 'node_modules/angular2-fontawesome/angular2-fontawesome.js',
-            packageMeta: {
-                main: './angular2-fontawesome.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/angular2-fontawesome/bundles/angular2-fontawesome.umd.js'
         },
         {
             name: 'angular2-notifications',
-            path: 'node_modules/angular2-notifications/components.js',
-            packageMeta: {
-                main: './components.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/angular2-notifications/components.js'
         },
         {
             name: 'ng2-split-pane',
-            path: 'node_modules/ng2-split-pane/ng2-split-pane.js',
-            packageMeta: {
-                main: './ng2-split-pane.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/ng2-split-pane/lib/ng2-split-pane.js'
         },
         {
             name: 'ng-sidebar',
-            path: 'node_modules/ng-sidebar/lib/index.js',
-            packageMeta: {
-                main: './index.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/ng-sidebar/lib/index.js'
         },
         {
             name: 'angular-2-local-storage',
-            path: 'node_modules/angular-2-local-storage/dist/index.js',
-            packageMeta: {
-                main: './index.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/angular-2-local-storage/dist/index.js'
         },
         {
             name: 'hterm-umdjs',
-            path: 'node_modules/hterm-umdjs/dist/index.js',
-            packageMeta: {
-                main: './index.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/hterm-umdjs/dist/index.js'
         }
     ];
 
