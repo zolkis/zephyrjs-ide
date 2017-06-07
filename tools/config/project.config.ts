@@ -113,8 +113,16 @@ export class ProjectConfig extends SeedConfig {
         {
             name: 'hterm-umdjs',
             path: 'node_modules/hterm-umdjs/dist/index.js'
+        },
+        {
+            name: 'rxjs',
+            path: 'node_modules/rxjs'
         }
     ];
+
+    this.SYSTEM_CONFIG_DEV.packages[''] = {
+        defaultExtension: 'js'
+    };
 
     this.addPackagesBundles(additionalPackages);
 
