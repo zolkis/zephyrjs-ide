@@ -15,6 +15,8 @@
     "build.templatelocals",
     "build.js.dev",
     "build.index.dev",
+    "prepare.boardviewer",
+    "copy.boardviewer",
     "sw.manifest.static"
   ],
 
@@ -29,6 +31,8 @@
     "build.monaco",
     "build.templatelocals",
     "copy.prod",
+    "prepare.boardviewer",
+    "copy.boardviewer",
     "build.js.prod",
     "build.bundles",
     "build.bundles.app",
@@ -49,6 +53,8 @@
     "build.monaco",
     "build.templatelocals",
     "copy.prod",
+    "prepare.boardviewer",
+    "copy.boardviewer",
     "compile.ahead.prod",
     "build.js.prod.aot",
     "build.bundles",
@@ -70,6 +76,8 @@
     "build.monaco",
     "build.templatelocals",
     "copy.prod.rollup.aot",
+    "prepare.boardviewer",
+    "copy.boardviewer",
     "compile.ahead.prod",
     "build.js.prod.rollup.aot",
     "build.bundles",
@@ -92,6 +100,8 @@
     "build.js.dev",
     "build.js.test",
     "build.index.dev",
+    "prepare.boardviewer",
+    "copy.boardviewer",
     "sw.manifest.static"
   ]
 }
