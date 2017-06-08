@@ -14,6 +14,7 @@ export class WebUsbPort {
     rawMode: boolean;
     echoMode: boolean;
     previousRead: string;
+    ashellReady: boolean;
 
     constructor(device: any) {
         this.device = device;
@@ -32,6 +33,7 @@ export class WebUsbPort {
     public connect(): Promise<void> {
         this.rawMode = true;
         this.echoMode = true;
+        this.ashellReady = false;
 
         return new Promise<void>((resolve, reject) => {
             let readLoop = () => {
@@ -39,6 +41,9 @@ export class WebUsbPort {
                     let skip = true,
                         skip_prompt = true,
                         str = this.decoder.decode(result.data);
+
+                    if (!this.ashellReady)
+                        this.ashellReady = /^(\x1b\[33macm)/.test(str);
 
                     if (str === 'raw') {
                         this.rawMode = true;
@@ -83,11 +88,6 @@ export class WebUsbPort {
                     this.onReceiveError(error);
                 });
             };
-
-            if (this.device.opened) {
-                reject('You are already connected to this device');
-                return;
-            }
 
             this.device.open()
             .then(() => {
@@ -149,6 +149,10 @@ export class WebUsbPort {
         return this.device && this.device.opened;
     }
 
+    public isAshellReady(): boolean {
+        return this.ashellReady;
+    }
+
     public read(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             this.device.transferIn(3, 64).then((response: any) => {
@@ -208,9 +212,7 @@ export class WebUsbPort {
                 .then(() => this.send('load\n'))
                 .then(() => {
                     let ihex =
-                        this.convIHex(
-                            this.stripBlankLines(
-                                this.stripComments(data)));
+                        this.convIHex(data);
 
                     for (let line of ihex.split('\n')) {
                         this.send(line + '\n');
@@ -231,13 +233,5 @@ export class WebUsbPort {
       let iHexString = Pointer_stringify(output);
       _free(ptr);
       return iHexString;
-    }
-
-    private stripComments(source: string): string {
-      return source.replace(RegExp('[ \t]*//.*', 'g'), '');
-    }
-
-    private stripBlankLines(source: string): string {
-      return source.replace(RegExp('^[ \t]*\n', 'gm'), '');
     }
 }

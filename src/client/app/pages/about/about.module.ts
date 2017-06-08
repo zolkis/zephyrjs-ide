@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 // Third party
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 
 // Own
 import { AboutComponent } from './about.component';

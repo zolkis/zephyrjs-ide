@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 
 // This module
-import { MonacoComponent } from './monaco.component';
+import { TabBarComponent } from './tab-bar.component';
 
 
 @NgModule({
@@ -15,10 +15,9 @@ import { MonacoComponent } from './monaco.component';
         CommonModule,
         FormsModule,
 
-        Angular2FontawesomeModule,
+        Angular2FontawesomeModule
     ],
-    declarations: [MonacoComponent],
-    exports: [MonacoComponent]
+    declarations: [TabBarComponent],
+    exports: [TabBarComponent]
 })
-
-export class MonacoModule { }
+export class TabBarModule { }

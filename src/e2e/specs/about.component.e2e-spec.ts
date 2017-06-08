@@ -2,8 +2,8 @@ import { browser, element, by } from 'protractor';
 
 
 describe('About', () => {
-    beforeEach( () => {
-        browser.get('/#/about');
+    beforeEach(async () => {
+        return await browser.get('/#/about');
     });
 
     it('should have correct feature heading', () => {

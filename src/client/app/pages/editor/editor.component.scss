@@ -129,10 +129,10 @@
 
                 > a {
                     color: $code-bg-color !important;
-                }
 
-                > a:hover {
-                    background-color: #e0e0e0;
+                    &:hover, &:focus, &:active, &.active {
+                        background-color: #e0e0e0 !important;
+                    }
                 }
             }
 

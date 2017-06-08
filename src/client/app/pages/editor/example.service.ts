@@ -13,17 +13,16 @@ export class ExampleService {
         {
             filename: 'Accelerometer',
             code:
-`// Copyright (c) 2016, Intel Corporation.
+`// Copyright (c) 2016-2017, Intel Corporation.
 
 // Test code to use the Accelerometer (subclass of Generic Sensor) API
 // to communicate with the BMI160 inertia sensor on the Arduino 101
 // and obtaining information about acceleration applied to the X, Y and Z axis
-console.log("Accelerometer test...");
+console.log("BMI160 accelerometer test...");
 
-var updateFrequency = 20 // maximum is 100Hz, but in ashell maximum is 20Hz
+var updateFrequency = 20; // maximum is 100Hz, but in ashell maximum is 20Hz
 
 var sensor = new Accelerometer({
-    includeGravity: false, // true is not supported, will throw error
     frequency: updateFrequency
 });
 
@@ -34,8 +33,8 @@ sensor.onchange = function() {
                 " z=" + sensor.z);
 };
 
-sensor.onstatechange = function(event) {
-    console.log("state: " + event);
+sensor.onactivate = function() {
+    console.log("activated");
 };
 
 sensor.onerror = function(event) {
@@ -54,7 +53,7 @@ sensor.start();`
 // write will allow client to send bytes to be stored
 // read will allow client to read back the stored value, or 0 if not found
 
-var ble = ` + REQUIRE + ` ("ble");
+var ble = ` + REQUIRE + `("ble");
 
 var deviceName = 'BLE Test';
 
@@ -124,7 +123,7 @@ console.log("BLE sample...");`
         {
             filename: 'Blink',
             code:
-`// Copyright (c) 2016, Intel Corporation.
+`// Copyright (c) 2016-2017, Intel Corporation.
 
 // Reimplementation of Arduino - Basics - Blink example
 //   - Toggles an onboard LED on and off every second
@@ -144,25 +143,21 @@ console.log("BLE sample...");`
 //   Larger resistors will make the LED dimmer. Smaller ones could reduce its
 //     life.
 
-console.log("Starting Blink example...");
+console.log('Starting Blink sample...');
 
 // import gpio module
-var gpio = ` + REQUIRE + `("gpio");
-var pins = ` + REQUIRE + `("arduino101_pins");
+var gpio = ` + REQUIRE + `('gpio');
 
-// pin 8 is one of the onboard LEDs on the Arduino 101
-// 'out' direction is default, could be left out
-var pin = gpio.open({
-    pin: pins.LED0,
-    direction: 'out'
-});
+// LED0 is one of the onboard LEDs on the Arduino 101
+// 'out' mode is default, could be left out
+var pin = gpio.open({pin: 'LED0', mode: 'out', activeLow: true});
 
 // remember the current state of the LED
-var toggle = false;
+var toggle = 0;
 
 // schedule a function to run every 1s (1000ms)
 setInterval(function () {
-    toggle = !toggle;
+    toggle = 1 - toggle;
     pin.write(toggle);
 }, 1000);`
         },
@@ -174,9 +169,9 @@ setInterval(function () {
 // Test code to use the Gyroscope (subclass of Generic Sensor) API
 // to communicate with the BMI160 inertia sensor on the Arduino 101
 // and monitor the rate of rotation around the the X, Y and Z axis
-console.log("Gyroscope test...");
+console.log("BMI160 gyroscope test...");
 
-var updateFrequency = 20 // maximum is 100Hz, but in ashell maximum is 20Hz
+var updateFrequency = 20; // maximum is 100Hz, but in ashell maximum is 20Hz
 
 var sensor = new Gyroscope({
     frequency: updateFrequency
@@ -189,8 +184,8 @@ sensor.onchange = function() {
                 " z=" + sensor.z);
 };
 
-sensor.onstatechange = function(event) {
-    console.log("state: " + event);
+sensor.onactivate = function() {
+    console.log("activated");
 };
 
 sensor.onerror = function(event) {
@@ -201,65 +196,225 @@ sensor.onerror = function(event) {
 sensor.start();`
         },
         {
-            filename: 'Traffic Light',
+            filename: 'Pattern Matching',
             code:
-`// Copyright (c) 2016, Intel Corporation.
+`// Copyright (c) 2017, Intel Corporation.
 
-// Reimplementation of Arduino - Basics - Blink example
-//   - Toggles onboard LEDs as if they were a traffic light
+// Test code to use the Curie Pattern Matching Engine within the Intel Curie Compute
+// on the Arduino 101/tinyTile, which uses the PME API to train and classify data
+console.log("Curie Pattern Matching Engine test...");
 
-// Hardware Requirements:
-//   - None, to use the onboard LED
-//   - Otherwise, three LEDs and resistors
-// Wiring:
-//   For an external LED:
-//     - Wire its long lead to the IO pin you choose below
-//     - Wire its short lead to one end of a resistor
-//     - Wire the other end of the resistor to Arduino GND
-// Note: For a completely safe resistor size, find the LED's actual forward
-//   voltage (or lowest reported), subtract from 3.3V, and divide by the
-//   desired current. For example:
-//     (3.3V - 1.8V) / 20 mA = 1.5 V / 0.02 A = 75 Ohms.
-//   Larger resistors will make the LED dimmer. Smaller ones could reduce its
-//     life.
+// import pme module
+var pme = ` + REQUIRE + `("pme");
 
-console.log("Starting TrafficLight example...");
+var training1 = [ 10, 10, 10, 10 ];
+var training2 = [ 20, 20, 20, 20 ];
 
-// WARNING: These traffic light timings are appropriate for hummingbirds only
+var classify1 = [ 15, 15, 15, 15 ];
+var classify2 = [ 14, 14, 14, 14 ];
+var classify3 = [ 16, 16, 16, 16 ];
+var classify4 = [ 25, 25, 25, 25 ];
+var classify5 = [ 30, 30, 30, 30 ];
 
-// import gpio module
-var gpio = ` + REQUIRE + `("gpio");
-var pins = ` + REQUIRE + `("arduino101_pins");
-
-var red    = gpio.open({pin: pins.LED2, direction: 'out', activeLow: true});
-var yellow = gpio.open({pin: pins.LED1, direction: 'out', activeLow: true});
-var green  = gpio.open({pin: pins.LED0, direction: 'out', activeLow: false});
-
-var elapsed = 0;
-
-// turn red light on first
-red.write(true);
-yellow.write(false);
-green.write(false);
-
-// schedule a function to run every 1s (1000ms)
-setInterval(function () {
-    elapsed++;
-    if (elapsed == 5) {
-        // switch to green after 5s
-        red.write(false);
-        green.write(true);
-    } else if (elapsed == 8) {
-        // switch to yellow after 3s
-        green.write(false);
-        yellow.write(true);
-    } else if (elapsed == 10) {
-        // switch to red after 2s
-        yellow.write(false);
-        red.write(true);
-        elapsed = 0;
+function pme_stats() {
+    console.log("PME statistics");
+    console.log("==============:");
+    var mode = pme.getClassifierMode();
+    if (mode === pme.RBF_MODE) {
+        console.log("Classification mode: RBF_MODE");
+    } else if (mode === pme.RBF_MODE) {
+        console.log("Classification mode: KNN_MODE");
     }
-}, 1000);`
+
+    mode = pme.getDistanceMode();
+    if (mode === pme.L1_DISTANCE) {
+        console.log("Distance mode: L1_DISTANCE");
+    } else if (mode === pme.LSUP_DISTANCE) {
+        console.log("Distance mode: LSUP_DISTANCE");
+    }
+
+    for (var i = 1; i <= pme.getCommittedCount(); i++) {
+        var neuron = pme.readNeuron(i);
+        console.log("Neuron id=" + i +
+                    " category=" + neuron.category +
+                    " context=" + neuron.context +
+                    " AIF=" + neuron.AIF +
+                    " minIF=" + neuron.minIF);
+    }
+}
+
+pme.begin();
+pme.learn(training1, 100);
+console.log("Learned [ 10, 10, 10, 10 ] with category 100");
+pme.learn(training2, 200);
+console.log("Learned [ 20, 20, 20, 20 ] with category 200");
+console.log("Global context: " + pme.getGlobalContext());
+console.log("Neuron context: " + pme.getNeuronContext());
+console.log("Neuron count: " + pme.getCommittedCount());
+
+var category = pme.classify(classify1);
+if (category === pme.NO_MATCH) {
+    category = "no match";
+}
+console.log("Classified [ 15, 15, 15, 15 ] as category " + category);
+
+category = pme.classify(classify2);
+if (category === pme.NO_MATCH) {
+    category = "no match";
+}
+console.log("Classified [ 14, 14, 14, 14 ] as category " + category);
+
+category = pme.classify(classify3);
+if (category === pme.NO_MATCH) {
+    category = "no match";
+}
+console.log("Classified [ 16, 16, 16, 16 ] as category " + category);
+
+category = pme.classify(classify4);
+if (category === pme.NO_MATCH) {
+    category = "no match";
+}
+console.log("Classified [ 25, 25, 25, 25 ] as category " + category);
+
+category = pme.classify(classify5);
+if (category === pme.NO_MATCH) {
+    category = "no match";
+}
+console.log("Classified [ 30, 30, 30, 30 ] as category " + category);
+
+pme_stats();
+
+console.log("Reconfigure with KNN_MODE, LSUP_DISTANCE,");
+pme.configure(pme.getGlobalContext(), pme.KNN_MODE, pme.LSUP_DISTANCE, 5, 10);
+
+pme_stats();`
+        },
+        {
+            filename: 'Sensor BLE Demo',
+            code:
+`// Copyright (c) 2017, Intel Corporation.
+
+// Demo code for Arduino 101/Tinytile that uses BLE to
+// advertise Accelerometer and Gyroscope data to web app
+
+var ble = ` + REQUIRE + `("ble");
+
+var DEVICE_NAME = 'Intel Curie';
+
+var updateFrequency = 20; // maximum is 100Hz, but in ashell maximum is 20Hz
+
+var SensorCharacteristic = new ble.Characteristic({
+    uuid: 'fc0a',
+    properties: ['read', 'notify'],
+    descriptors: [
+        new ble.Descriptor({
+            uuid: '2901',
+            value: 'BMI160 Sensor'
+        })
+    ]
+});
+
+SensorCharacteristic._onChange = null;
+
+SensorCharacteristic.onSubscribe = function(maxValueSize, updateValueCallback) {
+    console.log("Subscribed to bmi160 sensor change");
+    this._onChange = updateValueCallback;
+};
+
+SensorCharacteristic.onUnsubscribe = function() {
+    console.log("Unsubscribed to bmi160 sensor change");
+    this._onChange = null;
+};
+
+SensorCharacteristic.valueChange = function(isAccel, x, y, z) {
+    var multi = 262144; // 2 ** (32 - 14bit precision).
+
+    var xval = (x * multi) >> 1;
+    var yval = (y * multi) >> 1;
+    var zval = (z * multi) >> 1;
+
+    var data = new Buffer(13);
+    data.writeUInt8(isAccel, 0);
+
+    data.writeUInt32BE(xval, 1);
+    data.writeUInt32BE(yval, 5);
+    data.writeUInt32BE(zval, 9);
+
+    if (this._onChange) {
+        this._onChange(data);
+    }
+};
+
+ble.on('stateChange', function(state) {
+    if (state === 'poweredOn') {
+        ble.startAdvertising(DEVICE_NAME, ['fc00'], "https:/" + "/goo.gl/pw8HvI");
+    } else {
+        if (state === 'unsupported') {
+            console.log("BLE not enabled on board");
+        }
+        ble.stopAdvertising();
+    }
+});
+
+ble.on('advertisingStart', function(error) {
+    if (error) {
+        console.log("Failed to advertise Physical Web URL");
+        return;
+    }
+
+    ble.setServices([
+        new ble.PrimaryService({
+            uuid: 'fc00',
+            characteristics: [
+                SensorCharacteristic,
+            ]
+        })
+    ]);
+
+    console.log("Advertising as Physical Web device");
+});
+
+ble.on('accept', function(clientAddress) {
+    console.log("Client connected: " + clientAddress);
+    setTimeout(function() {
+        accel.start();
+        gyro.start();
+    }, 2000);
+});
+
+ble.on('disconnect', function(clientAddress) {
+    console.log("Client disconnected: " + clientAddress);
+    accel.stop();
+    gyro.stop();
+});
+
+var accel = new Accelerometer({
+    frequency: updateFrequency
+});
+
+var gyro = new Gyroscope({
+    frequency: updateFrequency
+});
+
+accel.onchange = function() {
+    SensorCharacteristic.valueChange(1, accel.x, accel.y, accel.z);
+};
+
+gyro.onchange = function() {
+    SensorCharacteristic.valueChange(0, gyro.x, gyro.y, gyro.z);
+};
+
+accel.onerror = function(event) {
+    console.log("error: " + event.error.name +
+                " - " + event.error.message);
+};
+
+gyro.onerror = function(event) {
+    console.log("error: " + event.error.name +
+                " - " + event.error.message);
+};
+
+console.log("Sensor (Accelerometer/Gyroscope) BLE Demo...");`
         }
     ];
 

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 // 3rd party modules
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 
 // This module
 import { SidebarGitHubComponent } from './sidebar-github.component';

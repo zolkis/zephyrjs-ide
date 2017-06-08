@@ -34,8 +34,6 @@ $ yarn install  # or yarn
 
 # watches your files and uses livereload by default
 $ npm start
-# api document for the app
-# npm run build.docs
 
 # to start deving with livereload site and coverage as well as continuous testing
 $ npm run start.deving
@@ -85,6 +83,24 @@ Your project will be compiled ahead of time (AOT), and then the resulting bundle
 - Beware of non-static/side-effectful imports. These cannot be properly optimized. For this reason, even though tree-shaking is taking place the developer still needs to be careful not to include non-static imports that are unnecessary, as those referenced imports will always end up in final bundle. Special attention should be given to RxJs, which makes heavy use of non-static/side-effectful imports: make sure you only add the operators you use, as any added operators will be included in your final production bundle.
 - UMD modules result in code that cannot be properly optimized. For best results, prefer ES6 modules whenever possible. This includes third-party dependencies: if one is published in both UMD and ES6 modules, go with the ES6 modules version.
 - During a production build, CommonJs modules will be automatically converted to ES6 modules. This means you can use them and/or require dependencies that use them without any issues.
+
+# Internationalization
+
+Put `i18n` attribute to your html tag to mark it for translation, more information here: https://angular.io/docs/ts/latest/cookbook/i18n.html
+
+## Create a translation source file
+
+```bash
+# Your translation file will be generated here `dist/locale`
+$ npm run i18n
+```
+
+## Production build with your language
+
+```bash
+# Build prod app with the language file `dist/locale/messages.en.xlf`
+$ npm run build.prod.rollup.aot -- --lang en
+```
 
 # Dockerization
 
@@ -144,7 +160,6 @@ Default application server configuration
 
 ```js
 var PORT             = 8000;
-var LIVE_RELOAD_PORT = 4002;
 var DOCS_PORT        = 4003;
 var APP_BASE         = '/';
 ```
@@ -152,7 +167,7 @@ var APP_BASE         = '/';
 Configure at runtime
 
 ```bash
-$ npm start -- --port 8080 --reload-port 4000 --base /my-app/
+$ npm start -- --port 8080 --base /my-app/
 ```
 
 ## Environment configuration

@@ -108,7 +108,8 @@ export class DeviceToolbarComponent implements AfterViewInit {
                tab.editor !== null &&
                tab.editor.getValue().length > 0 &&
                tab.runStatus !== OPERATION_STATUS.IN_PROGRESS &&
-               this.webusbService.isConnected();
+               this.webusbService.isConnected() &&
+               this.webusbService.isAshellReady();
     }
 
     // tslint:disable-next-line:no-unused-locals
@@ -188,7 +189,7 @@ export class DeviceToolbarComponent implements AfterViewInit {
 
         this.fileService.save(tab.filename, tab.editor.getValue(), true);
 
-        if (tab.saveToDevice) {
+        if (this.webusbService.isConnected() && tab.saveToDevice) {
             this._saveToDevice();
         }
 

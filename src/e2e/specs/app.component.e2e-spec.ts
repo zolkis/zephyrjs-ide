@@ -2,8 +2,8 @@ import { browser, element, by } from 'protractor';
 
 
 describe('App', () => {
-    beforeEach( () => {
-        browser.get('/');
+    beforeEach(async () => {
+        return await browser.get('/');
     });
 
     it('should have a title', () => {

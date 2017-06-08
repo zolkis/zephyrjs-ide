@@ -60,14 +60,19 @@ export class WebUsbService {
         }
 
         return new Promise<void>((resolve, reject) => {
+            let _onError = (error: DOMException) => {
+                this.port = null;
+                reject(error);
+            };
+
             this.requestPort()
             .then((p: WebUsbPort) => {
                 this.port = p;
                 _doConnect()
                 .then(() => resolve())
-                .catch((error: DOMException) => reject(error));
+                .catch((error: DOMException) => _onError(error));
             })
-            .catch((error: DOMException) => reject(error));
+            .catch((error: DOMException) => _onError(error));
         });
     }
 
@@ -90,14 +95,18 @@ export class WebUsbService {
     }
 
     public isConnected(): boolean {
-        return this.port && this.port.isConnected();
+        return this.port !== null && this.port.isConnected();
     }
 
-    public send(data: string) {
+    public isAshellReady(): boolean {
+        return this.port.isAshellReady();
+    }
+
+    public send(data: string): Promise<string> {
         return this.port.send(data);
     }
 
-    public run(data: string) {
+    public run(data: string): Promise<string> {
         return this.port.run(data);
     }
 

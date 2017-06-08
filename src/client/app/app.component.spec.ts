@@ -6,52 +6,27 @@ import { FormsModule } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { SidebarModule } from 'ng-sidebar/lib/sidebar.module';
-import { SplitPaneModule } from 'ng2-split-pane/lib/ng2-split-pane';
+import { SidebarModule } from 'ng-sidebar';
+import { SplitPaneModule } from 'ng2-split-pane';
 
 // Main app component
 import { AppComponent } from './app.component';
 
 // Pages
+import { HomeModule } from './pages/home/home.module';
+import { AboutModule } from './pages/about/about.module';
+import { EditorModule } from './pages/editor/editor.module';
+
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { EditorComponent } from './pages/editor/editor.component';
 
-// Editor components
-// TODO: shouldn't these imports come from the module?
-import { BoardExplorerComponent } from './pages/editor/components/board-explorer/board-explorer.component';
-import { ConsoleComponent } from './pages/editor/components/console/console.component';
-import { DeviceToolbarComponent } from './pages/editor/components/device-toolbar/device-toolbar.component';
-import { MonacoComponent } from './pages/editor/components/monaco/monaco.component';
-import { OcfExplorerComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.component';
-import { OcfResourceComponent } from './pages/editor/components/ocf-explorer/ocf-explorer.resource.component';
-import { SidebarFilesComponent } from './pages/editor/components/sidebar-files/sidebar-files.component';
-import { SidebarExamplesComponent } from './pages/editor/components/sidebar-examples/sidebar-examples.component';
-import { SidebarGitHubComponent } from './pages/editor/components/sidebar-github/sidebar-github.component';
-import { StatusBarComponent } from './pages/editor/components/statusbar/statusbar.component';
-import { TabBarComponent } from './pages/editor/components/tab-bar/tab-bar.component';
-
-import { OcfResourceValueFanComponent }
-    from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.fan.component';
-import { OcfResourceValueIlluminanceComponent }
-    from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.illuminance.component';
-import { OcfResourceValueLedComponent }
-    from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.led.component';
-import { OcfResourceValueRgbLedComponent }
-    from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.rgbled.component';
-import { OcfResourceValueTemperatureComponent }
-    from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.temperature.component';
-import { OcfResourceValueJsonComponent }
-    from './pages/editor/components/ocf-explorer/ocf-explorer.resource.value.json.component';
-
-
 // Shared
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { WebUsbService } from './shared/webusb/webusb.service';
+import { SharedModule } from './shared/shared.module';
+import { WebUsbService } from './shared/index';
 
 
 export function main() {
@@ -73,33 +48,16 @@ export function main() {
                     LocalStorageModule,
                     SimpleNotificationsModule,
                     SidebarModule,
-                    SplitPaneModule
+                    SplitPaneModule,
+
+                    HomeModule,
+                    AboutModule,
+                    EditorModule,
+                    SharedModule
                 ],
                 declarations: [
                     TestComponent,
-                    AppComponent,
-                    HomeComponent,
-                    AboutComponent,
-                    EditorComponent,
-                        BoardExplorerComponent,
-                        ConsoleComponent,
-                        DeviceToolbarComponent,
-                        MonacoComponent,
-                        OcfExplorerComponent,
-                        OcfResourceComponent,
-                            OcfResourceValueFanComponent,
-                            OcfResourceValueIlluminanceComponent,
-                            OcfResourceValueLedComponent,
-                            OcfResourceValueRgbLedComponent,
-                            OcfResourceValueTemperatureComponent,
-                            OcfResourceValueJsonComponent,
-                        SidebarFilesComponent,
-                        SidebarExamplesComponent,
-                        SidebarGitHubComponent,
-                        StatusBarComponent,
-                        TabBarComponent,
-                    NavbarComponent,
-                    FooterComponent
+                    AppComponent
                 ],
                 providers: [
                     { provide: APP_BASE_HREF, useValue: '/' },

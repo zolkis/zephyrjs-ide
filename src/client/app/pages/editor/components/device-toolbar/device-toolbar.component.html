@@ -61,6 +61,7 @@
                            aria-describedBy="save-to-device-help-block"
                            id="saveModal_saveToDevice"
                            name="saveToDevice"
+                           [disabled]="!webusbService.isConnected()"
                            [(ngModel)]="appDataService.activeEditorTab.saveToDevice" />
                     </div> <!-- ./checkbox -->
                     <p id="save-to-device-help-block" class="help-block">
@@ -70,8 +71,9 @@
                             appDataService.activeEditorTab.filename.length > 0 &&
                             !maySave()">
                             This will require the filename to be in the 8.3
-                            format.
+                            format
                         </span>
+                        and an active connection to a device.
                     </p>
                 </form>
             </div>

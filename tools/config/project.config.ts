@@ -2,7 +2,8 @@ import { argv } from 'yargs';
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
-// import { ExtendPackages } from './seed.config.interfaces';
+import { ExtendPackages } from './seed.config.interfaces';
+
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -65,6 +66,16 @@ export class ProjectConfig extends SeedConfig {
       {src: `${this.APP_SRC}/app/shared/webusb/ihex.js`, inject: true, vendor: false}
     ];
 
+    this.ROLLUP_INCLUDE_DIR = [
+      ...this.ROLLUP_INCLUDE_DIR,
+      //'node_modules/moment/**'
+    ];
+
+    this.ROLLUP_NAMED_EXPORTS = [
+      ...this.ROLLUP_NAMED_EXPORTS,
+      //{'node_modules/immutable/dist/immutable.js': [ 'Map' ]},
+    ];
+
     // Add packages (e.g. ng2-translate)
     // let additionalPackages: ExtendPackages[] = [{
     //   name: 'ng2-translate',
@@ -74,60 +85,51 @@ export class ProjectConfig extends SeedConfig {
     //
     // this.addPackagesBundles(additionalPackages);
 
-    let extraPackages = [
+    let additionalPackages: ExtendPackages[] = [
         {
             name: 'ngx-resource',
-            path: 'node_modules/ngx-resource/bundles/ngx-resource.umd.js',
-            packageMeta: {
-                main: 'index.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/ngx-resource/bundles/ngx-resource.umd.js'
         },
         {
             name: 'angular2-fontawesome',
-            path: 'node_modules/angular2-fontawesome/angular2-fontawesome.js',
-            packageMeta: {
-                main: 'angular2-fontawesome.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/angular2-fontawesome/bundles/angular2-fontawesome.umd.js'
         },
         {
             name: 'angular2-notifications',
-            path: 'node_modules/angular2-notifications/components.js',
-            packageMeta: {
-                main: 'components.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/angular2-notifications/components.js'
         },
         {
             name: 'ng2-split-pane',
-            path: 'node_modules/ng2-split-pane/components.js',
-            packageMeta: {
-                main: 'components.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/ng2-split-pane/lib/ng2-split-pane.js'
         },
         {
             name: 'ng-sidebar',
-            path: 'node_modules/ng-sidebar/lib/index.js',
-            packageMeta: {
-                main: 'index.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/ng-sidebar/lib/index.js'
         },
         {
             name: 'angular-2-local-storage',
-            path: 'node_modules/angular-2-local-storage/dist/index.js',
-            packageMEta: {
-                main: 'index.js',
-                defaultExtension: 'js'
-            }
+            path: 'node_modules/angular-2-local-storage/dist/index.js'
+        },
+        {
+            name: 'hterm-umdjs',
+            path: 'node_modules/hterm-umdjs/dist/index.js'
+        },
+        {
+            name: 'rxjs',
+            path: 'node_modules/rxjs'
         }
     ];
 
-    for (let pack of extraPackages) {
-        this.addPackageBundles(pack);
-    }
+    this.SYSTEM_CONFIG_DEV.packages[''] = {
+        defaultExtension: 'js'
+    };
+
+    this.addPackagesBundles(additionalPackages);
+
+    /* Add proxy middleware */
+    // this.PROXY_MIDDLEWARE = [
+    //   require('http-proxy-middleware')('/api', { ws: false, target: 'http://localhost:3003' })
+    // ];
 
     /* Add to or override NPM module configurations: */
     // this.PLUGIN_CONFIGS['browser-sync'] = { ghostMode: false };
