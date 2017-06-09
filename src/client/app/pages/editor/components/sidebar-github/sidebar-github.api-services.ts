@@ -15,13 +15,8 @@ export class RestClient extends Resource {
         this.token = token;
     }
 
-    public getUrl(methodOptions?: any): string | Promise<string> {
-        let resPath = super.getUrl();
-        return 'https://api.github.com' + resPath;
-    }
-
-    public getHeaders(methodOptions?: any): any {
-        let headers = super.getHeaders();
+    public $getHeaders(methodOptions?: any): any {
+        let headers = super.$getHeaders();
         headers.Authorization = 'token ' + this.token;
         return headers;
     }
@@ -40,7 +35,7 @@ export interface IQueryInput {
 
 @Injectable()
 @ResourceParams({
-  url: '/user'
+  url: 'https://api.github.com/user'
 })
 export class GitHubUserService extends RestClient {
   @ResourceAction({
@@ -58,7 +53,7 @@ export class GitHubUserService extends RestClient {
 
 @Injectable()
 @ResourceParams({
-  url: '/repos'
+  url: 'https://api.github.com/repos'
 })
 export class GitHubRepoService extends RestClient {
   @ResourceAction({

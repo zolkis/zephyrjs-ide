@@ -16,13 +16,13 @@ export class RestClient extends Resource {
         this.baseUrl = url;
     }
 
-    public getUrl(methodOptions?: any): string | Promise<string> {
-        let resPath = super.getUrl();
+    public $getUrl(methodOptions?: any): string | Promise<string> {
+        let resPath = super.$getUrl();
         return this.baseUrl + resPath;
     }
 
-    public getHeaders(methodOptions?: any): any {
-        let headers = super.getHeaders();
+    public $getHeaders(methodOptions?: any): any {
+        let headers = super.$getHeaders();
         if (methodOptions !== undefined && methodOptions.method > 0) {
             headers['Content-Type'] =
                 'application/x-www-form-urlencoded; charset=UTF-8';
