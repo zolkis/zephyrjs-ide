@@ -65,7 +65,7 @@ module.exports = function (config) {
       { pattern: 'node_modules/monaco-editor/**/*', included: false, watched: false },
 
       'test-config.js',
-      'dist/dev/app/system-config.js',
+      'dist/dev/system-config.js',
       'test-main.js'
     ],
 
