@@ -142,7 +142,36 @@
 
                     <div id="board-viewer-pane" class="split-pane-content-primary">
                         <div class="pane-title">Board explorer</div>
-                        <sd-board-explorer></sd-board-explorer>
+                        <div class="pane-menu dropdown">
+                            <button
+                                id="board-selection-dropdown"
+                                class="btn btn-link dropdown-toggle"
+                                type="button"
+                                data-toggle="dropdown"
+                                aria-haspopuup="true"
+                                aria-expanded="true">
+                                {{boardExplorerService.getBoardTitle(currentBoard) | async}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul
+                                class="dropdown-menu dropdown-menu-right"
+                                aria-labelledby="board-selection-dropdown">
+                                <li *ngFor="let board of boardExplorerService.listBoards()">
+                                    <a href="#" (click)="onSelectBoard(board)">
+                                        {{boardExplorerService.getBoardTitle(board) | async}}
+                                    </a>
+                                </li>
+                            </ul>
+                            <a
+                                href="#"
+                                class="btn btn-link"
+                                data-toggle="modal"
+                                data-target="#boardInfoModal"
+                                (click)="onBoardInfoClicked(currentBoard)">
+                                <fa [name]="'info-circle'"></fa>
+                            </a>
+                        </div> <!-- ./dropdown -->
+                        <sd-board-explorer [board]="currentBoard"></sd-board-explorer>
                     </div>
 
                     <div id="console-pane" class="split-pane-content-secondary">
@@ -189,5 +218,30 @@
         </div>
     </div>
 </div>
+
+<div #boardInfoModal id="boardInfoModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    {{boardExplorerService.getBoardTitle(currentBoard) | async}}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="docs">
+                    <markdown
+                        *ngIf="currentBoardDocs !== null"
+                        [data]="currentBoardDocs">
+                    </markdown>
+
+                    <p *ngIf="currentBoardDocs === null">
+                        No documentation available for this board.
+                    </p>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <simple-notifications [options]="notificationOptions"></simple-notifications>

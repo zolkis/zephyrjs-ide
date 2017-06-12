@@ -1,0 +1,64 @@
+<div id="board-container">
+    <div
+        #boardEl
+        id="board"
+        [inlineSVG]="boardExplorerService.getBoardImage(board) | async"
+        (onSVGInserted)="onSVGInserted($event)"
+        onresize="onContainerResize($event)">
+    </div>
+
+    <div id="board-highlights">
+        <div
+            *ngFor="let c of getComponents()"
+            id="highlight-{{c.getId()}}"
+            class="highlight"
+            [style.top.px]="c.getClientRect().top"
+            [style.left.px]="c.getClientRect().left"
+            [style.height.px]="c.getClientRect().height"
+            [style.width.px]="c.getClientRect().width"
+            (mouseover)="onComponentMouseover(c)"
+            data-toggle="tooltip"
+            data-placement="auto top"
+            title="{{c.getId()}}">
+
+            <button
+                data-toggle="modal"
+                data-target="#boardComponentHelpModal"
+                (click)="onComponentClicked(c)">
+            </button>
+        </div>
+    </div>
+</div>
+
+<div #boardComponentHelpModal id="boardComponentHelpModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    {{boardExplorerService.getBoardTitle(board) | async}}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <ul class="data">
+                    <li>Component:
+                        <strong *ngIf="selectedComponent.name !== null">
+                            {{selectedComponent.name}}
+                        </strong>
+                        <strong *ngIf="selectedComponent.name === null">
+                            {{selectedComponent.id}}
+                        </strong>
+                    </li>
+                    <li>Description: <strong>{{selectedComponent.description}}</strong></li>
+                    <li *ngIf="selectedComponent.keywords">
+                        Keywords: <strong>{{selectedComponent.keywords.join(',')}}</strong>
+                    </li>
+                </ul>
+
+                <div class="docs" *ngIf="selectedComponent.docs">
+                    <markdown [data]="selectedComponent.docs"></markdown>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

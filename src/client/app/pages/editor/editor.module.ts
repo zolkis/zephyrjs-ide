@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 // Third-party modules
 import { Angular2FontawesomeModule } from 'angular2-fontawesome';
+import { MarkdownModule } from 'angular2-markdown';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { SidebarModule } from 'ng-sidebar';
 import { SplitPaneModule } from 'ng2-split-pane';
@@ -33,6 +34,7 @@ import { EditorComponent } from './editor.component';
         FormsModule,
 
         Angular2FontawesomeModule,
+        MarkdownModule.forRoot(),
         SimpleNotificationsModule.forRoot(),
         SidebarModule,
         SplitPaneModule,

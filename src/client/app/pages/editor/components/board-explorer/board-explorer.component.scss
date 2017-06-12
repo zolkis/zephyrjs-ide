@@ -1,2 +1,70 @@
 :host {
+    display: block;
+    width: 100%;
+    height: calc(100% - 40px);
+    padding: 12px;
+    overflow: visible;
+
+    #board-container {
+        height: 100%;
+        position: relative;
+
+        #board {
+            height: 100%;
+
+            /deep/ svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        #board-highlights {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+
+            .highlight {
+                position: absolute;
+                padding: 0.1em;
+                margin: 0 auto;
+                opacity: 0;
+                transition: opacity 0.1s linear;
+                border: 1px solid yellow;
+                border-radius: 4px;
+
+                button {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    background: transparent;
+                    border: none;
+                }
+
+                &:hover {
+                    background: rgba(255,255,0,0.15);
+                    opacity: 1;
+                    transition: opacity 0.25s linear;
+                }
+            }
+        }
+    }
+
+    #boardHelpModal {
+        .modal-title .separator {
+            color: #999 !important;
+            font-weight: normal;
+            padding: 0 8px;
+        }
+
+        .modal-body {
+            ul.data {
+                list-style: none;
+                padding-left: 0;
+            }
+        }
+    }
 }

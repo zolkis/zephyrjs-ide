@@ -5,9 +5,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
 
 // Own
-import { AppDataService } from '../../app.data.service';
-import { FileService } from './file.service';
-import { ExampleService } from './example.service';
+import { AppDataService } from '../../app.data.service';
+import { BoardExplorerService } from './components/board-explorer/board-explorer.service';
+import { FileService } from './file.service';
+import { ExampleService } from './example.service';
 import { EditorTab } from './editor.tab';
 import { WebUsbService } from '../../shared/webusb/webusb.service';
 
@@ -17,7 +18,7 @@ import { WebUsbService } from '../../shared/webusb/webusb.service';
     selector: 'sd-editor',
     templateUrl: 'editor.component.html',
     styleUrls: ['editor.component.css'],
-    providers: [ExampleService, FileService]
+    providers: [BoardExplorerService, ExampleService, FileService]
 })
 export class EditorComponent {
     public notificationOptions = {
@@ -36,20 +37,26 @@ export class EditorComponent {
 
     public tabs: Array<EditorTab>;
 
+    public currentBoard: string = null;
+    public currentBoardDocs: string = null;
+
     @ViewChild('toggleConsoleButton')
     public toggleConsoleButton: ElementRef;
 
     public consoleToggledOff: boolean = false;
 
+
     // Methods
 
     constructor(
         private appDataService: AppDataService,
+        public boardExplorerService: BoardExplorerService,
         public exampleService: ExampleService,
         public fileService: FileService,
         private notificationsService: NotificationsService,
         public webusbService: WebUsbService) {
         this.tabs = appDataService.editorTabs;
+        this.currentBoard = this.boardExplorerService.listBoards()[0];
     }
 
     // tslint:disable-next-line:no-unused-locals
@@ -261,6 +268,20 @@ export class EditorComponent {
         });
     }
 
+    // tslint:disable-next-line:no-unused-locals
+    public onSelectBoard(board: string): boolean {
+        this.currentBoard = board;
+        return false;
+    }
+
+    // tslint:disable-next-line:no-unused-locals
+    public onBoardInfoClicked(board: string): boolean {
+        this.boardExplorerService.getBoardDocs(board)
+            .subscribe((docs: string) => {
+                this.currentBoardDocs = docs;
+            });
+        return false;
+    }
 
     ///////////////////////////////////////////////////////////////////////////
 

@@ -117,6 +117,14 @@ export class ProjectConfig extends SeedConfig {
         {
             name: 'rxjs',
             path: 'node_modules/rxjs'
+        },
+        {
+            name: 'ng-inline-svg',
+            path: 'node_modules/ng-inline-svg/lib/index.js'
+        },
+        {
+            name:'angular2-markdown',
+            path:'node_modules/angular2-markdown/bundles/angular2-markdown.umd.min.js'
         }
     ];
 

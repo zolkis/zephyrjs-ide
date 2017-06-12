@@ -54,4 +54,14 @@
           border-color: darken($border, 25%);
     }
   }
+
+  &.btn-link,
+  &.btn-link:hover,
+  &.btn-link:focus, &.btn-link.focus,
+  &.btn-link:active, &.btt-link.active {
+      color: $background;
+      background: none;
+      font-weight: normal;
+      outline: 0;
+  }
 }
