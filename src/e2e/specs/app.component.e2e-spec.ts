@@ -6,12 +6,12 @@ describe('App', () => {
         return await browser.get('/');
     });
 
-    it('should have a title', () => {
-        expect(browser.getTitle()).toEqual('JS IDE for Zephyr OS');
+    it('should have a title', async () => {
+        expect(await browser.getTitle()).toEqual('JS IDE for Zephyr OS');
     });
 
-    it('should have <nav>', () => {
-        expect(element(by.css('sd-navbar nav')).isPresent()).toEqual(true);
+    it('should have <nav>', async () => {
+        expect(await element(by.css('sd-navbar nav')).isPresent()).toEqual(true);
     });
 
     it('routing should preserve editor tabs', () => {

@@ -6,8 +6,7 @@ describe('About', () => {
         return await browser.get('/#/about');
     });
 
-    it('should have correct feature heading', () => {
-        expect(element.all(by.css('sd-about h3')).get(0).getText())
-            .toEqual('Features');
+    it('should have correct feature heading', async () => {
+        expect(await element.all(by.css('sd-about h3')).get(0).getText()).toEqual('Features');
     });
 });
