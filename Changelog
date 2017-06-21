@@ -1,3 +1,8 @@
+2017-06-21 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.17.0-alpha
+	* Feat: new Angular native implementation of the board explorer
+	* System: update multiple dependencies (incl. Angular to 4.2.3)
+
 2017-06-08 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.16.0-alpha
 	* Fix: save to device only if connected
