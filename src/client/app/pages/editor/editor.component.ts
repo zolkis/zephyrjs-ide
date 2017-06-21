@@ -60,6 +60,7 @@ export class EditorComponent {
         this.tabs = appDataService.editorTabs;
         this.currentBoard = this.boardExplorerService.listBoards()[0];
         this.sidebarOptions.opened = this.localStorageService.get('sidebarOptions.opened') as boolean;
+        this.consoleToggledOff= this.localStorageService.get('consoleToggledOff') as boolean;
     }
 
     // tslint:disable-next-line:no-unused-locals
@@ -72,6 +73,7 @@ export class EditorComponent {
     // tslint:disable-next-line:no-unused-locals
     public onToggleConsole() {
         this.consoleToggledOff = !this.consoleToggledOff;
+        this.localStorageService.set('consoleToggledOff', this.consoleToggledOff);
     }
 
     // tslint:disable-next-line:no-unused-locals
@@ -215,6 +217,7 @@ export class EditorComponent {
     // tslint:disable-next-line:no-unused-locals
     public onCloseConsole() {
         this.consoleToggledOff = true;
+        this.localStorageService.set('consoleToggledOff', this.consoleToggledOff);
         return false;
     }
 
