@@ -2,6 +2,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 // Third party
+import { LocalStorageService } from 'angular-2-local-storage';
 import { NotificationsService } from 'angular2-notifications';
 
 // Own
@@ -53,15 +54,18 @@ export class EditorComponent {
         public boardExplorerService: BoardExplorerService,
         public exampleService: ExampleService,
         public fileService: FileService,
+        private localStorageService: LocalStorageService,
         private notificationsService: NotificationsService,
         public webusbService: WebUsbService) {
         this.tabs = appDataService.editorTabs;
         this.currentBoard = this.boardExplorerService.listBoards()[0];
+        this.sidebarOptions.opened = this.localStorageService.get('sidebarOptions.opened') as boolean;
     }
 
     // tslint:disable-next-line:no-unused-locals
     public onToggleSidebar() {
         this.sidebarOptions.opened = !this.sidebarOptions.opened;
+        this.localStorageService.set('sidebarOptions.opened', this.sidebarOptions.opened);
         this._adjustBackdropPosition();
     }
 
