@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BoardExplorerService {
-    private readonly BASE_PATH: string = '/assets/boards/';
+    private readonly BASE_PATH: string = 'assets/boards/';
 
     private _boards: string[] = [
         'arduino_101',
