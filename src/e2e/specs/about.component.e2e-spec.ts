@@ -1,9 +1,15 @@
-import { browser, element, by } from 'protractor';
+import { browser, element, by, protractor } from 'protractor';
 
 
 describe('About', () => {
     beforeEach(async () => {
-        return await browser.get('/#/about');
+        await browser.get('/#/about');
+        return browser.driver.wait(function () {
+            let until = protractor.ExpectedConditions;
+            let elem = element(by.css('sd-about'));
+            browser.wait(until.visibilityOf(elem), 10000);
+            return elem;
+        });
     });
 
     it('should have correct feature heading', async () => {

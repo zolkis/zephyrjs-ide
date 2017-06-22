@@ -1,10 +1,16 @@
-import { browser, element, by } from 'protractor';
+import { browser, element, by, protractor } from 'protractor';
 
 
 describe('Home', () => {
 
   beforeEach(async () => {
-    return await browser.get('/');
+    await browser.get('/');
+    return browser.driver.wait(function () {
+        let until = protractor.ExpectedConditions;
+        let elem = element(by.css('sd-home'));
+        browser.wait(until.visibilityOf(elem), 10000);
+        return elem;
+    });
   });
 
   it('should have about button links to /#/about', async () => {

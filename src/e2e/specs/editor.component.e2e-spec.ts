@@ -3,7 +3,14 @@ import { browser, element, by, protractor, ElementFinder } from 'protractor';
 
 describe('Editor', () => {
     beforeEach(async () => {
-        return await browser.get('/#/editor');
+        await browser.get('/#/editor');
+        return browser.driver.wait(function () {
+            let until = protractor.ExpectedConditions;
+            let elem = element(by.css('sd-editor'));
+            browser.wait(until.visibilityOf(elem), 10000);
+            return elem;
+        });
+
     });
 
     it('should have correct nav text for About', async () => {
