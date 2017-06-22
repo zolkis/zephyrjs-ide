@@ -59,7 +59,6 @@ export class EditorComponent {
         public webusbService: WebUsbService) {
 
         this.tabs = appDataService.editorTabs;
-        this.currentBoard = this.boardExplorerService.listBoards()[0];
 
         let opened: boolean = this.localStorageService.get('sidebarOptions.opened') as boolean;
         if (opened === null) {
@@ -74,8 +73,12 @@ export class EditorComponent {
             // Default
             this.consoleToggledOff = false;
         }
-
         this.consoleToggledOff = off;
+
+        this.currentBoard = this.localStorageService.get('currentBoard') as string;
+        if (this.currentBoard === null) {
+            this.currentBoard = this.boardExplorerService.listBoards()[0];
+        }
     }
 
     // tslint:disable-next-line:no-unused-locals
@@ -293,6 +296,7 @@ export class EditorComponent {
     // tslint:disable-next-line:no-unused-locals
     public onSelectBoard(board: string): boolean {
         this.currentBoard = board;
+        this.localStorageService.set('currentBoard', this.currentBoard);
         return false;
     }
 
