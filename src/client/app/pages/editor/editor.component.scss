@@ -136,10 +136,20 @@
                 }
             }
 
+            .files, .examples {
+                .title {
+                    font-size: 13px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    position: absolute;
+                    top: 12px;
+                    left: 20px;
+                }
+            }
 
             .files {
                 a.filename {
-                    width: calc(100% - 50px);
+                    width: calc(100% - 38px);
                     display: inline-block;
 
                     .size {
@@ -150,7 +160,7 @@
 
                 a.delete {
                     width: auto;
-                    padding: 19px 15px;
+                    padding: 19px 9px;
                     display: inline-block;
                     float: right;
                     text-align: center;
