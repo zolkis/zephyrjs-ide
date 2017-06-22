@@ -203,6 +203,14 @@ export function main() {
             });
         });
 
+        it('stop should work', done => {
+            port.connect().then(() => {
+                port.run('foo()').then(() => {
+                    port.stop().then(() => done());
+                });
+            });
+        });
+
         it('save should work', done => {
             port.connect().then(() => {
                 port.save('foo.txt', 'foo').then((result: string) => {

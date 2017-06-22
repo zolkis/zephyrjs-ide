@@ -110,6 +110,10 @@ export class WebUsbService {
         return this.port.run(data);
     }
 
+    public stop(): Promise<string> {
+        return this.port.stop();
+    }
+
     public save(filename: string, data: string): Promise<string> {
         if (this.port === null) {
             return new Promise<string>((resolve, reject) => {
