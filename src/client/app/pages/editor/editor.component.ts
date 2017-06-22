@@ -57,10 +57,25 @@ export class EditorComponent {
         private localStorageService: LocalStorageService,
         private notificationsService: NotificationsService,
         public webusbService: WebUsbService) {
+
         this.tabs = appDataService.editorTabs;
         this.currentBoard = this.boardExplorerService.listBoards()[0];
-        this.sidebarOptions.opened = this.localStorageService.get('sidebarOptions.opened') as boolean;
-        this.consoleToggledOff= this.localStorageService.get('consoleToggledOff') as boolean;
+
+        let opened: boolean = this.localStorageService.get('sidebarOptions.opened') as boolean;
+        if (opened === null) {
+            // Default
+            this.sidebarOptions.opened = true;
+        } else {
+            this.sidebarOptions.opened = opened;
+        }
+
+        let off: boolean = this.localStorageService.get('consoleToggledOff') as boolean;
+        if (off === null) {
+            // Default
+            this.consoleToggledOff = false;
+        }
+
+        this.consoleToggledOff = off;
     }
 
     // tslint:disable-next-line:no-unused-locals
