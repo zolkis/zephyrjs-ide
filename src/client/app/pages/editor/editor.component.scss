@@ -222,32 +222,34 @@
             position: relative;
             background-color: $panel-bg-color;
 
-            .pane-title {
-                font-size: 14px;
-                line-height: 42px;
-                padding-left: 12px;
-                text-transform: uppercase;
+            .pane-header {
+                .pane-title {
+                    font-size: 14px;
+                    line-height: 42px;
+                    padding-left: 12px;
+                    text-transform: uppercase;
 
-                .close {
-                    float: right;
-                    padding: 14px 15.5px;
+                    .close {
+                        float: right;
+                        padding: 14px 15.5px;
 
-                    fa {
-                        color: darken($text-color, 10%);
-                        text-shadow: none;
-                        font-size: 13px;
-                        display: table-cell;
+                        fa {
+                            color: darken($text-color, 10%);
+                            text-shadow: none;
+                            font-size: 13px;
+                            display: table-cell;
+                        }
                     }
                 }
-            }
 
-            .pane-menu {
-                position: absolute;
-                top: 6px;
-                right: 0;
+                .pane-menu {
+                    position: absolute;
+                    top: 6px;
+                    right: 0;
 
-                .btn {
-                    padding-left: 0;
+                    .btn {
+                        padding-left: 0;
+                    }
                 }
             }
 

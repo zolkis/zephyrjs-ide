@@ -141,48 +141,52 @@
                     (on-ended-resizing)="onEndedResizing($event)">
 
                     <div id="board-viewer-pane" class="split-pane-content-primary">
-                        <div class="pane-title">Board explorer</div>
-                        <div class="pane-menu dropdown">
-                            <button
-                                id="board-selection-dropdown"
-                                class="btn btn-link dropdown-toggle"
-                                type="button"
-                                data-toggle="dropdown"
-                                aria-haspopuup="true"
-                                aria-expanded="true">
-                                {{boardExplorerService.getBoardTitle(currentBoard) | async}}
-                                <span class="caret"></span>
-                            </button>
-                            <ul
-                                class="dropdown-menu dropdown-menu-right"
-                                aria-labelledby="board-selection-dropdown">
-                                <li *ngFor="let board of boardExplorerService.listBoards()">
-                                    <a href="#" (click)="onSelectBoard(board)">
-                                        {{boardExplorerService.getBoardTitle(board) | async}}
-                                    </a>
-                                </li>
-                            </ul>
-                            <a
-                                href="#"
-                                class="btn btn-link"
-                                data-toggle="modal"
-                                data-target="#boardInfoModal"
-                                (click)="onBoardInfoClicked(currentBoard)">
-                                <fa [name]="'info-circle'"></fa>
-                            </a>
-                        </div> <!-- ./dropdown -->
+                        <div class="pane-header">
+                            <div class="pane-title">Board explorer</div>
+                            <div class="pane-menu dropdown">
+                                <button
+                                    id="board-selection-dropdown"
+                                    class="btn btn-link dropdown-toggle"
+                                    type="button"
+                                    data-toggle="dropdown"
+                                    aria-haspopuup="true"
+                                    aria-expanded="true">
+                                    Select board
+                                    <span class="caret"></span>
+                                </button>
+                                <ul
+                                    class="dropdown-menu dropdown-menu-right"
+                                    aria-labelledby="board-selection-dropdown">
+                                    <li *ngFor="let board of boardExplorerService.listBoards()">
+                                        <a href="#" (click)="onSelectBoard(board)">
+                                            {{boardExplorerService.getBoardTitle(board) | async}}
+                                        </a>
+                                    </li>
+                                </ul>
+                                <a
+                                    href="#"
+                                    class="btn btn-link"
+                                    data-toggle="modal"
+                                    data-target="#boardInfoModal"
+                                    (click)="onBoardInfoClicked(currentBoard)">
+                                    <fa [name]="'info-circle'"></fa>
+                                </a>
+                            </div> <!-- ./dropdown -->
+                        </div> <!-- ./pane-header -->
                         <sd-board-explorer [board]="currentBoard"></sd-board-explorer>
                     </div>
 
                     <div id="console-pane" class="split-pane-content-secondary">
-                        <div class="pane-title">
-                            Console
-                            <a  href="#"
-                                class="close"
-                                (click)="onCloseConsole()">
-                                <fa [name]="'close'"></fa>
-                            </a>
-                        </div>
+                        <div class="pane-header">
+                            <div class="pane-title">
+                                Console
+                                <a  href="#"
+                                    class="close"
+                                    (click)="onCloseConsole()">
+                                    <fa [name]="'close'"></fa>
+                                </a>
+                            </div>
+                        </div> <!-- ./pane-header -->
                         <sd-console></sd-console>
                     </div>
                 </horizontal-split-pane>
