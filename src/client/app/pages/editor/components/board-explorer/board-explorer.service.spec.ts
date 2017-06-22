@@ -88,7 +88,7 @@ export function main() {
 
         it('getBoardImage should work', async(() => {
             service.getBoardImage('mock_board').subscribe((image: string) => {
-                expect(image).toBe('/assets/boards/mock_board/mock_image.svg');
+                expect(image).toBe('assets/boards/mock_board/mock_image.svg');
             });
         }));
 
