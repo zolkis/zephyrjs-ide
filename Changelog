@@ -1,4 +1,8 @@
 2017-06-22 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.18.1-alpha
+	* Fix: use relative paths for the boards, so they work with any APP_BASE
+
+2017-06-22 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.18.0-alpha
 	* Feat: add STOP button to editor
 	* Feat: have editor remember the console and sidebar open/close status
