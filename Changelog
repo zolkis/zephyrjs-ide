@@ -1,3 +1,7 @@
+2017-06-29 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.18.3-alpha
+	* Chore: update WebUSB origin trial token
+
 2017-06-22 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.18.2-alpha
 	* Fix: use correct path in broken unit test
