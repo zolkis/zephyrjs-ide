@@ -9,6 +9,9 @@ services:
     command: npm start
     container_name: zephyrjs-ide-start
     image: zephyrjs-ide
+    volumes:
+      - .:/home/app/zephyrjs-ide
+      - /home/app/zephyrjs-ide/node_modules
     networks:
       - dev-network
     ports:
