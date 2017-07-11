@@ -171,7 +171,7 @@ export class BoardExplorerService {
                 _();
             } else {
                 this._fetchDocs(path, id)
-                    .catch((err: any, caught: Observable<void>): ObservableInput<{}> => {
+                    .catch((err: any, caught: Observable<void | {}>): ObservableInput<{}> => {
                         if (err.status === 404) {
                             // No documentation for this component.
                         }
@@ -184,14 +184,14 @@ export class BoardExplorerService {
         });
     }
 
-    private _fetchJson(path: string): Observable<void> {
+    private _fetchJson(path: string): Observable<void | {}> {
         return this.http.get(this.BASE_PATH + path + '/board.json')
             .map((res: Response) => {
                 this._data[path] = res.json();
             });
     }
 
-    private _fetchDocs(path: string, id?: string): Observable<void> {
+    private _fetchDocs(path: string, id?: string): Observable<void | {}> {
         if (this._data[path] === undefined) {
             this._data[path] = { docs: {}};
         }
@@ -206,7 +206,7 @@ export class BoardExplorerService {
                 .map((res: Response) => {
                     this._data[path].docs[id] = res.text();
                 })
-                .catch((err: any, caught: Observable<void>): ObservableInput<{}> => {
+                .catch((err: any, caught: Observable<void | {}>): ObservableInput<{}> => {
                     this._data[path].docs[id] = null;
                     return Observable.of(false);
                 });
@@ -216,7 +216,7 @@ export class BoardExplorerService {
                 .map((res: Response) => {
                     this._data[path].docs.__index__ = res.text();
                 })
-                .catch((err: any, caught: Observable<void>): ObservableInput<{}> => {
+                .catch((err: any, caught: Observable<void | {}>): ObservableInput<{}> => {
                     this._data[path].docs.__index__ = null;
                     return Observable.of(false);
                 });
