@@ -5,9 +5,9 @@
 <ul *ngIf="fileService.count() > 0">
     <li *ngFor="let filename of fileService.ls()">
         <a href="#" class="filename" (click)="onFilenameClicked(filename)">
-            {{filename}}
+            {{ filename }}
             <div class="size">
-                {{computeFileSize(filename)}} bytes
+                {{ computeFileSize(filename) }} bytes
             </div>
         </a>
 

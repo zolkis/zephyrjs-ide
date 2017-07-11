@@ -20,7 +20,7 @@
                     <fa [name]="'folder'"></fa>
                     <span *ngIf="sidebarOptions.opened">
                         Files
-                        <span class="count">({{fileService.count()}})</span>
+                        <span class="count">({{ fileService.count() }})</span>
                     </span>
                 </a>
             </li>
@@ -32,7 +32,7 @@
                     <fa [name]="'code'"></fa>
                     <span *ngIf="sidebarOptions.opened">
                         Examples
-                        <span class="count">({{exampleService.count()}})</span>
+                        <span class="count">({{ exampleService.count() }})</span>
                     </span>
                 </a>
             </li>
@@ -115,7 +115,7 @@
                         *ngFor="let tab of tabs"
                         role="tabpanel"
                         [ngClass]="{'tab-pane': true, 'active': tab.active}"
-                        id="tab-{{tab.id}}">
+                        id="tab-{{ tab.id }}">
 
                         <sd-monaco
                             [tab]="tab"
@@ -159,7 +159,7 @@
                                     aria-labelledby="board-selection-dropdown">
                                     <li *ngFor="let board of boardExplorerService.listBoards()">
                                         <a href="#" (click)="onSelectBoard(board)">
-                                            {{boardExplorerService.getBoardTitle(board) | async}}
+                                            {{ boardExplorerService.getBoardTitle(board) | async }}
                                         </a>
                                     </li>
                                 </ul>
@@ -229,7 +229,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">
-                    {{boardExplorerService.getBoardTitle(currentBoard) | async}}
+                    {{ boardExplorerService.getBoardTitle(currentBoard) | async }}
                 </h4>
             </div>
             <div class="modal-body">

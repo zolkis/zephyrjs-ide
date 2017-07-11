@@ -5,7 +5,7 @@
 <ul *ngIf="exampleService.count() > 0">
     <li *ngFor="let filename of exampleService.ls()">
         <a href="#" class="example" (click)="onFilenameClicked(filename)">
-            {{filename}}
+            {{ filename }}
         </a>
     </li>
 </ul>

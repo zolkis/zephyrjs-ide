@@ -5,14 +5,14 @@
         <a
             class="nav-link"
             [class.editing]="tab.editing"
-            title="{{tab.title}}"
-            href="#tab-{{tab.id}}"
+            title="{{ tab.title }}"
+            href="#tab-{{ tab.id }}"
             role="tab"
             data-toggle="tab"
             (click)="onActivateTab(tab)">
 
             <span class="tab-title">
-                {{tab.title}}
+                {{ tab.title }}
             </span>
 
             <input class="tab-title-editor"

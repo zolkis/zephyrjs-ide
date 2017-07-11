@@ -36,20 +36,20 @@
              gitHubService.wizardStep === wizardStepEnum.DOWNLOADING">
     <div *ngIf="gitHubService.data.user.object !== null" class="login-info">
         <div class="avatar">
-            <a href="{{gitHubService.data.user.object.hhtml_url}}" target="_blank">
-                <img src="{{gitHubService.data.user.object.avatar_url}}"
-                     alt="{{gitHubService.data.user.object.login}}"/>
+            <a href="{{ gitHubService.data.user.object.hhtml_url }}" target="_blank">
+                <img src="{{ gitHubService.data.user.object.avatar_url }}"
+                     alt="{{ gitHubService.data.user.object.login }}"/>
             </a>
         </div>
 
         <div class="info">
             You are logged in as
-            <a href="{{gitHubService.data.user.object.html_url}}" target="_blank">
+            <a href="{{ gitHubService.data.user.object.html_url }}" target="_blank">
                 <span *ngIf="gitHubService.data.user.object.name">
-                    {{gitHubService.data.user.object.name}}.
+                    {{ gitHubService.data.user.object.name }}.
                 </span>
                 <span *ngIf="!gitHubService.data.user.object.name">
-                    {{gitHubService.data.user.object.login}}.
+                    {{ gitHubService.data.user.object.login }}.
                 </span>
             </a>
         </div>
@@ -65,7 +65,7 @@
                [disabled]="gitHubService.data.repos.objects.length === 0"
                (ngModelChange)="onRepoChanged($event)">
             <option *ngFor="let repo of gitHubService.data.repos.objects" [value]="repo.full_name">
-            {{repo.full_name}}
+            {{ repo.full_name }}
             </option>
         </select>
     </div> <!-- /.form-group -->
@@ -80,7 +80,7 @@
                [disabled]="gitHubService.data.branches.objects.length === 0"
                (ngModelChange)="onBranchChanged($event)">
             <option *ngFor="let branch of gitHubService.data.branches.objects" [value]="branch.name">
-            {{branch.name}}
+            {{ branch.name }}
             </option>
         </select>
         <fa class="loading" [name]="'spinner'" [spin]="true" *ngIf="gitHubService.data.branches.ui.loading"></fa>
@@ -114,7 +114,7 @@
                     </td>
                     <td>
                         <a href="#" (click)="onFileClicked(file)">
-                            {{file.path}}
+                            {{ file.path }}
                         </a>
                     </td>
                 </tr>

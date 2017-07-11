@@ -80,7 +80,7 @@
                 <th class="name">
                     <span *ngIf="server.https">https://</span>
                     <span *ngIf="!server.https">http://</span>
-                    {{server.ip}}:{{server.port}}{{server.path}}
+                    {{ server.ip }}:{{ server.port }}{{ server.path }}
                 </th>
                 <th class="value">
                     &nbsp;
@@ -114,7 +114,7 @@
                     <fa [name]="'feed'"></fa>
                 </td>
                 <td class="name">
-                    {{resource.path}}
+                    {{ resource.path }}
                 </td>
                 <td class="value">
                     <sd-ocf-resource [resource]="resource"></sd-ocf-resource>
