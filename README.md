@@ -5,6 +5,7 @@
 
 # Table of Contents
 
+- [Table of Content](#table-of-content)
 - [Introduction](#introduction)
 - [How to start](#how-to-start)
 - [How to start with Aot](#how-to-start-with-aot-compilation)
@@ -13,7 +14,7 @@
   + [How to build and start the dockerized version of the application](#how-to-build-and-start-the-dockerized-version-of-the-application)
   + [Development build and deployment](#development-build-and-deployment)
   + [Production build and deployment](#production-build-and-deployment)
-- [Table of Content](#table-of-content)
+- [Analyzing the space usage of the app](#analyzing-the-space-usage-of-the-app)
 - [Configuration](#configuration)
 - [Environment Configuration](#environment-configuration)
 - [Tools documentation](#tools-documentation)
@@ -128,8 +129,8 @@ The application provides full Docker support. You can use it for both developmen
 
 The Dockerization infrastructure is described in the `docker-compose.yml` (respectively `docker-compose.production.yml`.
 The application consists of two containers:
-- `angular-seed` - In development mode, this container serves the angular app. In production mode it builds the angular app, with the build artifacts being served by the Nginx container
-- `angular-seed-nginx` - This container is used only production mode. It serves the built angular app with Nginx.
+- `zephyrjs-ide` - In development mode, this container serves the angular app. In production mode it builds the angular app, with the build artifacts being served by the Nginx container
+- `zephyrjs-ide-nginx` - This container is used only production mode. It serves the built angular app with Nginx.
 
 ## Development build and deployment
 
@@ -152,7 +153,17 @@ $ docker-compose -f docker-compose.production.yml up zephyrjs-ide   # Wait until
 $ docker-compose -f docker-compose.production.yml up -d zephyrjs-ide-nginx  # Start the nginx container in detached mode, in another terminal window
 ```
 
-Now open your browser at http://localhost:8000
+# Analyzing the space usage of the app
+You can analyze the bundle with `[source-map-explorer](https://github.com/danvk/source-map-explorer)`.
+It creates a html chart with a file by default, but output can also be json or tsv.
+
+Run the following:
+
+```bash
+$ npm run sme.prod # or respectively sme.prod.aot / sme.prod.rollup.aot
+# You can specify the output format by passing the `sme-out-format` parameter
+$ npm run sme.prod.aot -- --sme-out-format json # or html / tsv
+```
 
 # Configuration
 
