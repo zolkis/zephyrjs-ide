@@ -1,0 +1,25 @@
+<div class="title">
+    Settings
+</div>
+
+<ul>
+    <li>
+        <span class="label">
+            Font size: {{ settingsService.getEditorFontSize() }}
+        </span>
+
+        <div class="controls">
+            <button (click)="onFontSizeDecreaseClicked()">
+                <fa [name]="'font'"></fa><sup>-</sup>
+            </button>
+
+            <button (click)="onFontSizeDefaultClicked()">
+                <fa [name]="'font'"></fa>
+            </button>
+
+            <button (click)="onFontSizeIncreaseClicked()">
+                <fa [name]="'font'"></fa><sup>+</sup>
+            </button>
+        </div>
+    </li>
+</ul>

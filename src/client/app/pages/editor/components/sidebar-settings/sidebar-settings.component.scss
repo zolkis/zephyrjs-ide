@@ -1,0 +1,57 @@
+@import '../../../../../scss/variables';
+
+
+:host {
+    padding: 10px;
+    display: block;
+    height: 100%;
+
+    .title {
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: absolute;
+        top: 12px;
+        left: 20px
+    }
+
+    ul {
+        width: calc(100% - 20px) !important;
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+
+        li {
+            .label {
+                color: initial;
+                font-weight: bold;
+                font-size: 13px;
+            }
+
+            .controls {
+                float: right;
+
+                button {
+                    border: none;
+                    width: 18px;
+                    height: 18px;
+                    color: #fdfdfd;
+                    font-size: 10px;
+                    padding: 0;
+                    text-align: center;
+                    border-radius: 2px;
+                    background-color: #bfbfbf;
+
+                    &:hover {
+                        background-color: $accent-color;
+                    }
+
+                    sup {
+                        display: block;
+                        top: -1.5em;
+                        left: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

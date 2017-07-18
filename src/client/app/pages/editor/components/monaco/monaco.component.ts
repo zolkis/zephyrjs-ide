@@ -8,6 +8,7 @@ import {
     ViewChild
 } from '@angular/core';
 
+import { SettingsService } from '../../settings.service';
 import { WebUsbService } from '../../../../shared/webusb/webusb.service';
 
 import { WebUsbPort } from '../../../../shared/webusb/webusb.port';
@@ -37,7 +38,9 @@ export class MonacoComponent implements AfterViewInit {
 
     private initialCode: string = '';
 
-    constructor(private webusbService: WebUsbService) {
+    constructor(
+        private settingsService: SettingsService,
+        private webusbService: WebUsbService) {
     }
 
     public ngAfterViewInit() {
@@ -102,7 +105,13 @@ export class MonacoComponent implements AfterViewInit {
                 horizontalScrollbarSize: 7
             },
             hideCursorInOverviewRuler: true,
-            scrollBeyondLastLine: false
+            scrollBeyondLastLine: false,
+
+            fontSize: this.settingsService.getEditorFontSize()
+        });
+
+        this.settingsService.onEditorFontSizeChanged.subscribe((size: number) => {
+            this.tab.editor.updateOptions({fontSize: size});
         });
 
         if (model !== null) {

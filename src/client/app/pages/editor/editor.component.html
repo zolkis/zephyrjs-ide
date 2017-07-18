@@ -47,6 +47,17 @@
                     </span>
                 </a>
             </li>
+
+            <li>
+                <a href="#" class="settings"
+                   [class.active]="secondarySidebarOptions.content === 'settings'"
+                   (click)="onSettingsClicked()">
+                    <fa [name]="'cog'"></fa>
+                    <span *ngIf="sidebarOptions.opened">
+                        Settings
+                    </span>
+                </a>
+            </li>
         </ul>
 
         <button class="toggleCollapse" (click)="onToggleSidebar()">
@@ -91,6 +102,11 @@
                 (onFileSelected)="onGitHubFileSelected($event)"
                 class="github">
             </sd-sidebar-github>
+
+            <sd-sidebar-settings
+                *ngIf="secondarySidebarOptions.content === 'settings'"
+                class="settings">
+            </sd-sidebar-settings>
         </ng-sidebar>
 
         <vertical-split-pane

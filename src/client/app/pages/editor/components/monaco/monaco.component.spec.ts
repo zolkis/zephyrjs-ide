@@ -12,6 +12,7 @@ import { AppDataService } from '../../../../app.data.service';
 import { EditorTab } from '../../editor.tab';
 import { MonacoModule } from './monaco.module';
 import { MonacoComponent } from './monaco.component';
+import { SettingsService } from '../../settings.service';
 import { WebUsbService } from '../../../../shared/webusb/webusb.service';
 
 
@@ -58,6 +59,7 @@ export function main() {
                 providers: [
                     AppDataService,
                     LocalStorageService,
+                    SettingsService,
                     WebUsbService
                 ],
                 imports: [

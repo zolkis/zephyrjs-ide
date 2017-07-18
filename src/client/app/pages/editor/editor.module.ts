@@ -19,6 +19,7 @@ import { OcfExplorerModule } from './components/ocf-explorer/ocf-explorer.module
 import { SidebarFilesModule } from './components/sidebar-files/sidebar-files.module';
 import { SidebarExamplesModule } from './components/sidebar-examples/sidebar-examples.module';
 import { SidebarGitHubModule } from './components/sidebar-github/sidebar-github.module';
+import { SidebarSettingsModule } from './components/sidebar-settings/sidebar-settings.module';
 import { StatusBarModule } from './components/statusbar/statusbar.module';
 import { TabBarModule } from './components/tab-bar/tab-bar.module';
 
@@ -47,6 +48,7 @@ import { EditorComponent } from './editor.component';
         SidebarFilesModule,
         SidebarExamplesModule,
         SidebarGitHubModule,
+        SidebarSettingsModule,
         StatusBarModule,
         TabBarModule,
 
