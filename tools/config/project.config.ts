@@ -125,7 +125,12 @@ export class ProjectConfig extends SeedConfig {
         {
             name:'angular2-markdown',
             path:'node_modules/angular2-markdown/bundles/angular2-markdown.umd.min.js'
+        },
+        {
+            name:'angular2-ui-switch',
+            path:'node_modules/angular2-ui-switch/dist/index.js'
         }
+
     ];
 
     this.SYSTEM_CONFIG_DEV.packages[''] = {

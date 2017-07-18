@@ -457,6 +457,10 @@ angular2-notifications@0.4.53:
   version "0.4.53"
   resolved "https://registry.yarnpkg.com/angular2-notifications/-/angular2-notifications-0.4.53.tgz#d308f1a10a58723a7fa68b488b855473b6d12f32"
 
+angular2-ui-switch@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/angular2-ui-switch/-/angular2-ui-switch-1.2.0.tgz#096a2ccc3eed06e78ef76130cd27a8220e2c0a50"
+
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-0.2.1.tgz#0d8e946967a3d8143f93e24e298525fc1b2235f9"

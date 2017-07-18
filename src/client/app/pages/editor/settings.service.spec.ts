@@ -9,7 +9,8 @@ import { SettingsService } from './settings.service';
 @Injectable()
 class MockLocalStorageService {
     public contents: any = {
-        'SETTINGS.editor.fontSize': 12
+        'SETTINGS.editor.fontSize': 12,
+        'SETTINGS.editor.lineNumbers': true
     };
 
     public get(prop: string): string {
@@ -41,7 +42,7 @@ export function main() {
             service = settingsService;
         }));
 
-        it('get/set editorFontSize should work', () => {
+        it('editor.fontSize functions should work', () => {
             expect(service.getEditorFontSize()).toBe(12);
 
             service.increaseEditorFontSize();
@@ -59,6 +60,19 @@ export function main() {
             service.setEditorFontSize(24);
             service.increaseEditorFontSize();
             expect(service.getEditorFontSize()).toBe(24);
+        });
+
+        it('editor.lineNumbers functions should work', () => {
+            expect(service.getEditorLineNumbers()).toBe(true);
+
+            service.toggleEditorLineNumbers();
+            expect(service.getEditorLineNumbers()).toBe(false);
+
+            service.setEditorLineNumbers(true);
+            expect(service.getEditorLineNumbers()).toBe(true);
+
+            service.setEditorLineNumbers(false);
+            expect(service.getEditorLineNumbers()).toBe(false);
         });
     });
 }

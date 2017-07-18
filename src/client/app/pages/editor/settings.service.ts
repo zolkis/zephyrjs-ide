@@ -9,20 +9,30 @@ export class SettingsService {
     readonly PREFIX: string = 'SETTINGS.';
 
     @Output() onEditorFontSizeChanged = new EventEmitter();
+    @Output() onEditorLineNumbersChanged = new EventEmitter();
 
     private _settings: any = {
         editor: {
             defaultFontSize: 12,
             minimumFontSize: 6,
             maximumFontSize: 24,
-            fontSize: 12
+            fontSize: 12,
+
+            lineNumbers: true
         }
     };
 
     public constructor(private _localStorageService: LocalStorageService) {
-        let val = this._localStorageService.get(this.PREFIX + 'editor.fontSize') as number;
-        if (val !== null) {
-            this.setEditorFontSize(val);
+        let fontSize: number =
+            this._localStorageService.get(this.PREFIX + 'editor.fontSize') as number;
+        if (fontSize !== null) {
+            this.setEditorFontSize(fontSize);
+        }
+
+        let lineNumbers: boolean =
+            this._localStorageService.get(this.PREFIX + 'editor.lineNumbers') as boolean;
+        if (lineNumbers !== null) {
+            this.setEditorLineNumbers(lineNumbers);
         }
     }
 
@@ -54,5 +64,21 @@ export class SettingsService {
             return;
         }
         this.setEditorFontSize(this.getEditorFontSize() + 1);
+    }
+
+    public getEditorLineNumbers(): boolean {
+        return this._settings.editor.lineNumbers;
+    }
+
+    public setEditorLineNumbers(show: boolean) {
+        if (show !== this.getEditorLineNumbers()) {
+            this._settings.editor.lineNumbers = show;
+            this._localStorageService.set(this.PREFIX + 'editor.lineNumbers', show);
+            this.onEditorLineNumbersChanged.emit(show);
+        }
+    }
+
+    public toggleEditorLineNumbers() {
+        this.setEditorLineNumbers(!this.getEditorLineNumbers());
     }
 }

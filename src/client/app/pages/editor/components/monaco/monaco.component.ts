@@ -107,11 +107,16 @@ export class MonacoComponent implements AfterViewInit {
             hideCursorInOverviewRuler: true,
             scrollBeyondLastLine: false,
 
-            fontSize: this.settingsService.getEditorFontSize()
+            fontSize: this.settingsService.getEditorFontSize(),
+            lineNumbers: this.settingsService.getEditorLineNumbers()
         });
 
         this.settingsService.onEditorFontSizeChanged.subscribe((size: number) => {
             this.tab.editor.updateOptions({fontSize: size});
+        });
+
+        this.settingsService.onEditorLineNumbersChanged.subscribe((show: boolean) => {
+            this.tab.editor.updateOptions({lineNumbers: show});
         });
 
         if (model !== null) {

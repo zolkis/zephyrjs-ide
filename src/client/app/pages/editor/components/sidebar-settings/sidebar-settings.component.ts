@@ -24,4 +24,8 @@ export class SidebarSettingsComponent {
     public onFontSizeIncreaseClicked() {
         this.settingsService.increaseEditorFontSize();
     }
+
+    public onLineNumbersSwitchClicked() {
+        this.settingsService.toggleEditorLineNumbers();
+    }
 }
