@@ -8,10 +8,6 @@
     height: 100%;
     font-family: $default-font;
 
-    &#home-route /deep/ sd-navbar, &#home-route /deep/ sd-footer {
-        display: none;
-    }
-
     &#editor-route /deep/ sd-footer {
         display: none;
     }

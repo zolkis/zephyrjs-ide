@@ -1,73 +1,237 @@
 @import '../../../scss/variables';
 @import '../../../scss/mixins';
 
+@mixin landing-button {
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-family: $thin-font;
+    font-size: 90%;
+}
+
 :host {
-    background: url('assets/images/landing-bg.jpg') no-repeat 50% 50% fixed;
-    background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -webkit-background-size: cover;
     display: block;
-    height: 100%;
+    background: #f0f0f0;
 
-    #landing-page {
-        color: white !important;
+    #leader {
+        background: url('assets/images/landing-bg.jpg') no-repeat 100% 100%;
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 80px;
+        padding-bottom: 200px;
 
-        .container {
-            width: 485px;
-        }
-    }
-
-    #logo {
-        margin-bottom: 20px;
-
-        img {
-            width: 114px;
-            height: 84px;
-        }
-    }
-
-    #app-name {
-        font-family: $thin-font;
-        font-size: 28px;
-        margin-bottom: -24px;
-        text-transform: uppercase;
-    }
-
-    #navbar {
-        margin-top: 100px;
-        padding-left: 0;
-
-        > li {
-            display: inline-block;
-            padding: 0 35px;
-
-            > a {
-                @include button-variant($panel-bg-color, #00ffff, transparent);
-                padding: 2px 40px;
+        #logo {
+            img {
+                width: 150px;
             }
         }
 
-        margin-bottom: 40px;
-    }
+        #app-name {
+            font-size: 45px;
+            margin-bottom: 40px;
 
-    #about {
-        p {
-            color: #e0e0e0;
+            small {
+                display: block;
+                font-size: 11px;
+                margin-top: -11px;
+                margin-left: 58px;
+            }
+        }
+
+        #app-tagline {
+            font-size: 50px;
+            font-family: $thin-font;
+        }
+
+        #get-started {
+            margin-top: 30px;
+            border-radius: 4px;
+            background-color: #ff6666;
+            text-transform: uppercase;
+            font-size: 12px;
+            padding: 10px 30px;
+            letter-spacing: 1px;
         }
     }
 
-    #get-started {
-        $bg: #ff545c;
+    #about {
+        margin: 0 auto;
+        width: 66.66%;
+        margin-top: -150px;
 
-        margin-top: 30px;
-        padding: 12px 36px;
-        background-color: $bg;
-        color: $panel-bg-color;
-        text-shadow: none;
+        th {
+            background-color: $panel-bg-color;
+            padding: 20px;
+            text-transform: uppercase;
+            color: $text-highlight-color;
+            font-size: 110%;
+            width: 50%;
 
-        &:hover {
-            background-color: lighten($bg, 5%);
+            &:last-child {
+                border-left: 1px solid lighten($panel-bg-color, 2.5%);
+            }
+        }
+
+        td {
+            background-color: #ff6666;
+            padding: 30px;
+
+            &:last-child {
+                background-color: #e65258;
+            }
+
+            ul {
+                padding: 0;
+            }
+
+            li {
+                list-style: none;
+                padding: 2px 0;
+            }
+        }
+    }
+
+    #steps {
+        display: block;
+        position: relative;
+        width: 100%;
+
+        #steps-bg {
+            background-image: url('assets/images/landing-steps-bg.png');
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100%;
+            width: 50%;
+            max-width: 600px;
+        }
+
+        .step {
+            margin: 0 auto;
+            padding: 80px;
+            width: 66.66%;
+            color: #111;
+
+            .title {
+                font-family: $bold-font;
+                font-size: 22px;
+                text-transform: uppercase;
+            }
+
+            .description {
+                width: 50%;
+            }
+
+            .action {
+                @include landing-button;
+                margin-top: 20px;
+                background-color: #e65258;
+            }
+        }
+
+        .step-container {
+            &:nth-child(2) {
+                background: white;
+
+                .action {
+                    background-color: #5ad1d2;
+                }
+            }
+
+            &:nth-child(3) {
+                .action {
+                    background-color: #dbe0e8;
+                }
+            }
+        }
+    }
+
+    #tutorials {
+        display: block;
+        margin-top: 20px;
+        padding-bottom: 40px;
+        background: #f0f0f0;
+
+        .tutorial {
+            width: 66.66%;
+            margin: 0 auto;
+
+            .header {
+                background-color: $panel-bg-color;
+                color: $text-highlight-color;
+                text-transform: uppercase;
+                font-size: 110%;
+                padding: 20px;
+            }
+
+            .contents {
+                background-color: white;
+                color: #111;
+
+                .video, .description {
+                    vertical-align: middle;
+                    display: inline-block;
+                    width: 50%;
+                }
+
+                .video {
+                    a {
+                        display: block;
+                    }
+
+                    img {
+                        width: 100%;
+                    }
+                }
+
+                .description {
+                    padding: 20px;
+                    width: calc(50% - 40px);
+
+                    .title {
+                        font: $bold-font;
+                        font-weight: bold;
+                        font-size: 1.2em;
+                        margin-bottom: 10px;
+                    }
+
+                    .action {
+                        display: block;
+                        width: inherit;
+                        margin-top: 20px;
+                        @include landing-button;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width: 992px) {
+    :host {
+        #about, #steps .step {
+            width: 90% !important;;
+        }
+
+        #steps {
+            .step {
+                padding: 10px !important;
+
+                .description {
+                    width: 100% !important;
+                }
+            }
+        }
+
+        #tutorials {
+            .tutorial {
+                width: 90% !important;
+
+                .video {
+                    width: 100% !important;
+                }
+            }
         }
     }
 }
@@ -86,8 +250,14 @@
             font-size: 18px;
         }
 
-        #hello {
-            font-size: 80px;
+        #app-tagline {
+            font-size: 28px !important;
+        }
+
+        #about {
+            th, td {
+                padding: 10px !important;
+            }
         }
     }
 }

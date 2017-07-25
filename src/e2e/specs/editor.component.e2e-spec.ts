@@ -13,9 +13,9 @@ describe('Editor', () => {
 
     });
 
-    it('should have correct nav text for About', async () => {
+    it('should have correct nav text for Home', async () => {
         let el = element(by.css('sd-navbar .navbar-right li:nth-child(1) a'));
-        expect(await el.getText()).toEqual('About');
+        expect(await el.getText()).toEqual('Home');
     });
 
     it('should have correct nav text for Editor', async () => {

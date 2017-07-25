@@ -1,40 +1,128 @@
-<div id="landing-page" class="absolutely-centered">
-    <div class="container">
-        <div id="logo">
-            <img src="assets/images/logo-home.png"
-                 alt="<%= APP_TITLE %>" />
-        </div>
-
-        <div id="app-name"><%= APP_TITLE_HTML %></div>
-
-        <ul id="navbar">
-            <li>
-                <a [routerLink]="['/about']" class="btn btn-mini">
-                    About
-                </a>
-            </li>
-            <li>
-                <a [routerLink]="['/editor']" class="btn btn-mini">
-                    Editor
-                </a>
-            </li>
-        </ul>
-
-        <div id="about">
-            <p>
-                Welcome to <%= APP_TITLE_HTML %>, a creative computing tool for
-                makers to build their projects, apps, and more.
-            </p>
-            <p>
-                This editor is web plug-and-play ready, with integrating USB APIs
-                that let you use your board instantaneously, and start coding as
-                soon as you plug it in.
-            </p>
-        </div>
-
-        <a class="btn" id="get-started"
-           [routerLink]="['/editor']">
-            Let's get started!
-        </a>
+<div id="leader">
+    <div id="logo">
+        <img src="assets/images/logo-home.png"
+             alt="<%= APP_TITLE %>" />
     </div>
-</div>
+
+    <div id="app-name">
+        JS <strong>IDE</strong>
+        <small>for Zephyr<sup>&reg;</sup> OS</small>
+    </div>
+
+    <div id="app-tagline">
+        A creative development tool.
+    </div>
+
+    <a class="btn" id="get-started"
+       [routerLink]="['/editor']">
+        Let's get started!
+    </a>
+</div> <!-- ./leader -->
+
+<table id="about">
+    <thead>
+        <tr>
+            <th>About</th>
+            <th>Features</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>
+                <p>
+                    Welcome to <%= APP_TITLE_HTML %>, a creative computing tool
+                    for makers to build their projects, apps, and more.
+                </p>
+                <p>
+                    This editor is web plug-and-play ready, with integrating
+                    USB APIs that let you use your board instantaneously, and
+                    start coding as soon as you plug it in.
+                </p>
+            </td>
+
+            <td>
+                <ul>
+                    <li>Plug-and-play WebUSB connectivity</li>
+                    <li>JavaScript Runtime for Zephyr<sup>&reg;</sup> OS powered boards</li>
+                    <li>Instant JAvaScript code execution on target</li>
+                    <li>IDE with multiple tabs, console shell, and GitHub integration</li>
+                    <li>Web app that works online and offline</li>
+                    <li>Integrated documentation and board explorer</li>
+                </ul>
+            </td>
+        </tr>
+</table> <!-- ./about -->
+
+
+<div id="steps">
+    <div class="step-container">
+        <div class="step">
+            <div class="title">01. Set up</div>
+            <div class="description">
+                Our Web IDE runs on a web browser without any plugins. All you need
+                is a ZephyrJS powered board, USB cable, and a web browser.
+            </div>
+            <a href="https://www.youtube.com/watch?v=4ZrrsCVbPJs"
+               target="_blank" class="action btn">
+                Watch our tutorial
+            </a>
+        </div>
+    </div>
+
+    <div class="step-container">
+        <div class="step">
+            <div class="title">02. Connect the board</div>
+            <div class="description">
+                Plug in your USB cable ro your board and open the editor in your
+                browser.
+            </div>
+            <a href="https://www.zephyrproject.org/downloads"
+               target="_blank" class="action btn">
+                Download images
+            </a>
+        </div>
+    </div>
+
+    <div class="step-container">
+        <div class="step">
+            <div class="title">03. Start coding</div>
+            <div class="description">
+                Explore the documentation and your new environment, code and deploy
+                to a device in a matter of minutes!
+            </div>
+            <a href="https://github.com/01org/zephyr.js/tree/master/samples"
+               target="_blank" class="action btn">
+                Download sample code
+            </a>
+        </div>
+    </div>
+
+    <div id="steps-bg" class="hidden-xs hidden-sm"></div> <!-- just for the background image -->
+</div> <!-- ./steps -->
+
+<div id="tutorials">
+    <div class="tutorial">
+        <div class="header">Tutorials</div>
+        <div class="contents">
+            <div class="video">
+                <a href="https://www.youtube.com/watch?v=4ZrrsCVbPJs"
+                   target="_blank">
+                    <img src="assets/images/landing-tutorial-video.jpg"
+                         alt="Tutorial" />
+                </a>
+            </div> <!-- ./contente -->
+            <div class="description hidden-xs hidden-sm">
+                <div class="title">ZJS IDE tutorial</div>
+                Theis wiki is intended to supplement the video tutorial about
+                ZJS and the Web IDE. Here you will find step-by-step
+                instructions to recreate what you see there, and learn how to
+                get started with ZJS and the IDE.
+                <a href="https://wiki.zephyrproject.org/view/Main_Page"
+                   target="_blank" class="action btn">
+                    Go to Wiki
+                </a>
+            </div> <!-- ./description -->
+        </div> <!-- ./contents -->
+    </div> <!-- ./tutorial -->
+</div> <!-- ./tutorials -->

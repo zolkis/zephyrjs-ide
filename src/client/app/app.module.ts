@@ -13,7 +13,6 @@ import { ResourceModule } from 'ngx-resource';
 
 // This app
 import { HomeModule } from './pages/home/home.module';
-import { AboutModule } from './pages/about/about.module';
 import { EditorModule } from './pages/editor/editor.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -27,7 +26,6 @@ import { SharedModule } from './shared/shared.module';
 
       ResourceModule.forRoot(),
 
-      AboutModule,
       EditorModule,
       HomeModule,
       SharedModule.forRoot()
