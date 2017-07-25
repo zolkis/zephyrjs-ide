@@ -1,3 +1,9 @@
+2017-07-25 Salvatore Iovene <salvatore.iovene@intel.com>
+	* Release: 0.19.0-alpha
+	* System: get up to date with seed project
+	* Feat: add Settings UI to editor
+	* Feat: improve landing page
+
 2017-06-29 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.18.3-alpha
 	* Chore: update WebUSB origin trial token
