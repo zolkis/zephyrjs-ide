@@ -20,7 +20,7 @@
                     <fa [name]="'folder'"></fa>
                     <span *ngIf="sidebarOptions.opened">
                         Files
-                        <span class="count">({{fileService.count()}})</span>
+                        <span class="count">({{ fileService.count() }})</span>
                     </span>
                 </a>
             </li>
@@ -32,7 +32,7 @@
                     <fa [name]="'code'"></fa>
                     <span *ngIf="sidebarOptions.opened">
                         Examples
-                        <span class="count">({{exampleService.count()}})</span>
+                        <span class="count">({{ exampleService.count() }})</span>
                     </span>
                 </a>
             </li>
@@ -44,6 +44,17 @@
                     <fa [name]="'github'"></fa>
                     <span *ngIf="sidebarOptions.opened">
                         GitHub
+                    </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#" class="settings"
+                   [class.active]="secondarySidebarOptions.content === 'settings'"
+                   (click)="onSettingsClicked()">
+                    <fa [name]="'cog'"></fa>
+                    <span *ngIf="sidebarOptions.opened">
+                        Settings
                     </span>
                 </a>
             </li>
@@ -91,6 +102,11 @@
                 (onFileSelected)="onGitHubFileSelected($event)"
                 class="github">
             </sd-sidebar-github>
+
+            <sd-sidebar-settings
+                *ngIf="secondarySidebarOptions.content === 'settings'"
+                class="settings">
+            </sd-sidebar-settings>
         </ng-sidebar>
 
         <vertical-split-pane
@@ -115,7 +131,7 @@
                         *ngFor="let tab of tabs"
                         role="tabpanel"
                         [ngClass]="{'tab-pane': true, 'active': tab.active}"
-                        id="tab-{{tab.id}}">
+                        id="tab-{{ tab.id }}">
 
                         <sd-monaco
                             [tab]="tab"
@@ -159,7 +175,7 @@
                                     aria-labelledby="board-selection-dropdown">
                                     <li *ngFor="let board of boardExplorerService.listBoards()">
                                         <a href="#" (click)="onSelectBoard(board)">
-                                            {{boardExplorerService.getBoardTitle(board) | async}}
+                                            {{ boardExplorerService.getBoardTitle(board) | async }}
                                         </a>
                                     </li>
                                 </ul>
@@ -200,13 +216,13 @@
         <div class="about">
             <span class="app-version">
                 <a href="https://github.com/01org/zephyrjs-ide/releases" target="_blank">
-                    v0.18.3-alpha
+                    v0.19.0-alpha
                 </a>
             </span>
             <span class="separator">/</span>
             <span class="app-rev">
                 <a href="https://github.com/01org/zephyrjs-ide/commits" target="_blank">
-                    502fccc
+                    18c7815
                 </a>
             </span>
         </div> <!-- ./about -->
@@ -229,7 +245,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">
-                    {{boardExplorerService.getBoardTitle(currentBoard) | async}}
+                    {{ boardExplorerService.getBoardTitle(currentBoard) | async }}
                 </h4>
             </div>
             <div class="modal-body">
