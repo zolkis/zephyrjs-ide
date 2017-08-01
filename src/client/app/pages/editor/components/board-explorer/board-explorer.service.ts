@@ -16,7 +16,8 @@ export class BoardExplorerService {
         'minnowboard_turbot_B_41',
         'quark_mcu_dev_kit_c1000',
         'quark_mcu_dev_kit_d2000',
-        'tinyTILE'
+        'tinyTILE',
+        'up-board'
     ];
     private _data: any = {};
 
