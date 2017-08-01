@@ -1,6 +1,6 @@
 {
   "name": "zephyrjs-ide",
-  "version": "0.19.0-alpha",
+  "version": "0.20.0-alpha",
   "description": "Online JavaScript editor with WebUSB Zephyr.js integration",
   "repository": {
     "url": "https://github.com/01org/zephyrjs-ide"
