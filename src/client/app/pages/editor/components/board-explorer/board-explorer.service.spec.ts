@@ -77,7 +77,7 @@ export function main() {
         }));
 
         it('listBoards should work', () => {
-            expect(service.listBoards().length).toBe(6);
+            expect(service.listBoards().length).toBe(7);
         });
 
         it('getBoardTitle should work', async(() => {
