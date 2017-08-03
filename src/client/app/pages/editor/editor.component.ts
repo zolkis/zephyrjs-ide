@@ -10,7 +10,6 @@ import { AppDataService } from '../../app.data.service';
 import { BoardExplorerService } from './components/board-explorer/board-explorer.service';
 import { FileService } from './file.service';
 import { ExampleService } from './example.service';
-import { SettingsService } from './settings.service';
 import { EditorTab } from './editor.tab';
 import { WebUsbService } from '../../shared/webusb/webusb.service';
 
@@ -20,7 +19,7 @@ import { WebUsbService } from '../../shared/webusb/webusb.service';
     selector: 'sd-editor',
     templateUrl: 'editor.component.html',
     styleUrls: ['editor.component.css'],
-    providers: [BoardExplorerService, ExampleService, FileService, SettingsService]
+    providers: [BoardExplorerService, ExampleService, FileService]
 })
 export class EditorComponent {
     public notificationOptions = {

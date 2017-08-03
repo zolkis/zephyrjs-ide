@@ -8,6 +8,7 @@ import { ResourceModule } from 'ngx-resource';
 // Own
 import { AppDataService } from '../../app.data.service';
 import { EditorModule } from './editor.module';
+import { SettingsService } from './settings.service';
 
 
 export function main() {
@@ -20,7 +21,7 @@ export function main() {
 
       TestBed.configureTestingModule({
         declarations: [TestComponent],
-        providers: [AppDataService],
+        providers: [AppDataService, SettingsService],
         imports: [EditorModule, ResourceModule]
       });
     });

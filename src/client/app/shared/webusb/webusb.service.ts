@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WebUsbPort } from './webusb.port';
+import { SettingsService } from '../../pages/editor/settings.service';
 
 /**
  * This class provides the WebUsb service.
@@ -9,7 +10,7 @@ export class WebUsbService {
     public usb: any = null;
     public port: WebUsbPort = null;
 
-    constructor() {
+    constructor(private settingsService: SettingsService) {
         this.usb = (navigator as any).usb;
     }
 
@@ -107,7 +108,8 @@ export class WebUsbService {
     }
 
     public run(data: string): Promise<string> {
-        return this.port.run(data);
+        let throttle = this.settingsService.getDeviceThrottle();
+        return this.port.run(data, throttle);
     }
 
     public stop(): Promise<string> {

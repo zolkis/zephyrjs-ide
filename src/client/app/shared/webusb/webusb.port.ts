@@ -205,7 +205,7 @@ export class WebUsbPort {
         return new Promise((resolve) => setTimeout(resolve, time));
     }
 
-    public run(data: string): Promise<string> {
+    public run(data: string, throttle: boolean): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             if (data.length === 0) {
                 reject('Empty data');
@@ -221,14 +221,14 @@ export class WebUsbPort {
                     var count = 0;
                     for (let line of ihex.split('\n')) {
                         // Every 20 lines sleep for a moment to let ashell
-                        // catch up.  This prevents overflowing the UART
-                        if (count < 20) {
+                        // catch up if throttle is enabled. This prevents
+                        // overflowing the UART
+                        if (!throttle || count < 20) {
                             this.send(line + '\n');
                         } else {
-                            await this.sleep(700).then(() => {
+                            await this.sleep(700);
                             this.send(line + '\n');
                             count = 0;
-                            });
                         }
                         count ++;
                     }

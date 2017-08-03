@@ -10,6 +10,7 @@ export class SettingsService {
 
     @Output() onEditorFontSizeChanged = new EventEmitter();
     @Output() onEditorLineNumbersChanged = new EventEmitter();
+    @Output() onDeviceThrottleChanged = new EventEmitter();
 
     private _settings: any = {
         editor: {
@@ -17,8 +18,8 @@ export class SettingsService {
             minimumFontSize: 6,
             maximumFontSize: 24,
             fontSize: 12,
-
-            lineNumbers: true
+            lineNumbers: true,
+            deviceThrottle: true
         }
     };
 
@@ -33,6 +34,12 @@ export class SettingsService {
             this._localStorageService.get(this.PREFIX + 'editor.lineNumbers') as boolean;
         if (lineNumbers !== null) {
             this.setEditorLineNumbers(lineNumbers);
+        }
+
+        let deviceThrottle: boolean =
+            this._localStorageService.get(this.PREFIX + 'editor.deviceThrottle') as boolean;
+        if (deviceThrottle !== null) {
+            this.setDeviceThrottle(deviceThrottle);
         }
     }
 
@@ -80,5 +87,21 @@ export class SettingsService {
 
     public toggleEditorLineNumbers() {
         this.setEditorLineNumbers(!this.getEditorLineNumbers());
+    }
+
+    public getDeviceThrottle(): boolean {
+        return this._settings.editor.deviceThrottle;
+    }
+
+    public setDeviceThrottle(throttle: boolean) {
+        if (throttle !== this.getDeviceThrottle()) {
+            this._settings.editor.deviceThrottle = throttle;
+            this._localStorageService.set(this.PREFIX + 'editor.deviceThrottle', throttle);
+            this.onDeviceThrottleChanged.emit(throttle);
+        }
+    }
+
+    public toggleDeviceThrottle() {
+        this.setDeviceThrottle(!this.getDeviceThrottle());
     }
 }

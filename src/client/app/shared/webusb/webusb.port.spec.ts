@@ -196,7 +196,7 @@ export function main() {
 
         it('run should work', done => {
             port.connect().then(() => {
-                port.run('foo()').then((result: string) => {
+                port.run('foo()', true).then((result: string) => {
                     expect(result).toBe(undefined); // no warning
                     done();
                 });
@@ -205,7 +205,7 @@ export function main() {
 
         it('stop should work', done => {
             port.connect().then(() => {
-                port.run('foo()').then(() => {
+                port.run('foo()', true).then(() => {
                     port.stop().then(() => done());
                 });
             });

@@ -28,4 +28,8 @@ export class SidebarSettingsComponent {
     public onLineNumbersSwitchClicked() {
         this.settingsService.toggleEditorLineNumbers();
     }
+
+    public onDeviceThrottleSwitchClicked() {
+        this.settingsService.toggleDeviceThrottle();
+    }
 }
