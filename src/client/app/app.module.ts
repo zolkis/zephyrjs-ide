@@ -14,6 +14,7 @@ import { ResourceModule } from 'ngx-resource';
 // This app
 import { HomeModule } from './pages/home/home.module';
 import { EditorModule } from './pages/editor/editor.module';
+import { SettingsService } from './pages/editor/settings.service';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -31,6 +32,7 @@ import { SharedModule } from './shared/shared.module';
       SharedModule.forRoot()
   ],
   declarations: [AppComponent],
+  providers: [SettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

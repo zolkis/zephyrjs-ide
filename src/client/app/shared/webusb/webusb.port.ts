@@ -200,7 +200,12 @@ export class WebUsbPort {
         });
     }
 
-    public run(data: string): Promise<string> {
+
+    public sleep (time: number) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    public run(data: string, throttle: boolean): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             if (data.length === 0) {
                 reject('Empty data');
@@ -210,12 +215,22 @@ export class WebUsbPort {
                 .then(() => this.send('set transfer ihex\n'))
                 .then(() => this.send('stop\n'))
                 .then(() => this.send('load\n'))
-                .then(() => {
+                .then(async () => {
                     let ihex =
                         this.convIHex(data);
-
+                    var count = 0;
                     for (let line of ihex.split('\n')) {
-                        this.send(line + '\n');
+                        // Every 20 lines sleep for a moment to let ashell
+                        // catch up if throttle is enabled. This prevents
+                        // overflowing the UART
+                        if (!throttle || count < 20) {
+                            this.send(line + '\n');
+                        } else {
+                            await this.sleep(700);
+                            this.send(line + '\n');
+                            count = 0;
+                        }
+                        count ++;
                     }
                 })
                 .then(() => this.send('run temp.dat\n'))

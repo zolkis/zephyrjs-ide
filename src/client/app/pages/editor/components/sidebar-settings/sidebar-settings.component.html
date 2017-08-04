@@ -38,4 +38,19 @@
         </div>
     </li>
 
+    <li>
+        <span class="label">
+             Throttle Device Transmission
+        </span>
+
+        <div class="controls">
+            <ui-switch
+                [checked]="settingsService.getDeviceThrottle()"
+                (click)="onDeviceThrottleSwitchClicked()"
+                size="small"
+                color="#03e08a">
+            </ui-switch>
+        </div>
+    </li>
+
 </ul>

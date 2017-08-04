@@ -10,7 +10,8 @@ import { SettingsService } from './settings.service';
 class MockLocalStorageService {
     public contents: any = {
         'SETTINGS.editor.fontSize': 12,
-        'SETTINGS.editor.lineNumbers': true
+        'SETTINGS.editor.lineNumbers': true,
+        'SETTINGS.editor.deviceThrottle': true
     };
 
     public get(prop: string): string {
@@ -73,6 +74,19 @@ export function main() {
 
             service.setEditorLineNumbers(false);
             expect(service.getEditorLineNumbers()).toBe(false);
+        });
+
+        it('editor.deviceThrottle functions should work', () => {
+            expect(service.getDeviceThrottle()).toBe(true);
+
+            service.toggleDeviceThrottle();
+            expect(service.getDeviceThrottle()).toBe(false);
+
+            service.setDeviceThrottle(true);
+            expect(service.getDeviceThrottle()).toBe(true);
+
+            service.setDeviceThrottle(false);
+            expect(service.getDeviceThrottle()).toBe(false);
         });
     });
 }
