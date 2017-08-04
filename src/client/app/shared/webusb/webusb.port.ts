@@ -174,7 +174,11 @@ export class WebUsbPort {
         });
     }
 
-    public save(filename: string, data: string): Promise<string> {
+    public sleep (time: number) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    public save(filename: string, data: string, throttle: boolean): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             if (data.length === 0) {
                 reject('Empty data');
@@ -188,9 +192,20 @@ export class WebUsbPort {
                 .then(() => this.send('set transfer raw\n'))
                 .then(() => this.send('stop\n'))
                 .then(() => this.send('load ' + filename + '\n'))
-                .then(() => {
+                .then(async () => {
+                    var count = 0;
                     for (let line of data.split('\n')) {
-                        this.send(line + '\n');
+                        // Every 20 lines sleep for a moment to let ashell
+                        // catch up if throttle is enabled. This prevents
+                        // overflowing the UART.
+                        if (!throttle || count < 20) {
+                            this.send(line + '\n');
+                        } else {
+                            await this.sleep(700);
+                            this.send(line + '\n');
+                            count = 0;
+                        }
+                        count ++;
                     }
                 })
                 .then(() => this.send('\x1A\n'))
@@ -198,11 +213,6 @@ export class WebUsbPort {
                 .then((warning: string) => resolve(warning))
                 .catch((error: string) => reject(error));
         });
-    }
-
-
-    public sleep (time: number) {
-        return new Promise((resolve) => setTimeout(resolve, time));
     }
 
     public run(data: string, throttle: boolean): Promise<string> {

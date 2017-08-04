@@ -123,6 +123,7 @@ export class WebUsbService {
             });
         }
 
-        return this.port.save(filename, data);
+        let throttle = this.settingsService.getDeviceThrottle();
+        return this.port.save(filename, data, throttle);
     }
 }
