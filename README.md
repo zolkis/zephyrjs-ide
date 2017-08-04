@@ -154,7 +154,7 @@ $ docker-compose -f docker-compose.production.yml up -d zephyrjs-ide-nginx  # St
 ```
 
 # Analyzing the space usage of the app
-You can analyze the bundle with `[source-map-explorer](https://github.com/danvk/source-map-explorer)`.
+You can analyze the bundle with [source-map-explorer](https://github.com/danvk/source-map-explorer).
 It creates a html chart with a file by default, but output can also be json or tsv.
 
 Run the following:
