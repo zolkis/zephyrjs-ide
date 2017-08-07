@@ -13,7 +13,8 @@
     background: #f0f0f0;
 
     #leader {
-        background: url('assets/images/landing-bg.jpg') no-repeat 100% 100%;
+        background: url('assets/images/landing-bg.jpg') #313139 no-repeat 100% 100%;
+        background-position-x: 50%;
         display: block;
         width: 100%;
         text-align: center;
