@@ -10,6 +10,7 @@ export class SettingsService {
 
     @Output() onEditorFontSizeChanged = new EventEmitter();
     @Output() onEditorLineNumbersChanged = new EventEmitter();
+    @Output() onEditorMinimapChanged = new EventEmitter();
     @Output() onDeviceThrottleChanged = new EventEmitter();
 
     private _settings: any = {
@@ -19,6 +20,7 @@ export class SettingsService {
             maximumFontSize: 24,
             fontSize: 12,
             lineNumbers: true,
+            minimap: false,
             deviceThrottle: true
         }
     };
@@ -36,12 +38,22 @@ export class SettingsService {
             this.setEditorLineNumbers(lineNumbers);
         }
 
+        let minimap: boolean =
+            this._localStorageService.get(this.PREFIX + 'editor.minimap') as boolean;
+        if (minimap !== null) {
+            this.setEditorMinimap(minimap);
+        }
+
         let deviceThrottle: boolean =
             this._localStorageService.get(this.PREFIX + 'editor.deviceThrottle') as boolean;
         if (deviceThrottle !== null) {
             this.setDeviceThrottle(deviceThrottle);
         }
     }
+
+    /*
+     * Font size.
+     */
 
     public getEditorFontSize(): number {
         return this._settings.editor.fontSize;
@@ -73,6 +85,10 @@ export class SettingsService {
         this.setEditorFontSize(this.getEditorFontSize() + 1);
     }
 
+    /*
+     * Line numbers.
+     */
+
     public getEditorLineNumbers(): boolean {
         return this._settings.editor.lineNumbers;
     }
@@ -88,6 +104,31 @@ export class SettingsService {
     public toggleEditorLineNumbers() {
         this.setEditorLineNumbers(!this.getEditorLineNumbers());
     }
+
+    /*
+     * Minimap.
+     */
+
+    public getEditorMinimap(): boolean {
+        return this._settings.editor.minimap;
+    }
+
+    public setEditorMinimap(show: boolean) {
+        if (show !== this.getEditorMinimap()) {
+            this._settings.editor.minimap = show;
+            this._localStorageService.set(this.PREFIX + 'editor.minimap', show);
+            this.onEditorMinimapChanged.emit(show);
+        }
+    }
+
+    public toggleEditorMinimap() {
+        this.setEditorMinimap(!this.getEditorMinimap());
+    }
+
+
+    /*
+     * Device throttle.
+     */
 
     public getDeviceThrottle(): boolean {
         return this._settings.editor.deviceThrottle;

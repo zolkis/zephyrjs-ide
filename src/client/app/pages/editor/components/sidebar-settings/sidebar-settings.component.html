@@ -40,6 +40,21 @@
 
     <li>
         <span class="label">
+            Minimap
+        </span>
+
+        <div class="controls">
+            <ui-switch
+                [checked]="settingsService.getEditorMinimap()"
+                (click)="onMinimapSwitchClicked()"
+                size="small"
+                color="#03e08a">
+            </ui-switch>
+        </div>
+    </li>
+
+    <li>
+        <span class="label">
              Throttle Device Transmission
         </span>
 

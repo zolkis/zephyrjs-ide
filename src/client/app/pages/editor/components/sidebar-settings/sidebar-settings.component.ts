@@ -29,6 +29,10 @@ export class SidebarSettingsComponent {
         this.settingsService.toggleEditorLineNumbers();
     }
 
+    public onMinimapSwitchClicked() {
+        this.settingsService.toggleEditorMinimap();
+    }
+
     public onDeviceThrottleSwitchClicked() {
         this.settingsService.toggleDeviceThrottle();
     }

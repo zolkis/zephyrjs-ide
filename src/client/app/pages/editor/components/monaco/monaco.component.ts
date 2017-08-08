@@ -82,10 +82,18 @@ export class MonacoComponent implements AfterViewInit {
         let model = null;
 
         if (monaco.editor.defineTheme !== undefined) {
+            // NOTE: keep in sync with `colors.scss`.
+            let bg = '22252e';
+
             monaco.editor.defineTheme('web-ide', {
                 base: theme,
                 inherit: true,
-                rules: []
+                rules: [
+                    {background: bg} // NOTE: no # symbol.
+                ],
+                colors: {
+                    'editor.background': '#' + bg
+                }
             });
             theme = 'web-ide';
         }
@@ -108,7 +116,10 @@ export class MonacoComponent implements AfterViewInit {
             scrollBeyondLastLine: false,
 
             fontSize: this.settingsService.getEditorFontSize(),
-            lineNumbers: this.settingsService.getEditorLineNumbers()
+            lineNumbers: this.settingsService.getEditorLineNumbers(),
+            minimap: {
+               enabled: this.settingsService.getEditorMinimap()
+            }
         });
 
         this.settingsService.onEditorFontSizeChanged.subscribe((size: number) => {
@@ -117,6 +128,10 @@ export class MonacoComponent implements AfterViewInit {
 
         this.settingsService.onEditorLineNumbersChanged.subscribe((show: boolean) => {
             this.tab.editor.updateOptions({lineNumbers: show});
+        });
+
+        this.settingsService.onEditorMinimapChanged.subscribe((show: boolean) => {
+            this.tab.editor.updateOptions({minimap: {enabled: show}});
         });
 
         if (model !== null) {

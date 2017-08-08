@@ -11,6 +11,7 @@ class MockLocalStorageService {
     public contents: any = {
         'SETTINGS.editor.fontSize': 12,
         'SETTINGS.editor.lineNumbers': true,
+        'SETTINGS.editor.minimap': false,
         'SETTINGS.editor.deviceThrottle': true
     };
 
@@ -74,6 +75,19 @@ export function main() {
 
             service.setEditorLineNumbers(false);
             expect(service.getEditorLineNumbers()).toBe(false);
+        });
+
+        it('editor.minimap functions should work', () => {
+            expect(service.getEditorMinimap()).toBe(false);
+
+            service.toggleEditorMinimap();
+            expect(service.getEditorMinimap()).toBe(true);
+
+            service.setEditorMinimap(true);
+            expect(service.getEditorMinimap()).toBe(true);
+
+            service.setEditorMinimap(false);
+            expect(service.getEditorMinimap()).toBe(false);
         });
 
         it('editor.deviceThrottle functions should work', () => {

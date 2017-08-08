@@ -7,17 +7,9 @@
     .monaco-container {
         padding-top: 12px;
         height: 100%;
-        background-color: $code-bg-color;
 
         .monaco-editor {
             height: 100%;
-            background: $code-bg-color;
-
-            /deep/ {
-                .monaco-editor.vs-dark, .monaco-editor-background {
-                    background-color: $code-bg-color;
-                }
-            }
         }
     }
 }
