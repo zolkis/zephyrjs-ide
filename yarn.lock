@@ -4597,9 +4597,9 @@ next-tick@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
 
-ng-inline-svg@^3.2.1:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/ng-inline-svg/-/ng-inline-svg-3.4.0.tgz#bd530dd539215db492677c325ad758b8e353bb59"
+ng-inline-svg@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/ng-inline-svg/-/ng-inline-svg-4.0.1.tgz#42ec1e6338d36eee8ceec8fdaa7e5cfad75f0405"
 
 ng-sidebar@^4.2.1:
   version "4.2.3"

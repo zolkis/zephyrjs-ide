@@ -119,6 +119,14 @@ export class ProjectConfig extends SeedConfig {
             path: 'node_modules/rxjs'
         },
         {
+            name: 'tslib',
+            path: 'node_modules/tslib/tslib.js'
+        },
+        {
+            name: '@angular/common/http', // Needed from ng-inline-svg since 4.0.1 at least
+            path: 'node_modules/@angular/common/bundles/common-http.umd.js'
+        },
+        {
             name: 'ng-inline-svg',
             path: 'node_modules/ng-inline-svg/lib/index.js'
         },
