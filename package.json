@@ -178,7 +178,7 @@
     "hterm-umdjs": "^1.2.0",
     "intl": "^1.2.5",
     "jquery": "^3.1.1",
-    "monaco-editor": "^0.9.0",
+    "monaco-editor": "^0.10.0",
     "ng-inline-svg": "^3.2.1",
     "ng-sidebar": "^4.2.1",
     "ng2-split-pane": "^1.3.1",
