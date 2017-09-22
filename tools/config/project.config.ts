@@ -96,7 +96,7 @@ export class ProjectConfig extends SeedConfig {
         },
         {
             name: 'angular2-notifications',
-            path: 'node_modules/angular2-notifications/components.js'
+            path: 'node_modules/angular2-notifications/dist/index.js'
         },
         {
             name: 'ng2-split-pane',
