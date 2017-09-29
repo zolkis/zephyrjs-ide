@@ -67,4 +67,8 @@
             }
         }
     }
+
+    .modal, /deep/ .modal-backdrop {
+        position: absolute !important;
+    }
 }

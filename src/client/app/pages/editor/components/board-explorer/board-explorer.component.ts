@@ -96,6 +96,7 @@ export class BoardExplorerComponent implements OnInit, OnDestroy {
     };
 
     @ViewChild('boardEl') private $boardEl: ElementRef;
+    @ViewChild('boardComponentHelpModal') private $boardHelpModal: ElementRef;
     private _components: BoardComponent[] = [];
     private _refreshComponentsPositionSub: Subscription;
 
@@ -123,6 +124,18 @@ export class BoardExplorerComponent implements OnInit, OnDestroy {
             for (let component of this.getComponents()) {
                 component.calculateComponentClientRect();
             }
+        });
+
+        $(this.$boardHelpModal.nativeElement).on('show.bs.modal', (e) => {
+            setTimeout(() => {
+                $('.modal-backdrop').appendTo($('sd-board-explorer'));
+                $('body').removeClass('modal-open');
+            }, 1);
+        });
+
+        $(this.$boardHelpModal.nativeElement).on('shown.bs.modal', (e) => {
+            // guard against infinite focus loop
+            $(document).off('focusin.bs.modal');
         });
     }
 
