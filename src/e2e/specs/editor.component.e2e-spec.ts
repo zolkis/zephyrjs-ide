@@ -172,7 +172,7 @@ describe('Editor', () => {
 
     it('examples link in sidebar should have correct count', async () => {
         let count = element(by.css('ng-sidebar aside ul li a.examples .count'));
-        expect(await count.getText()).toBe('(6)');
+        expect(await count.getText()).toBe('(5)');
     });
 
     it('secondary sidebar toggles when clicking on Files menu', async () => {
