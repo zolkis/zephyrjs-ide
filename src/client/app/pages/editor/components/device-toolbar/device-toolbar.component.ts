@@ -197,6 +197,10 @@ export class DeviceToolbarComponent implements AfterViewInit {
             return;
         }
 
+        if (tab.saveToDevice) {
+            tab.filename = tab.filename.toLowerCase();
+        }
+
         if (tab.filename !== tab.title &&
             this.fileService.exists(tab.filename)) {
             $(this.overwriteModal.nativeElement).modal('show');

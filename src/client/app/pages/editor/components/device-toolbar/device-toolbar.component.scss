@@ -6,6 +6,16 @@
     overflow: hidden;
     padding: 10px;
 
+    #saveModal_filename.willSaveToDevice {
+        text-transform: lowercase;
+    }
+
+    /deep/ .form-control-feedback {
+        top: 14px;
+        right: 14px;
+        color: #ccc;
+    }
+
     .buttons {
         button, button[disabled] {
             padding: 2px 12px;

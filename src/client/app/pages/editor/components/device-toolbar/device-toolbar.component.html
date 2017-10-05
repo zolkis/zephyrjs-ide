@@ -49,11 +49,18 @@
                         <input
                             type="text"
                             class="form-control"
+                            [class.willSaveToDevice]="appDataService.activeEditorTab.saveToDevice"
+                            [class.has-feedback]="appDataService.activeEditorTab.saveToDevice"
+                            [class.has-warning]="appDataService.activeEditorTab.saveToDevice"
                             aria-describedBy="filename-help-block"
                             id="saveModal_filename" name="filename"
                             placeholder="File name"
                             [(ngModel)]="appDataService.activeEditorTab.filename"
                             (keyup.enter)="onSaveConfirm()" />
+                        <span
+                            *ngIf="appDataService.activeEditorTab.saveToDevice"
+                            class="glyphicon glyphicon-warning-sign form-control-feedback"
+                            aria-hidden="true"></span>
                     </div> <!-- ./form-group -->
                     <p id="filename-help-block" class="help-block">
                         The contents of the current tab will be saved in the
