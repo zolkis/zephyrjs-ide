@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { WebUsbPort } from './webusb.port';
+import { WebUsbPortInterface } from './webusb.port.interface';
+import { WebUsbPort} from './webusb.port';
 import { SettingsService } from '../../pages/editor/settings.service';
 
 /**
@@ -8,7 +9,7 @@ import { SettingsService } from '../../pages/editor/settings.service';
 @Injectable()
 export class WebUsbService {
     public usb: any = null;
-    public port: WebUsbPort = null;
+    public port: WebUsbPortInterface = null;
 
     constructor(private settingsService: SettingsService) {
         this.usb = (navigator as any).usb;
@@ -22,8 +23,8 @@ export class WebUsbService {
         // tslint:disable-next-line:no-empty
     }
 
-    public requestPort(): Promise<WebUsbPort> {
-        return new Promise<WebUsbPort>((resolve, reject) => {
+    public requestPort(): Promise<WebUsbPortInterface> {
+        return new Promise<WebUsbPortInterface>((resolve, reject) => {
             const filters = [{
                 'vendorId': 0x8086,
                 'productId': 0xF8A1
@@ -35,6 +36,7 @@ export class WebUsbService {
 
             this.usb.requestDevice({'filters': filters})
             .then((device: any) => {
+                // TODO: create correct port according to settings
                 resolve(new WebUsbPort(device));
             })
             .catch((error: string) => {
@@ -67,7 +69,7 @@ export class WebUsbService {
             };
 
             this.requestPort()
-            .then((p: WebUsbPort) => {
+            .then((p: WebUsbPortInterface) => {
                 this.port = p;
                 _doConnect()
                 .then(() => resolve())

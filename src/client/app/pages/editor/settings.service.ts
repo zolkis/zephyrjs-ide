@@ -3,11 +3,17 @@ import { Injectable, EventEmitter, Output } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 
+export enum WebUsbConnectionBackend {
+    AUTODETECT,
+    ASHELL_V1
+}
+
 @Injectable()
 export class SettingsService {
     // E.g. 'zephyrjs-ide.SETTINGS.foo'
     readonly PREFIX: string = 'SETTINGS.';
 
+    @Output() onWebUsbConnectionBackendChanged = new EventEmitter();
     @Output() onEditorFontSizeChanged = new EventEmitter();
     @Output() onEditorLineNumbersChanged = new EventEmitter();
     @Output() onEditorMinimapChanged = new EventEmitter();
@@ -22,10 +28,21 @@ export class SettingsService {
             lineNumbers: true,
             minimap: false,
             deviceThrottle: true
+        },
+        webusb: {
+            connectionBackend: WebUsbConnectionBackend.AUTODETECT
         }
     };
 
+    public WebUsbConnectionBackend: typeof WebUsbConnectionBackend = WebUsbConnectionBackend;
+
     public constructor(private _localStorageService: LocalStorageService) {
+        let webusbConnectionBackend: WebUsbConnectionBackend =
+            this._localStorageService.get(this.PREFIX + 'webusb.connectionBackend') as number;
+        if (webusbConnectionBackend !== null) {
+            this.setWebUsbConnectionBackend(webusbConnectionBackend);
+        }
+
         let fontSize: number =
             this._localStorageService.get(this.PREFIX + 'editor.fontSize') as number;
         if (fontSize !== null) {
@@ -54,6 +71,18 @@ export class SettingsService {
     /*
      * Font size.
      */
+
+    public getWebUsbConnectionBackend(): number {
+        return this._settings.webusb.connectionBackend;
+    }
+
+    public setWebUsbConnectionBackend(backend: WebUsbConnectionBackend) {
+        if (backend !== this.getWebUsbConnectionBackend()) {
+            this._settings.webusb.connectionBackend = backend;
+            this._localStorageService.set(this.PREFIX + 'webusb.connectionBackend', backend);
+            this.onWebUsbConnectionBackendChanged.emit(backend);
+        }
+    }
 
     public getEditorFontSize(): number {
         return this._settings.editor.fontSize;

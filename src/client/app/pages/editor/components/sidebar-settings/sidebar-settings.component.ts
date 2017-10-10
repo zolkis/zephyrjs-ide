@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { SettingsService } from '../../settings.service';
+import { SettingsService, WebUsbConnectionBackend } from '../../settings.service';
 
 
 @Component({
@@ -10,7 +10,16 @@ import { SettingsService } from '../../settings.service';
     styleUrls: ['sidebar-settings.component.css']
 })
 export class SidebarSettingsComponent {
+    public selectedWebUsbConnectionBackend: WebUsbConnectionBackend;
+
     public constructor(public settingsService: SettingsService) {
+        this.selectedWebUsbConnectionBackend =
+            this.settingsService.getWebUsbConnectionBackend();
+    }
+
+    public onWebUsbConnectionBackendChanged() {
+        this.settingsService.setWebUsbConnectionBackend(
+            this.selectedWebUsbConnectionBackend);
     }
 
     public onFontSizeDecreaseClicked() {

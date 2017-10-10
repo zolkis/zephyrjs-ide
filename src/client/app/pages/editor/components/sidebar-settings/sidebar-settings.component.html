@@ -5,6 +5,30 @@
 <ul>
     <li>
         <span class="label">
+            WebUSB backend
+        </span>
+
+        <div class="controls">
+            <select
+                class="form-control"
+                [(ngModel)]="selectedWebUsbConnectionBackend"
+                (change)="onWebUsbConnectionBackendChanged()">
+                <option
+                    value="settingsService.WebUsbConnectionBackend.AUTODETECT"
+                    [selected]="
+                        settingsService.getWebUsbConnectionBackend() === settingsService.WebUsbConnectionBackend.AUTODETECT">
+                    Autodetect
+                </option>
+                <option
+                    value="settingsService.WebUsbConnectionBackend.ASHELL_V1"
+                    [selected]="
+                        settingsService.getWebUsbConnectionBackend() === settingsService.WebUsbConnectionBackend.ASHELL_V1">
+                    AShell v1
+                </option>
+            </select>
+        </div>
+    <li>
+        <span class="label">
             Font size: {{ settingsService.getEditorFontSize() }}
         </span>
 

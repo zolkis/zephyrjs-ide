@@ -7,7 +7,10 @@ declare function Pointer_stringify(ptr: any): string;
 declare function _free(ptr: any): any;
 
 
-export class WebUsbPort {
+import { WebUsbPortInterface } from './webusb.port.interface';
+
+
+export class WebUsbPort implements WebUsbPortInterface {
     device: any;
     decoder: any;
     encoder: any;

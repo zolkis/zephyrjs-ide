@@ -33,6 +33,11 @@
             .controls {
                 float: right;
 
+                select {
+                    height: 24px;
+                    font-size: 13px;
+                }
+
                 button {
                     border: none;
                     width: 18px;
