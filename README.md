@@ -70,6 +70,14 @@ $ npm start -- --app foo
 $ npm start -- --app bar
 ```
 
+*Please note*
+If the `npm start` command exists quickly with an `ELIFECYCLE` error code, you probably need to assign more memory to gulp/watcher:
+
+```
+echo "fs.inotify.max_user_watches = 524288" >> /etc/sysctl.conf
+sudo sysctl -p
+```
+
 _Does not rely on any global dependencies._
 
 # How to start with AoT compilation
