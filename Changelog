@@ -1,3 +1,34 @@
+2017-12-14 Sudarsana Nagineni <sudarsana.nagineni@intel.com>
+	* Release: 0.22.0-alpha
+	* Chore: add Zephyr based USB device default VID/PID to filters
+	* Chore: convert filenames to lowercase when saving to device
+	* Chore: add TabBar unit tests
+	* Chore: update angular2-notifications to the latest
+	* Chore: remove http dep because it's in the seed now
+	* Chore: update ng-inline-svg
+	* Chore: update package lock and yarn lock
+	* Docs: update all of url information from "01org" to "intel"
+	* Docs: update README with info about ELIFECYCLE error
+	* Docs: add link to ashell docs
+	* Feat: cosmetic change to revert back the spaces
+	* Feat: constrain documentation modal to pane
+	* Feat: update Monaco and add optional Minimap
+	* Feat: add translation file checking (#2078)
+	* Feat: allow custom template interpolation chars
+	* Fix: have a space between digital and unit symbol
+	* Fix: typos and spelling mistakes
+	* Fix: remove period after app tagline in home page
+	* Fix: version capitalization
+	* Samples: remove PME example
+	* System: update lock files
+	* System: update karma and other dev deps
+	* System: add version to envConfig
+	* System: added dependencies for Angular's  http client
+	* System: I18n.providers to pass linter
+	* System: backing out upstream changes and removing gecko
+	* System: updating packages to fix Mac build
+	* System: fixed HttpClientModule import issue
+
 2017-08-08 Salvatore Iovene <salvatore.iovene@intel.com>
 	* Release: 0.21.0-alpha
 	* Feat: add option to throttle communication with device
