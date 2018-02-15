@@ -107,6 +107,10 @@ export class WebUsbService {
         return this.port.send(data);
     }
 
+    public init() {
+        this.port.init();
+    }
+
     public run(data: string): Promise<string> {
         let throttle = this.settingsService.getDeviceThrottle();
         return this.port.run(data, throttle);

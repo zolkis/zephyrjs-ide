@@ -68,8 +68,9 @@ export class DeviceToolbarComponent implements AfterViewInit {
 
         this.webusbService.connect()
         .then(() => {
-            this.appDataService.term.io.print('\r\nConnection established\r\n');
-            this.webusbService.send('\n'); // Force getting a prompt
+            this.appDataService.term.io.print('\r\nConnection established.\r\n');
+            this.webusbService.init();
+
             this.onSuccess.emit({
                 header: 'Success',
                 body: 'You are now connected to the USB device'
