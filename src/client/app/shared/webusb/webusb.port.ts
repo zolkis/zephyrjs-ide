@@ -109,15 +109,6 @@ export class WebUsbPort {
             this.previousRead = str;
     }
 
-    private handleInput(result: any) {
-        // TODO: check status: "ok", "stall", "babble"
-        if (this.ideMode) {
-            this.ideHandler(result);
-        } else {
-            this.terminalHandler(result);
-        }
-    }
-
     public connect(): Promise<void> {
         this.rawMode = true;
         this.echoMode = true;
@@ -129,7 +120,12 @@ export class WebUsbPort {
                 // result is of type USBInTransferResult
                 this.device.transferIn(3, 64)
                 .then((result: any) => {
-                    this.handleInput(result);
+                    // TODO: check status: "ok", "stall", "babble"
+                    if (this.ideMode) {
+                        this.ideHandler(result);
+                    } else {
+                        this.terminalHandler(result);
+                    }
                     if (this.device.opened) {
                         readLoop();
                     }
@@ -168,7 +164,7 @@ export class WebUsbPort {
                     finish();
                 }).catch((error: DOMException) => {
                         // fall back to the other webusb interface (uart vs raw)
-                        this.webusb_iface = this.webusb_iface == WEBUSB_RAW ?
+                        this.webusb_iface = this.webusb_iface === WEBUSB_RAW ?
                                                 WEBUSB_UART : WEBUSB_RAW;
                         this.device.claimInterface(this.webusb_iface)
                         .then(() => {
@@ -227,7 +223,7 @@ export class WebUsbPort {
     }
 
     public init() {
-        if (this.webusb_iface == WEBUSB_UART) {
+        if (this.webusb_iface === WEBUSB_UART) {
             this.send('\n');
         }
     }
@@ -298,11 +294,70 @@ export class WebUsbPort {
         });
     }
 
-    public run(data: string, throttle: boolean): Promise<string> {
-        if (this.ideMode) {
-            return  this.sendIdeRun(data);  // data: a file name
+    private ideHandler(input: any): boolean {
+        try {
+            let str = this.decoder.decode(input.data); // may be partial JSON
+            this.onReceive(str);  // For now, just echo whatever is received
+            // TODO: wait until a full this.message is received, then JSON.parse.
+        } catch (err) {
+            return false;
         }
-        return this.sendConsoleRun(data, throttle);  // data: stream (program)
+        return true;
+    }
+
+    private terminalHandler(input: any) {
+        let skip = true,
+            skip_prompt = true,
+            str = this.decoder.decode(input.data);
+
+
+        if (!this.ashellReady)
+            this.ashellReady = /^(\x1b\[33macm)/.test(str);
+
+        if (str === 'raw') {
+            this.rawMode = true;
+            str = '';
+        } else if (str === 'ihex') {
+            this.rawMode = false;
+            str = '';
+        }
+
+        skip = !this.rawMode && /^(\n|\[.*\])/.test(str);
+
+        if (str === 'echo_off') {
+            this.echoMode = false;
+            str = '';
+        } else if (str === 'echo_on') {
+            this.echoMode = true;
+            str = '';
+        }
+
+        skip_prompt = !this.echoMode && /^(\r|\n|\x1b\[33macm)/.test(str);
+
+        if (!skip && !skip_prompt) {
+            if (str.length === 1 &&
+                str.charCodeAt(0) !== 13 &&
+                str.charCodeAt(0) !== 10 &&
+                this.previousRead !== undefined &&
+                this.previousRead.charCodeAt(
+                    this.previousRead.length - 1) === 13) {
+                str = '\r\n' + str;
+            }
+
+            this.onReceive(str);
+        }
+
+        if (!skip)
+            this.previousRead = str;
+    }
+
+    private handleInput(result: any) {
+        // TODO: check status: "ok", "stall", "babble"
+        if (this.ideMode) {
+            this.ideHandler(result);
+        } else {
+            this.terminalHandler(result);
+        }
     }
 
     private sendConsoleRun(data: string, throttle: boolean): Promise<string> {
